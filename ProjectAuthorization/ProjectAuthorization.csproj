@@ -15,4 +15,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.7.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Authorization.Infrastructure.Database\Authorization.Infrastructure.Database.csproj" />
+  </ItemGroup>
+
 </Project>
