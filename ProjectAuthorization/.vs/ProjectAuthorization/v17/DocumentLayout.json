@@ -1,12 +1,69 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1844E96D-8B8A-431D-9733-A9B568E56608}|..\\Authorization.Infrastructure.Api\\Authorization.Infrastructure.Api.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.infrastructure.api\\controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4930C363-94E3-43F4-A4B4-F932E28040BD}|ProjectAuthorization.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\projectauthorization\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4930C363-94E3-43F4-A4B4-F932E28040BD}|ProjectAuthorization.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C2ADB9-D07A-47A9-9DE0-A2AFADE8475D}|..\\Authorization.Infrastructure.Database\\Authorization.Infrastructure.Database.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.infrastructure.database\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthorizationController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
+              "RelativeToolTip": "..\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADcAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T06:08:08.641Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Database\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Infrastructure.Database\\Class1.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Database\\Class1.cs",
+              "RelativeToolTip": "..\\Authorization.Infrastructure.Database\\Class1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T06:03:11.216Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T05:38:12.333Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
