@@ -3,14 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1844E96D-8B8A-431D-9733-A9B568E56608}|..\\Authorization.Infrastructure.Api\\Authorization.Infrastructure.Api.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.infrastructure.api\\controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\handler\\authorization\\postregistrationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4930C363-94E3-43F4-A4B4-F932E28040BD}|ProjectAuthorization.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\projectauthorization\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\handler\\authorization\\postloginhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4930C363-94E3-43F4-A4B4-F932E28040BD}|ProjectAuthorization.csproj|C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4930C363-94E3-43F4-A4B4-F932E28040BD}|ProjectAuthorization.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A8C2ADB9-D07A-47A9-9DE0-A2AFADE8475D}|..\\Authorization.Infrastructure.Database\\Authorization.Infrastructure.Database.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.infrastructure.database\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\authorizeoptions\\tokencreater.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1844E96D-8B8A-431D-9733-A9B568E56608}|..\\Authorization.Infrastructure.Api\\Authorization.Infrastructure.Api.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.infrastructure.api\\controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\responses\\authorization\\postloginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\authorizeoptions\\hashpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\authorizeoptions\\authoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\responses\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\responses\\authorization\\postregistrationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\requests\\authorization\\postregistrationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\domain\\requests\\authorization\\postloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07774AC-32EB-4187-A743-AE1010F229DD}|..\\Authorization.Application\\Authorization.Application.csproj|c:\\users\\user\\desktop\\kworkrep\\projectauthorization\\authorization.application\\abstractions\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,17 +50,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "TokenCreater.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\AuthorizeOptions\\TokenCreater.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\AuthorizeOptions\\TokenCreater.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\AuthorizeOptions\\TokenCreater.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\AuthorizeOptions\\TokenCreater.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAcwCQAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:54:37.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HashPassword.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\AuthorizeOptions\\HashPassword.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\AuthorizeOptions\\HashPassword.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\AuthorizeOptions\\HashPassword.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\AuthorizeOptions\\HashPassword.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:54:25.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PostLoginHandler.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Handler\\Authorization\\PostLoginHandler.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Handler\\Authorization\\PostLoginHandler.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Handler\\Authorization\\PostLoginHandler.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Handler\\Authorization\\PostLoginHandler.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAQwBUAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:36:55.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PostLoginResponse.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Responses\\Authorization\\PostLoginResponse.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Responses\\Authorization\\PostLoginResponse.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Responses\\Authorization\\PostLoginResponse.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Responses\\Authorization\\PostLoginResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:27:34.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AuthorizationController.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
               "RelativeDocumentMoniker": "..\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
               "RelativeToolTip": "..\\Authorization.Infrastructure.Api\\Controllers\\AuthorizationController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADcAAAADAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA8AAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-09T06:08:08.641Z",
               "EditorCaption": ""
@@ -38,27 +120,105 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Database\\Class1.cs",
-              "RelativeDocumentMoniker": "..\\Authorization.Infrastructure.Database\\Class1.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Infrastructure.Database\\Class1.cs",
-              "RelativeToolTip": "..\\Authorization.Infrastructure.Database\\Class1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-09T06:03:11.216Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\ProjectAuthorization\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADwAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-09T05:38:12.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PostRegistrationHandler.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Handler\\Authorization\\PostRegistrationHandler.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Handler\\Authorization\\PostRegistrationHandler.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Handler\\Authorization\\PostRegistrationHandler.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Handler\\Authorization\\PostRegistrationHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:37:13.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthOptions.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\AuthorizeOptions\\AuthOptions.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\AuthorizeOptions\\AuthOptions.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\AuthorizeOptions\\AuthOptions.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\AuthorizeOptions\\AuthOptions.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:54:16.525Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PostRegistrationRequest.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Requests\\Authorization\\PostRegistrationRequest.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Requests\\Authorization\\PostRegistrationRequest.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Requests\\Authorization\\PostRegistrationRequest.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Requests\\Authorization\\PostRegistrationRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:20:06.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PostLoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Requests\\Authorization\\PostLoginRequest.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Requests\\Authorization\\PostLoginRequest.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Requests\\Authorization\\PostLoginRequest.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Requests\\Authorization\\PostLoginRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:19:50.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PostRegistrationResponse.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Responses\\Authorization\\PostRegistrationResponse.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Responses\\Authorization\\PostRegistrationResponse.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Responses\\Authorization\\PostRegistrationResponse.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Responses\\Authorization\\PostRegistrationResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:27:45.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BaseResponse.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Responses\\BaseResponse.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Domain\\Responses\\BaseResponse.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Domain\\Responses\\BaseResponse.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Domain\\Responses\\BaseResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T07:26:29.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Abstractions\\IRepository.cs",
+              "RelativeDocumentMoniker": "..\\Authorization.Application\\Abstractions\\IRepository.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Kworkrep\\ProjectAuthorization\\Authorization.Application\\Abstractions\\IRepository.cs",
+              "RelativeToolTip": "..\\Authorization.Application\\Abstractions\\IRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-09T06:44:49.42Z",
               "EditorCaption": ""
             }
           ]

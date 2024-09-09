@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Authorization.Application.Abstractions;
+using Swashbuckle.AspNetCore.Annotations;
+using Authorization.Application.Domain.Responses.Authorization;
+using Authorization.Application.Domain.Requests.Authorization;
 
 namespace Authorization.Infrastructure.Api.Controllers
 {
@@ -13,10 +12,10 @@ namespace Authorization.Infrastructure.Api.Controllers
 	public class AuthorizationController : ControllerBase
 	{
 		private readonly IMediator _mediator;
+
 		public AuthorizationController( IMediator mediator, IRepository<User> userRepository, AuthOptions authOptions )
 		{
-			_mediator = mediator ?? throw new ArgumentNullException( nameof( mediator ) );
-			
+			_mediator = mediator ?? throw new ArgumentNullException( nameof( mediator ) );			
 		}
 
 		[HttpPost]
