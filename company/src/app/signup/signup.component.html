@@ -1,0 +1,132 @@
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr 1.3fr 0.7fr;
+    grid-template-rows: 0.4fr 2.2fr 0.4fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "a a a a"
+      "c LEFT RIGHT d"
+      "b b b b";
+    min-height: 100vh;
+    background: #a4abe9;
+  }
+
+  .LEFT {
+    grid-area: LEFT;
+    text-align: center;
+    background: #031757;
+    color: white;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+  .RIGHT {
+    grid-area: RIGHT;
+    text-align: center;
+    background: #c4cde9;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+  .a {
+    grid-area: a;
+    content: '\200b';
+    padding-top: 10%;
+  }
+
+  .b {
+    grid-area: b;
+    content: '\200b';
+    padding-bottom: 10%;
+  }
+
+  .c {
+    grid-area: c;
+    content: '\200b';
+    padding-left: 15%;
+  }
+
+  .d {
+    grid-area: d;
+    content: '\200b';
+    padding-right: 15%;
+  }
+
+  .refer {
+    border: 0px;
+    background-color: transparent;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .refer:hover {
+    text-decoration: underline;
+  }
+
+  .simpleText {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .inputField {
+    background: #a4abe9;
+    height: 25px;
+    width: 250px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .primary {
+    height: 25px;
+    width: 125px;
+    border-radius: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background: #031757;
+    color: white;
+  }
+</style>
+
+<div class="container">
+  <div class="LEFT">
+    <h1> Добро пожаловать</h1>
+    <p class="simpleText"> Это - сайт компании ... </p>
+    <p class="simpleText"> Здесь вы можете ...</p>
+    <br><br><br>
+    <p class="simpleText"> Для начала вам нужно зарегистрироваться</p>
+  </div>
+  <div class="RIGHT">
+    <h2> Регистрация </h2>
+    <div class="SignUpWindow">
+      <input class="inputField" id="InputEmail" type="email" aria-describedby="emailHelp"
+        placeholder="Введите ваш Email" name="email" [(ngModel)]="login" />
+      <br>
+      <input class="inputField" id="InputPassword" type="password" placeholder="Пароль" name="password"
+        [(ngModel)]="password" />
+      <br>
+      <input class="inputField" id="ConfirmInputPassword" type="password" placeholder="Повторите пароль"
+        name="passwordRepeated" [(ngModel)]="passwordRepeated" />
+      <br>
+      <button class="primary" routerLink="/home" type="button" (click)="this.OnSignUpButtonClick()">Создать
+        аккаунт</button>
+      <br>
+      <p class="simpleText"></p>Уже есть аккаунт?<p class="refer" routerLink="/login" type="button"
+        (click)="this.OnLoginButtonClick()">Заходите
+      </p>
+      <br>
+      <p (ngModel)="this.prompt">{{this.prompt}}</p>
+    </div>
+  </div>
+  <div class="a"></div>
+  <div class="b"></div>
+  <div class="c"></div>
+  <div class="d"></div>
+</div>
