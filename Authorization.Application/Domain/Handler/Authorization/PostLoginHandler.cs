@@ -8,10 +8,11 @@ using Authorization.Application.AuthorizeOptions;
 using Authorization.Application.Domain.Entities;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Responses.Authorization;
+using MediatR;
 
 namespace Authorization.Application.Domain.Handler.Authorization
 {
-	public class PostLoginHandler
+	public class PostLoginHandler : IRequestHandler<PostLoginRequest, PostLoginResponse>
 	{
 		private readonly IRepository<User> _repository;
 		private readonly HashPassword _hasher;

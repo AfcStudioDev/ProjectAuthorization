@@ -12,8 +12,10 @@ namespace Authorization.Infrastructure.Database
     {
         public static void AddInfrastructureDataBase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AuthorizationServiceContext>(options =>
-                options.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 21)))
+            string connectionString = configuration["DefaultConnection"];// configuration.GetConnectionString( "DefaultConnection" );
+
+			services.AddDbContext<AuthorizationServiceContext>(options =>
+                options.UseMySql( connectionString, ServerVersion.AutoDetect( connectionString ) )
             );
 
             services.AddTransient<IRepository<User>, UserRepository>();

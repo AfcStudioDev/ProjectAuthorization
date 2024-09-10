@@ -10,6 +10,9 @@ namespace Authorization.Infrastructure.Database.Contexts
         public virtual DbSet<Device> Devices { get; set; }
         public virtual DbSet<LicenseType> LicenseTypes { get; set; }
 
-        public AuthorizationServiceContext(DbContextOptions<AuthorizationServiceContext> options) : base(options) { }
+        public AuthorizationServiceContext(DbContextOptions<AuthorizationServiceContext> options) : base(options) 
+        {
+            Database.EnsureCreated();
+		}
     }
 }

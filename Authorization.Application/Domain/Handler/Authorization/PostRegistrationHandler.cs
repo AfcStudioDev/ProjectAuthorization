@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Authorization.Application.Abstractions;
 using Authorization.Application.AuthorizeOptions;
 using Authorization.Application.Domain.Entities;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Responses.Authorization;
+using MediatR;
 
 namespace Authorization.Application.Domain.Handler.Authorization
 {
-	public class PostRegistrationHandler
+	public class PostRegistrationHandler : IRequestHandler<PostRegistrationRequest, PostRegistrationResponse>
 	{
 		private readonly IRepository<User> _repository;
 		private HashPassword _hasher;
@@ -24,9 +26,9 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
 		public async Task<PostRegistrationResponse> Handle( PostRegistrationRequest request, CancellationToken cancellationToken )
 		{
-			if ( ValidData( request ) )
-			{ 
-			
+			if ( !ValidData( request ) )
+			{
+				return new PostRegistrationResponse() { Success = false, Message = "InValid Password or Login" };
 			}
 			if ( CheckOnExist( request ) )
 			{
@@ -34,13 +36,10 @@ namespace Authorization.Application.Domain.Handler.Authorization
 			}
 			else
 			{
-				Random rnd = new Random();
-				var code = rnd.Next( 0, 999999 ).ToString( "D6" );
-
 				byte[] salt = _hasher.CreateDinamicSaltFromEmail( request.Email );
 				User user = new User()
 				{
-					Id = Guid.NewGuid(),//todo лучше id пусть база содает
+					Id = Guid.NewGuid(),//todo лучше id пусть база создает
 					Email = request.Email,									
 					PasswordHash = _hasher.EncryptingPass( request.Password, salt )
 				};
@@ -79,10 +78,16 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
 		private bool ValidData( PostRegistrationRequest request)
 		{
-
-			var x = "^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$" +
-				"";
+			var emailRegex = new Regex( "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" );
+			var passwordRegex = new Regex( "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" );
+			if ( emailRegex.IsMatch( request.Email ) && passwordRegex.IsMatch( request.Password ) )
+			{
 				return true;
+			}
+			else 
+			{
+				return false;
+			}			
 		}
 	}
 }

@@ -15,7 +15,6 @@ namespace Authorization.Infrastructure.Api.Controllers
 	public class AuthorizationController : ControllerBase
 	{
 		private readonly IMediator _mediator;
-
 		public AuthorizationController( IMediator mediator, IRepository<User> userRepository, AuthOptions authOptions )
 		{
 			_mediator = mediator ?? throw new ArgumentNullException( nameof( mediator ) );			
