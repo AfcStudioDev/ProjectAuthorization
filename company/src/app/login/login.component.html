@@ -1,0 +1,94 @@
+<style>
+  .LoginWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    background: #a4abe9;
+  }
+
+  .refer {
+    border: 0px;
+    background-color: transparent;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: right;
+  }
+
+  .refer:hover {
+    text-decoration: underline;
+  }
+
+  .envelope {
+    position: absolute;
+    border-color: #031757 #c4cde9 #c4cde9 #c4cde9;
+    border-style: solid;
+    border-width: 250px 500px 250px 500px;
+    height: 0px;
+    width: 0px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+  .label {
+    position: absolute;
+    top: 170px;
+    text-align: center;
+    color: white;
+  }
+
+  .inputs {
+    position: absolute;
+    top: 340px;
+    text-align: center;
+  }
+
+  .inputField {
+    background: #a4abe9;
+    height: 25px;
+    width: 250px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .primary {
+    height: 25px;
+    width: 125px;
+    border-radius: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background: #031757;
+    color: white;
+  }
+
+  .simpleText {
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+</style>
+<div class="LoginWindow">
+  <div class="envelope"></div>
+  <h1 class="label">Название компании</h1>
+  <form class="inputs">
+    <input id="exampleInputEmail" class="inputField" type="email" aria-describedby="emailHelp"
+      placeholder="Введите ваш Email" name="email" [(ngModel)]="login" />
+    <br>
+    <input id="exampleInputPassword" class="inputField" type="password" placeholder="Пароль" name="password"
+      [(ngModel)]="password" />
+    <br>
+    <button class="primary" routerLink="/home" type="button" (click)="this.OnLoginButtonClick()">Войти</button>
+    <br>
+    <p class="simpleText">Нет аккаунта?</p>
+    <p class="refer" routerLink="/home" type="button" (click)="this.OnSignUpButtonClick()">Зарегистрируйтесь</p>
+  </form>
+</div>

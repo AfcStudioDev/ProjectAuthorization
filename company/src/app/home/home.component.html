@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Page Title</title>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: 0.2fr 2.6fr 0.2fr;
+      grid-template-rows: 0.4fr 1.7fr 1.6fr 0.3fr;
+      gap: 0px 0px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "b TOPTOP d"
+        "b TOP d"
+        "b BOTTOM d"
+        "c c c";
+      background-color: #031757;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      min-height: 100vh;
+    }
+
+    .c {
+      grid-area: c;
+    }
+
+    .BOTTOM {
+      padding: 10px;
+      grid-area: BOTTOM;
+      background-color: #031757;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .TOP {
+      padding: 10px;
+      grid-area: TOP;
+      background-color: #031757;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+
+    .TOPTOP {
+      grid-area: TOPTOP;
+      background-color: #031757;
+      color: white;
+      display: inline-block;
+    }
+
+    .b {
+      grid-area: b;
+    }
+
+    .d {
+      grid-area: d;
+    }
+
+    .bay {
+      height: 40px;
+      width: 60%;
+      border-radius: 12px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+      background: #031757;
+      color: white;
+    }
+
+    .devicesTable {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      margin: 20px, 20px;
+      border-radius: 20px;
+      border: 2px solid black;
+      background-color: #c4cde9;
+    }
+
+    .devicesTable th {
+      border: 1px solid black;
+      font-size: 24px;
+    }
+
+    .devicesTable td {
+      border: 1px solid black;
+      font-size: 16px;
+    }
+
+    .devicesTable tr:first-child th {
+      border-top: none;
+      height: 25%;
+    }
+
+    .devicesTable tr:first-child td {
+      border-top: none;
+    }
+
+    .devicesTable tr:last-child th {
+      border-bottom: none;
+    }
+
+    .devicesTable tr:last-child td {
+      border-bottom: none;
+    }
+
+    .devicesTable tr td:first-child {
+      border-left: none;
+      width: 25%;
+    }
+
+    .devicesTable tr th:first-child {
+      border-left: none;
+      width: 25%;
+    }
+
+    .devicesTable tr td:last-child {
+      border-right: none;
+    }
+
+    .devicesTable tr th:last-child {
+      border-right: none;
+    }
+
+    .offersTable {
+      table-layout: fixed;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      margin: 20px, 20px;
+      border-radius: 20px;
+      background-color: #031757;
+    }
+
+    .refer {
+      border: 0px;
+      background-color: #c4cde9;
+      float: right;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+
+    .refer:hover {
+      text-decoration: underline;
+    }
+
+    .title {
+      float: left;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="c"></div>
+  <div class="BOTTOM">
+    <table class="offersTable">
+      <tr>
+        <td>
+          <table class="devicesTable">
+            <tr>
+              <th>Месяц</th>
+            </tr>
+            <tr>
+              <td>99.9 руб. / месяц</td>
+            </tr>
+            <tr>
+              <td><button class="bay">Взять</button></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table class="devicesTable">
+            <tr>
+              <th>Квартал</th>
+            </tr>
+            <tr>
+              <td>199.9 руб. / месяц</td>
+            </tr>
+            <tr>
+              <td><button class="bay">Взять</button></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table class="devicesTable">
+            <tr>
+              <th>Полгода</th>
+            </tr>
+            <tr>
+              <td>499.9 руб. / месяц</td>
+            </tr>
+            <tr>
+              <td><button class="bay">Взять</button></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table class="devicesTable">
+            <tr>
+              <th>Год</th>
+            </tr>
+            <tr>
+              <td>4999.9 руб. / месяц</td>
+            </tr>
+            <tr>
+              <td><button class="bay">Взять</button></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="TOP">
+    <table class="devicesTable">
+      <tr>
+        <th>Название устройства</th>
+        <th>Лицензия</th>
+      </tr>
+      <tr>
+        <td>модель1</td>
+        <td>лицензия1</td>
+      </tr>
+      <tr>
+        <td>модель2</td>
+        <td>лицензия2</td>
+      </tr>
+      <tr>
+        <td>модель3</td>
+        <td>лицензия3</td>
+      </tr>
+    </table>
+    <br><br><br><br>
+  </div>
+  <div class="TOPTOP">
+    <h1 class="title" (ngModel)="this.login">{{this.login}}: наш телеграмм</h1>
+    <button class="refer" routerLink="/login" type="button" (click)="this.OnLoginButtonClick()">Выйти</button>
+  </div>
+  <div class="b"></div>
+  <div class="d"></div>
+</div>
