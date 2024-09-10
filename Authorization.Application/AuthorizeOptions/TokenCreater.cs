@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Authorization.Application.Domain.Entities;
 
 namespace Authorization.Application.AuthorizeOptions
 {
@@ -35,7 +36,7 @@ namespace Authorization.Application.AuthorizeOptions
 			var claims = new List<Claim>
 			{
 				new Claim("UserId",user.Id.ToString()),
-				new Claim("Name",user.Name)
+				new Claim("Email",user.Email)
 			};
 			return claims;
 		}

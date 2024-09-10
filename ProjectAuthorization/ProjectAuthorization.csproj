@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Authorization.Application\Authorization.Application.csproj" />
+    <ProjectReference Include="..\Authorization.Infrastructure.Api\Authorization.Infrastructure.Api.csproj" />
     <ProjectReference Include="..\Authorization.Infrastructure.Database\Authorization.Infrastructure.Database.csproj" />
   </ItemGroup>
 

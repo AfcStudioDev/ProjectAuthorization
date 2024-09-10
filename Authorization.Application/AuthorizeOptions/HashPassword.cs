@@ -29,19 +29,22 @@ namespace Authorization.Application.AuthorizeOptions
 			return salt;
 		}
 
-		private byte[] GetSalt( string salt )
+		public byte[] CreateDinamicSaltFromEmail(string email)
 		{
-			byte[] dynamicSalt = Encoding.ASCII.GetBytes( salt.ToCharArray(), 0, 8 );
+			SHA256 sha256 = SHA256.Create();
+			var hashBytes = sha256.ComputeHash( Encoding.ASCII.GetBytes( email ) );
+			var hashString = BitConverter.ToString( hashBytes ).Replace( "-", "" ).ToLower();
+			var saltString = hashString.Substring(0,8);
+			var dynamicSalt = Encoding.ASCII.GetBytes( saltString );
 			var fullSalt = dynamicSalt.Concat( _staticSalt ).ToArray();
 			return fullSalt;
 		}
 
-		public string EncryptingPass( string password, string salt )
-		{
-			byte[] fullSalt = GetSalt( salt );
+		public string EncryptingPass( string password, byte[] salt )
+		{			
 			var hash = Convert.ToBase64String( KeyDerivation.Pbkdf2(
 				password: password,
-				salt: fullSalt,
+				salt: salt,
 				prf: KeyDerivationPrf.HMACSHA256,
 				iterationCount: 10000,
 				numBytesRequested: 32

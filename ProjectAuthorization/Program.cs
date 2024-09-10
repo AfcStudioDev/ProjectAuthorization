@@ -1,12 +1,15 @@
 using Authorization.Infrastructure.Database;
 using Microsoft.OpenApi.Models;
+using Authorization.Application;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+builder.Services.AddApplication( builder.Configuration );
 builder.Services.AddInfrastructureDataBase(builder.Configuration);
 
+builder.Services.AddEndpointsApiExplorer();
 
 #region Swagger Configuration
-
 builder.Services.AddSwaggerGen(swagger =>
 {
     //This is to generate the Default UI of Swagger Documentation
@@ -50,25 +53,22 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI( c =>
+	{
+		c.SwaggerEndpoint( "/swagger/v1/swagger.json", "FractalzBackend" );
+		c.RoutePrefix = string.Empty;
+	} );
 }
 
-app.UseStaticFiles();
+app.UseCors( x => x
+	.AllowAnyOrigin()
+	.AllowAnyMethod()
+	.AllowAnyHeader() );
 
-app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseSwagger();
-
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FractalzBackend");
-    c.RoutePrefix = string.Empty;
-});
-
-
 app.MapControllers();
 
 app.Run();

@@ -5,10 +5,13 @@ using Authorization.Application.Abstractions;
 using Swashbuckle.AspNetCore.Annotations;
 using Authorization.Application.Domain.Responses.Authorization;
 using Authorization.Application.Domain.Requests.Authorization;
+using Authorization.Application.Domain.Entities;
+using Authorization.Application.AuthorizeOptions;
 
 namespace Authorization.Infrastructure.Api.Controllers
 {
 	[Route( "Authorization" )]
+	[ApiController]
 	public class AuthorizationController : ControllerBase
 	{
 		private readonly IMediator _mediator;

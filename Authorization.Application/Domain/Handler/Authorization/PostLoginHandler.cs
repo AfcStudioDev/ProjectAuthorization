@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Authorization.Application.Abstractions;
 using Authorization.Application.AuthorizeOptions;
+using Authorization.Application.Domain.Entities;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Responses.Authorization;
 
@@ -40,15 +41,15 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
 		private bool CheckOnIdentity( string identity, string password, out User user )
 		{
-			user = _repository.Get().SingleOrDefault( u => u.Name == identity );
+			user = _repository.Get().SingleOrDefault( u => u.Email == identity );
 			if ( user == null )
 			{
 				return false;
 			}
+			var salt = _hasher.CreateDinamicSaltFromEmail( user.Email );
+			string passwordHash = _hasher.EncryptingPass( password, salt );
 
-			string passwordHash = _hasher.EncryptingPass( password, user.Salt );
-
-			if ( user.Password == passwordHash )
+			if ( user.PasswordHash == passwordHash )
 			{
 				return true;
 			}
