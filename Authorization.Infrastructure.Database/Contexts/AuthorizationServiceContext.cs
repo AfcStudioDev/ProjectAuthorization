@@ -13,6 +13,6 @@ namespace Authorization.Infrastructure.Database.Contexts
         public AuthorizationServiceContext(DbContextOptions<AuthorizationServiceContext> options) : base(options) 
         {
             Database.EnsureCreated();
-		}
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Authorization.Application.Domain.Requests.FilesUpload;
 using Authorization.Application.Domain.Responses.FilesUpload;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Authorization.Application.Domain.Handler.FilesUpload
 {
@@ -26,6 +27,7 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
                     break;
 
             }
+
             var response = new GetFilesUploadResponse();
             Stream? stream = null;
 
@@ -40,7 +42,11 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
                 response.Message = "Файл не найден";
             }
 
-            return new GetFilesUploadResponse() { File = stream };
+            response.File = new FileStreamResult(stream, "application/octet-stream") { 
+                FileDownloadName = Path.GetFileName(path)
+            };
+
+            return response;
         }
     }
 }
