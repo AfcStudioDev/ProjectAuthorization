@@ -27,7 +27,7 @@ namespace Authorization.Infrastructure.Api.Controllers
 
             if (response.Success)
             {
-                return Ok(response);
+                return response.File!;
             }
             else
             {
