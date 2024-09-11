@@ -24,7 +24,7 @@ namespace Authorization.Application
 			//services.AddMediatR(Assembly.GetExecutingAssembly()); почемуто это не саботало. сработала строка выше 
 
 			services.AddSingleton( configuration.GetSection( "AuthOptions" ).Get<AuthOptions>() );
-			services.AddSingleton( x => new HashPassword( configuration["DefaultConnection"] ) );
+			services.AddSingleton( x => new HashPassword( configuration.GetConnectionString("DefaultConnection")! ) );
 			services.AddAuthentication( JwtBearerDefaults.AuthenticationScheme )
 					.AddJwtBearer( options =>
 					{

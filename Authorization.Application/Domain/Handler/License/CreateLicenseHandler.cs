@@ -20,25 +20,38 @@ namespace Authorization.Application.Domain.Handler.License
         public async Task<CreateLicenseResponse> Handle(CreateLicenseRequest request, CancellationToken cancellationToken)
         {
             var newLicense = new Entities.License() { LicenseTypeId = request.LicenseType, StartLicense = DateTime.Now };
-            var device = _deviceRepository.Get(a => a.UserId == request.UserId).FirstOrDefault();
+            var device = _deviceRepository.GetWithInclude(a => a.UserId == request.UserId, a => a.Licenses).FirstOrDefault();
 
             if (device is not null)
             {
-                var lastLicense = device.Licenses.OrderByDescending(a => a.StartLicense).FirstOrDefault();
+                var sortingLicense = device.Licenses.OrderByDescending(a => a.StartLicense.Ticks).ToList();
+                var lastLicense = sortingLicense.FirstOrDefault();
                 if (lastLicense != null)
                 {
-                    newLicense.StartLicense = lastLicense.StartLicense + lastLicense.LicenseType.Length;
+                    lastLicense = _licenseRepository.GetWithInclude(a => a.Id == lastLicense.Id, a => a.LicenseType).First();
+
+                    var endLastlicense = lastLicense.StartLicense.AddDays(lastLicense.LicenseType.Duration);
+
+                    var startLicense = endLastlicense >= DateTime.Now ? endLastlicense : DateTime.Now;
+
+                    newLicense.StartLicense = startLicense;
+
+                    device.Licenses.Add(newLicense);
                 }
+                else
+                {
+                    device.Licenses.Add(newLicense);
+                }
+
+                await _deviceRepository.UpdateAsync(device);
             }
             else
             {
-                device = new Device() { DeviceNumber = request.DeviceNumber, UserId = request.UserId };
+                device = new Device() { DeviceNumber = request.DeviceNumber, UserId = request.UserId, LicenseKey = Guid.NewGuid().ToString() };
                 device.Licenses.Add(newLicense);
 
                 await _deviceRepository.CreateAsync(device);
             }
-
-            await _deviceRepository.UpdateAsync(device);
 
             return new CreateLicenseResponse() { Success = true };
         }

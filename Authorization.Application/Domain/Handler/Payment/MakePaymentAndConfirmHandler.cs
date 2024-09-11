@@ -1,54 +1,66 @@
-﻿using Authorization.Application.Abstractions;
-using Authorization.Application.Domain.Entities;
+﻿using Authorization.Application.Domain.Requests.License;
 using Authorization.Application.Domain.Requests.Payment;
 using Authorization.Application.Domain.Responses.Payment;
+using Authorization.YooKassa;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 
 namespace Authorization.Application.Domain.Handler.Payment
 {
     public class MakePaymentAndConfirmHandler : IRequestHandler<MakePaymentAndConfirmRequest, MakePaymentAndConfirmResponse>
     {
-        private readonly IRepository<User> _userRepository;
-        private readonly IRepository<Device> _deviceRepository;
+        private readonly IMediator _mediator;
+        private readonly string _urlPayments;
+        private readonly string _shopId;
+        private readonly string _secretKey;
 
-        public MakePaymentAndConfirmHandler(IRepository<User> repositoryUser, IRepository<Device> repositoryDevice)
+        public MakePaymentAndConfirmHandler(IMediator mediator, IConfiguration configuration)
         {
-            _userRepository = repositoryUser;
-            _deviceRepository = repositoryDevice;
+            _mediator = mediator;
+            _urlPayments = configuration["YooCassaService:UrlPayments"]!;
+            _shopId = configuration["YooCassaService:ShopId"]!;
+            _secretKey = configuration["YooCassaService:SecretKey"]!;
         }
 
         public async Task<MakePaymentAndConfirmResponse> Handle(MakePaymentAndConfirmRequest request, CancellationToken cancellationToken)
         {
-            var user = _userRepository.GetWithInclude(a => a.Id == (Guid)request.UserId!, a => a.Devices).First();
+            var response = new MakePaymentAndConfirmResponse();
 
-            var device = user.Devices.FirstOrDefault(a => a.DeviceNumber == request.DeviceNumber);
-
-            var newLicense = new Entities.License() { LicenseTypeId = request.LicenseType, StartLicense = DateTime.Now };
-
-            if (device != null)
+            if (await ConfirmYoucassaPayment(request.PaymentId))
             {
-                var licenses = _deviceRepository.GetWithInclude(a => a.Id == device.Id, a => a.Licenses).FirstOrDefault()!.Licenses;
+                var createLicenseRequest = new CreateLicenseRequest() { UserId = (Guid)request.UserId!, DeviceNumber = request.DeviceNumber, LicenseType = request.LicenseType };
+                var responseCreateLicense = await _mediator.Send(createLicenseRequest);
 
-                if (licenses.Count > 0)
+                if (responseCreateLicense.Success)
                 {
-                    var endlicense = licenses.OrderByDescending(a => a.StartLicense).First();
-
-                    newLicense.StartLicense = endlicense.StartLicense + endlicense.LicenseType.Length;
+                    response.Success = true;
                 }
                 else
-                    newLicense.StartLicense = DateTime.Now;
-
-                device.Licenses.Add(newLicense);
-
-                _deviceRepository.Update(device);
+                {
+                    response.Success = false;
+                    response.Message = "Не удалось создать лицензию";
+                }
             }
             else
             {
-                var newDevice = new Device() { DeviceNumber = request.DeviceNumber, LicenseKey = Guid.NewGuid().ToString(), UserId = (Guid)request.UserId! };
-                newDevice.Licenses.Add(newLicense);
+                response.Success = false;
+                response.Message = "Не удалось подтвердить платеж";
             }
 
-            return new MakePaymentAndConfirmResponse() { Success = true };
+            return response;
+        }
+
+        /// <summary>
+        /// Отправка запроса в Юкассу для подтверждения успешного платежа
+        /// </summary>
+        /// <param name="paymentId"></param>
+        /// <returns></returns>
+        private async Task<bool> ConfirmYoucassaPayment(string paymentId)
+        {
+            YooCassaClient client = new YooCassaClient(_urlPayments, _shopId, _secretKey);
+            var response = await client.IsSuccessPay(paymentId);
+
+            return response;
         }
     }
 }

@@ -13,12 +13,12 @@ namespace Authorization.Application.Domain.Handler.Payment
 {
     public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, CreatePaymentResponse>
     {
-        private readonly IRepository<LicenseType> _repository;
+        private readonly IRepository<Entities.LicenseType> _repository;
         private readonly string _urlPayments;
         private readonly string _shopId;
         private readonly string _secretKey;
 
-        public CreatePaymentHandler(IConfiguration configuration, IRepository<LicenseType> repository)
+        public CreatePaymentHandler(IConfiguration configuration, IRepository<Entities.LicenseType> repository)
         {
             _urlPayments = configuration["YooCassaService:UrlPayments"]!;
             _shopId = configuration["YooCassaService:ShopId"]!;
@@ -45,7 +45,7 @@ namespace Authorization.Application.Domain.Handler.Payment
             return response;
         }
 
-        private async Task<PayResponse?> CreatePaynetAndGetResponse(CreatePaymentRequest paymentRequest, LicenseType licenseType)
+        private async Task<PayResponse?> CreatePaynetAndGetResponse(CreatePaymentRequest paymentRequest, Entities.LicenseType licenseType)
         {
             var youcassaClient = new YooCassaClient(_urlPayments, _shopId, _secretKey);
 

@@ -25,6 +25,8 @@ namespace Authorization.Infrastructure.Api.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 GetAllLicense", typeof(GetListLicenseResponse))]
         public async Task<IActionResult> GetAllLicense(GetListLicenseRequest request)
         {
+            request.UserId = GetUserIdFromToken();
+
             var response = await _mediator.Send(request);
 
             if (response.Success)
@@ -62,6 +64,8 @@ namespace Authorization.Infrastructure.Api.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 CreateLicense", typeof(CreateLicenseResponse))]
         public async Task<IActionResult> Create(CreateLicenseRequest request)
         {
+            request.UserId = GetUserIdFromToken();
+
             var response = await _mediator.Send(request);
 
             if (response.Success)
@@ -91,6 +95,11 @@ namespace Authorization.Infrastructure.Api.Controllers
             {
                 return BadRequest(response);
             }
+        }
+
+        private Guid GetUserIdFromToken()
+        {
+            return Guid.Parse(HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "UserId")!.Value);
         }
     }
 }

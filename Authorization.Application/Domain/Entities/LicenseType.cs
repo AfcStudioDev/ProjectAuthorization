@@ -1,12 +1,15 @@
-﻿namespace Authorization.Application.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Authorization.Application.Domain.Entities
 {
     public class LicenseType
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;
-        public Decimal Price { get; set; }
-        public TimeSpan Length { get; set; }
+        public decimal Price { get; set; }
+        public int Duration { get; set; }
 
+        [JsonIgnore]
         public List<License> Licenses { get; set; } = new();
     }
 }

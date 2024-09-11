@@ -12,7 +12,7 @@ namespace Authorization.Infrastructure.Database
     {
         public static void AddInfrastructureDataBase(this IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration["DefaultConnection"];// configuration.GetConnectionString( "DefaultConnection" );
+            string connectionString = configuration.GetConnectionString( "DefaultConnection" )!;
 
 			services.AddDbContext<AuthorizationServiceContext>(options =>
                 options.UseMySql( connectionString, ServerVersion.AutoDetect( connectionString ) )
