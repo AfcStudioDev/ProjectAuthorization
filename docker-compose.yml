@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  sbpfront:
+    image: ${DOCKER_REGISTRY-}sbpfronts
+    build:
+      context: company
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/test/:/etc/nginx/conf.d/:ro
