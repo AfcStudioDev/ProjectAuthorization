@@ -1,0 +1,125 @@
+<div class="container">
+  <button type="button" class="btn btn-primary" (click)="this.OnLoginButtonClick()">Выйти</button>
+  <div class="table-container form-control p-0 my-2 rounded">
+    <table class="table table-borderless m-2 rounded">
+      <thead>
+        <tr>
+          <th scope="col">Login пользователя</th>
+          <th>Операции</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>eeee.ru</td>
+          <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-primary">Лицензии</button>
+            <button type="button" class="btn btn-danger mx-2">Удалить</button>
+          </td>
+        </tr>
+        <tr>
+          <td>eeee.ru</td>
+          <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-primary">Лицензии</button>
+            <button type="button" class="btn btn-danger mx-2">Удалить</button>
+          </td>
+        </tr>
+        <tr>
+          <td>eeee.ru</td>
+          <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-primary">Лицензии</button>
+            <button type="button" class="btn btn-danger mx-2">Удалить</button>
+          </td>
+        </tr>
+        <tr>
+          <td>eeee.ru</td>
+          <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-primary">Лицензии</button>
+            <button type="button" class="btn btn-danger mx-2">Удалить</button>
+          </td>
+        </tr>
+        <tr>
+          <td>eeee.ru</td>
+          <td>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-primary">Лицензии</button>
+            <button type="button" class="btn btn-danger mx-2">Удалить</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="bayModal" tabindex="-1" aria-labelledby="licenseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="bayModalLabel">Лицензии пользователя</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Предоставить лиензию:</p>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" placeholder="000000000">
+          <label for="floatingInput">Номер устройства</label>
+        </div>
+        <select class="form-select my-2" aria-label="Default select example">
+          <option selected>Выберите лицензию</option>
+          <option value="1">30 дней</option>
+          <option value="2">90 дней</option>
+          <option value="3">180 дней</option>
+          <option value="3">365 дней</option>
+        </select>
+        <button type="button" class="btn btn-primary">Предоставить</button>
+
+        <div class="table-container form-control p-0 my-2 rounded">
+          <table class="table table-borderless m-2 rounded">
+            <thead>
+              <tr>
+                <th scope="col">Лицензии</th>
+                <th>Операции</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Устройство: 1234567</td>
+              </tr>
+              <tr>
+                <td>Лицензия от 23.12.2003</td>
+                <td>
+                  <button type="button" class="btn btn-danger mx-2">Удалить</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Лицензия от 23.12.2003</td>
+                <td>
+                  <button type="button" class="btn btn-danger mx-2">Удалить</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Устройство: 1234567</td>
+              </tr>
+              <tr>
+                <td>Лицензия от 23.12.2003</td>
+                <td>
+                  <button type="button" class="btn btn-danger mx-2">Удалить</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Лицензия от 23.12.2003</td>
+                <td>
+                  <button type="button" class="btn btn-danger mx-2">Удалить</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button type="button" class="btn btn-primary">Применить</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -64,6 +64,11 @@ button.btn-primary {
   border-radius: 20px;
 }
 
+button.btn {
+  border: none;
+  border-radius: 20px;
+}
+
 button.btn-primary:hover {
   background-color: #499495;
 }
@@ -110,9 +115,4 @@ th {
 h4,
 li {
   color: #4a8e9f;
-}
-
-button.btn {
-  border: none;
-  border-radius: 20px;
 }

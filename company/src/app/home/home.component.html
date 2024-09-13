@@ -1,10 +1,4 @@
 <div class="container">
-  <h5 class="title" (ngModel)="this.login">{{this.login}}: наш телеграмм https://t.me/NeedMoreRamonaFlowers</h5>
-  <h5 class="title">Прошу написать в телеграм</h5>
-  <h5 class="title">так обсуждение будет оперативнее</h5>
-  <h5 class="title">контакты написаны сюда, </h5>
-  <h5 class="title">потому что кворк запрещает оставлять свои контакты в чате</h5>
-  
   <button type="button" class="btn btn-primary" (click)="this.OnLoginButtonClick()">Выйти</button>
   <div class="table-container form-control p-0 my-2 rounded">
     <table class="table table-borderless m-2 rounded">
@@ -15,74 +9,47 @@
         </tr>
       </thead>
       <tbody>
+        @for (c of licenseList; track c.id) {
         <tr>
-          <td>модель1</td>
-          <td>лицензия1</td>
+          <td>{{c.deviceNumber}}</td>
+          <td>
+            <tr>
+              @for (lic of c.licenses; track lic.id) {
+                <td>{{lic.licenseType.name}}</td>
+                <td>Начало: {{lic.startLicense}}</td>
+                <td>Длительность: {{lic.licenseType.duration}}</td>
+              }
+            </tr>
+          </td>
         </tr>
+      }
+      @empty {
         <tr>
-          <td>модель2</td>
-          <td>лицензия2</td>
+          <td>Нет лицензий</td>
         </tr>
-        <tr>
-          <td>модель3</td>
-          <td>лицензия3</td>
-        </tr>
+      }
       </tbody>
     </table>
   </div>
 
   <div class="container  justify-content-center ">
     <div class="card-deck justify-content-center text-center row">
+      @for (c of typeLicense; track c.id) {
       <div class="card m-1 col-12 col-md-2 box-shadow">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">На 30 дней</h4>
+          <h4 class="my-0 font-weight-normal">На {{c.duration}} дней</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">0₽</h1>
+          <h1 class="card-title pricing-card-title">{{c.price}}₽</h1>
           <ul class="list-unstyled mt-3 mb-4">
+            <li class="fs-5">{{c.name}}</li>
             <li>На одно устройство</li>
           </ul>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-lg btn-block btn-primary">Приобрести</button>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal"
+            class="btn btn-lg btn-block btn-primary">Приобрести</button>
         </div>
       </div>
-
-      <div class="card m-1 col-12 col-md-2  box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">На 90 дней</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">15₽</h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>На одно устройство</li>
-          </ul>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-lg btn-block btn-primary">Приобрести</button>
-        </div>
-      </div>
-      <div class="card m-1 col-12 col-md-2 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">На 180 дней</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">29₽</h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>На одно устройство</li>
-          </ul>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-lg btn-block btn-primary">Приобрести</button>
-        </div>
-      </div>
-
-      <div class="card m-1 col-12 col-md-2 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">На 365 дней</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">3500₽</h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>На одно устройство</li>
-          </ul>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal" class="btn btn-lg btn-block btn-primary">Приобрести</button>
-        </div>
-      </div>
+      }
     </div>
   </div>
   <!-- <button class="refer" routerLink="/login" type="button" (click)="this.OnLoginButtonClick()">Выйти</button> -->

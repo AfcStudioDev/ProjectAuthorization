@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
