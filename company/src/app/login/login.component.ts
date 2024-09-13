@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from "../home/home.component";
 import { LoginRequest } from '../../requests/AuthorizationRequest/LoginRequest';
 import { AuthorizationService } from '../http/authorization.service';
-import { Alert } from '../../../dist/hello-world/browser/scripts-EEEIPNC3';
 
 @Component({
   selector: 'app-login',
