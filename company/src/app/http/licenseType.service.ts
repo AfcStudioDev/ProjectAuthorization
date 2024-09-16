@@ -12,7 +12,6 @@ export class LicenseTypeService {
 
     public GetTypeLicense(): Observable<ListLicenseTypeResponse> {
         const url = configs.AuthorisationServiceHost + "/" + configs.licenseTypeUrl;
-        console.log("sdfsdfsdfsdfsdf");
         return this.httpClient.get<ListLicenseTypeResponse>(url);
     }
 }
