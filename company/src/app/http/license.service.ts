@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { configs } from '../config';
 import { Observable } from 'rxjs';
 import { ListLicenseResponse } from '../../responses/LicenseResponse/ListLicenseResponse';
@@ -15,8 +15,10 @@ export class LicenseService {
 
     public GetAllLicense(): Observable<ListLicenseResponse> {
         const url = configs.AuthorisationServiceHost + "/" + configs.licenseUrl + "/" + configs.licenseAllUrl;
+        const header = new HttpHeaders({'Authorization': `Bearer ${this.token}`, 'X-Require-Auth': 'true'});
+        const options = {headers : header}
 
-        return this.httpClient.get<ListLicenseResponse>(url);
+        return this.httpClient.get<ListLicenseResponse>(url, options);
     }
 
     public CreateLicense(request: CreateLicenseRequest): Observable<BaseResponse> {
