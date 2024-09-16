@@ -20,7 +20,7 @@ namespace Authorization.Application.Domain.Handler.License
         public async Task<CreateLicenseResponse> Handle(CreateLicenseRequest request, CancellationToken cancellationToken)
         {
             var newLicense = new Entities.License() { LicenseTypeId = request.LicenseType, StartLicense = DateTime.Now };
-            var device = _deviceRepository.GetWithInclude(a => a.UserId == request.UserId, a => a.Licenses).FirstOrDefault();
+            var device = _deviceRepository.GetWithInclude(a => a.UserId == request.UserId && a.DeviceNumber == request.DeviceNumber, a => a.Licenses).FirstOrDefault();
 
             if (device is not null)
             {
