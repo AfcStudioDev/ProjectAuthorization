@@ -14,7 +14,7 @@ import { GetFilesUploadRequest } from '../../requests/Download/GetFilesUploadReq
   imports: [FormsModule, HomeComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [AuthorizationService]
+  providers: [AuthorizationService,DownloadDistrService]
 })
 export class LoginComponent {  
   constructor(private router: Router, private authorizationService : AuthorizationService, private downloadDistrService : DownloadDistrService){
@@ -43,28 +43,12 @@ export class LoginComponent {
 
   OnDownLoad1Click(){
     let request = new GetFilesUploadRequest(0);
-    this.downloadDistrService.GetDistr(request).subscribe({
-      next: (response) => { 
-
-      },
-      error: (err) => {
-        alert("Ссылка на скачивание временно не доступна");
-        console.log(err)
-      }
-    });
+    this.downloadDistrService.GetDistr(request);    
   }
 
   OnDownLoad2Click(){
     let request = new GetFilesUploadRequest(1);
-    this.downloadDistrService.GetDistr(request).subscribe({
-      next: (response) => { 
-
-      },
-      error: (err) => {
-        alert("Ссылка на скачивание временно не доступна");
-        console.log(err)
-      }
-    });
+    this.downloadDistrService.GetDistr(request);    
   }
 
   CheckAuthToken(){

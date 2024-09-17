@@ -35,7 +35,7 @@ export class SignUpComponent {
     } else {      
       this.authorizationService.Registration(this.registration).subscribe({
         next: (response) => {
-          this.router.navigate(["/home"]);
+          this.router.navigate(["/login"]);
         },
         error: (err) => {
           alert("Не удалось создать аккаунт");

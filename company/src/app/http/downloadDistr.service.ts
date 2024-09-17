@@ -10,9 +10,19 @@ import { HttpParameterCodec } from "@angular/common/http";
 export class  DownloadDistrService{
     constructor(private httpClient: HttpClient) { }
 
-    public GetDistr(request: GetFilesUploadRequest): Observable<GetFilesUploadResponse> {        
-        let queryString = encodeURIComponent( JSON.stringify(request));
+    public GetDistr(request: GetFilesUploadRequest) {        
+        let queryString = Object.entries(request)
+        .reduce((acc,e,i) => 
+          `${acc}${i >0 ? '&' : '?' }${e[0]}=${encodeURIComponent(e[1])}`,
+          '');
         const url = configs.AuthorisationServiceHost + "/" + configs.filesUrl + "/" + queryString;
-        return this.httpClient.get<GetFilesUploadResponse>(url);
-    }    
+        this.downLoadFile(url);       
+    }
+    private  downLoadFile(url: string) {
+        let anchor = document.createElement("a");
+    
+        anchor.download = "";
+        anchor.href = url;
+        anchor.click();
+    }
 }
