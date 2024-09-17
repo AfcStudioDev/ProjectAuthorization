@@ -7,7 +7,6 @@ namespace Authorization.Infrastructure.Database.Contexts
     {
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<License> Licenses { get; set; }
-        public virtual DbSet<Device> Devices { get; set; }
         public virtual DbSet<LicenseType> LicenseTypes { get; set; }
 
         public AuthorizationServiceContext(DbContextOptions<AuthorizationServiceContext> options) : base(options) 
