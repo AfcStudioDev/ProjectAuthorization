@@ -6,12 +6,14 @@ namespace Authorization.Application.Domain.Entities
     {
         public Guid Id { get; set; }
         public DateTime StartLicense { get; set; }
+        public string DeviceNumber { get; set; } = null!;
+        public string LicenseKey { get; set; } = null!;
 
-        public Guid DeviceId { get; set; }
+        public int Duration { get; set; }
+
+        public Guid UserId { get; set; }
 
         [JsonIgnore]
-        public Device Device { get; set; } = null!;
-        public Guid LicenseTypeId { get; set; }
-        public LicenseType LicenseType { get; set; } = null!;
+        public User User { get; set; } = null!;
     }
 }
