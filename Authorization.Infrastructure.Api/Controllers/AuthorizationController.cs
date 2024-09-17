@@ -7,6 +7,7 @@ using Authorization.Application.Domain.Responses.Authorization;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Entities;
 using Authorization.Application.AuthorizeOptions;
+using Authorization.Application.Domain.Requests.LicenseType;
 
 namespace Authorization.Infrastructure.Api.Controllers
 {
@@ -60,7 +61,7 @@ namespace Authorization.Infrastructure.Api.Controllers
 		[Route("LoginList")]
 		[SwaggerResponse(StatusCodes.Status200OK, "Post 200 GetListLogin", typeof(GetListLoginResponse))]
 		[SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 GetListLogin", typeof(GetListLoginResponse))]
-		public async Task<IActionResult> getLoginList(GetListLoginRequest request)
+		public async Task<IActionResult> getLoginList([FromQuery] GetListLoginRequest request)
 		{
 			var response = await _mediator.Send(request);
 

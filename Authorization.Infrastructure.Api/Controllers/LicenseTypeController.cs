@@ -1,4 +1,5 @@
-﻿using Authorization.Application.Domain.Requests.LicenseType;
+﻿using Authorization.Application.Domain.Requests.Authorization;
+using Authorization.Application.Domain.Requests.LicenseType;
 using Authorization.Application.Domain.Responses.License;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
