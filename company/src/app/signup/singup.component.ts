@@ -13,7 +13,9 @@ import { AuthorizationService } from '../http/authorization.service';
   providers: [AuthorizationService]
 })
 export class SignUpComponent {
-  constructor(private router: Router, private authorizationService: AuthorizationService) { }
+  constructor(private router: Router, private authorizationService: AuthorizationService) { 
+    this.CheckAuthToken();
+  }
   emailRegex: RegExp = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
   //passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
   login: string = "john@gmail.com";
@@ -59,4 +61,12 @@ export class SignUpComponent {
   OnLoginButtonClick() {
     this.router.navigate(["/login"]);
   }
+  CheckAuthToken(){
+    let token:string = localStorage.getItem("token") || "";
+    if( token != "" )
+    {
+      this.router.navigate(['/home']);
+    }
+  }
+  
 }
