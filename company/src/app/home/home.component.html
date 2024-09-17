@@ -15,21 +15,19 @@
           <td>{{c.deviceNumber}}</td>
           <td>{{c.licenseKey}}</td>
           <td>
-              @for (lic of c.licenses; track lic.id) {
-                <tr>
-                <td>{{lic.licenseType.name}}</td>
-                <td>Начало: {{lic.startLicense.slice(0, lic.startLicense.indexOf("T"))}}</td>
-                <td>{{lic.licenseType.duration}} дней</td>
-              </tr>
-              }        
-          </td>
+        <tr>
+          <td>Начало: {{c.startLicense.slice(0, c.startLicense.indexOf("T"))}}</td>
+          <td>{{c.duration}} дней</td>
         </tr>
-      }
-      @empty {
+
+        </td>
+        </tr>
+        }
+        @empty {
         <tr>
           <td>Нет лицензий</td>
         </tr>
-      }
+        }
       </tbody>
     </table>
   </div>
@@ -66,10 +64,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Вы хотите преобрести товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за {{typeLicenseModal.price}}₽</p>
+        <p>Вы хотите преобрести товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
+          {{typeLicenseModal.price}}₽</p>
         <p>Введите номер устройства:</p>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control"  [(ngModel)]="createPaymentRequest.deviceNumber"  id="floatingInput" placeholder="000000000">
+          <input type="email" class="form-control" [(ngModel)]="createPaymentRequest.deviceNumber" id="floatingInput"
+            placeholder="000000000">
           <label for="floatingInput">Номер устройства</label>
         </div>
       </div>

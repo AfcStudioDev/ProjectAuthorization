@@ -1,16 +1,16 @@
-import { LicenseTypeModel } from "./LicenseTypeModel";
-
 export class LicenseModel {
-    constructor(id = "", startLicense = "", deviceId = "", licenseTypeId = "", licenseType : any) {
+    constructor(id = "", startLicense = "", deviceNumber = "", licenseKey = "", duration : 0, userId: "") {
         this.id = id;
         this.startLicense = startLicense;
-        this.deviceId = deviceId;
-        this.licenseTypeId = licenseTypeId;
-        this.licenseType = licenseType;
+        this.deviceNumber = deviceNumber;
+        this.licenseKey = licenseKey;
+        this.duration = duration;
+        this.userId = userId;
     }
     id: string
     startLicense: string
-    deviceId: string
-    licenseTypeId: string
-    licenseType: LicenseTypeModel
+    deviceNumber: string
+    licenseKey: string
+    duration: number
+    userId: string
 }

@@ -18,7 +18,7 @@ namespace Authorization.Infrastructure.Api.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         [Route("CreatePayment")]
         [SwaggerResponse(StatusCodes.Status200OK, "Post 200 Payment", typeof(CreatePaymentResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 Payment", typeof(CreatePaymentResponse))]
@@ -37,7 +37,7 @@ namespace Authorization.Infrastructure.Api.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         [Route("MakePaymentAndConfirmLicenseCreate")]
         [SwaggerResponse(StatusCodes.Status200OK, "Post 200 Payment", typeof(MakePaymentAndConfirmResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 Payment", typeof(MakePaymentAndConfirmResponse))]
