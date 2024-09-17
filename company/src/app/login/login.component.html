@@ -1,94 +1,42 @@
-<style>
-  .LoginWindow {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100vh;
-    background: #a4abe9;
-  }
+<div class="container text-center vh-100">
+  <div class="row  d-flex align-items-center justify-content-center h-75">
+    <div class="col-md-6">  
+      <div class="card shadow-lg text-center">
+        <div class="card-header triangle p-4">
+          <h5 class="company-label">компани наме</h5>
+        </div>
+        <div class="card-body p-4">
+          <form>
+            <div class="form-group py-2">
+              <input id="exampleInputEmail" class="inputField form-control" type="email" aria-describedby="emailHelp"
+                placeholder="Введите ваш Email" name="email" [(ngModel)]="login.identificator" />
+            </div>
+            <div class="form-group py-2">
+              <input id="exampleInputPassword" class="inputField form-control" type="password" placeholder="Пароль"
+                name="password" [(ngModel)]="login.password" />
+            </div>
 
-  .refer {
-    border: 0px;
-    background-color: transparent;
-    text-decoration: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    float: right;
-  }
+            <button class="btn btn-primary btn-block w-100" routerLink="/home" type="button"
+              (click)="this.OnLoginButtonClick()">Войти</button>
 
-  .refer:hover {
-    text-decoration: underline;
-  }
-
-  .envelope {
-    position: absolute;
-    border-color: #031757 #c4cde9 #c4cde9 #c4cde9;
-    border-style: solid;
-    border-width: 250px 500px 250px 500px;
-    height: 0px;
-    width: 0px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  }
-
-  .label {
-    position: absolute;
-    top: 170px;
-    text-align: center;
-    color: white;
-  }
-
-  .inputs {
-    position: absolute;
-    top: 340px;
-    text-align: center;
-  }
-
-  .inputField {
-    background: #a4abe9;
-    height: 25px;
-    width: 250px;
-    border-radius: 12px;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-
-  .primary {
-    height: 25px;
-    width: 125px;
-    border-radius: 12px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    background: #031757;
-    color: white;
-  }
-
-  .simpleText {
-    float: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-</style>
-<div class="LoginWindow">
-  <div class="envelope"></div>
-  <h1 class="label">Название компании</h1>
-  <form class="inputs">
-    <input id="exampleInputEmail" class="inputField" type="email" aria-describedby="emailHelp"
-      placeholder="Введите ваш Email" name="email" [(ngModel)]="login" />
-    <br>
-    <input id="exampleInputPassword" class="inputField" type="password" placeholder="Пароль" name="password"
-      [(ngModel)]="password" />
-    <br>
-    <button class="primary" routerLink="/home" type="button" (click)="this.OnLoginButtonClick()">Войти</button>
-    <br>
-    <p class="simpleText">Нет аккаунта?</p>
-    <p class="refer" routerLink="/home" type="button" (click)="this.OnSignUpButtonClick()">Зарегистрируйтесь</p>
-  </form>
+            <div class="d-flex justify-content-center">
+              <p class="simpleText px-2">Нет аккаунта?</p>
+              <a class="refer" routerLink="/home" type="button"
+                (click)="this.OnSignUpButtonClick()">Зарегистрируйтесь</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>    
+  </div>
+  <div class="row justify-content-center text-center h-25">
+    <div class="col">
+      <p>скачать андроид</p>
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoad1Click()">Скачай меня по ссылке</button>
+    </div>
+    <div class="col">
+      <p>скачать вин</p>
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoad2Click()">Скачай меня по ссылке</button>
+    </div>    
+  </div>
 </div>
