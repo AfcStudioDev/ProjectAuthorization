@@ -45,6 +45,10 @@ export class HomeComponent {
     this.getLicense();
   }
 
+  getCountDaysEnd(startLicense: Date, duration: number) {
+    return Math.round((new Date(startLicense).setHours(duration * 24) - Date.now()) / (60 * 60 * 24 * 1000));
+  }
+
   getTypeLicense() {
     this.licenseTypeService.GetTypeLicense().subscribe({
       next: (response) => {

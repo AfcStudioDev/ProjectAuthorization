@@ -16,8 +16,13 @@
           <td>{{c.licenseKey}}</td>
           <td>
         <tr>
-          <td>Начало: {{c.startLicense.slice(0, c.startLicense.indexOf("T"))}}</td>
-          <td>{{c.duration}} дней</td>
+          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5){
+            <td class="text-danger">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+          }
+          @else
+          {
+            <td class="text-success">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+          }
         </tr>
 
         </td>
@@ -52,7 +57,6 @@
       }
     </div>
   </div>
-  <!-- <button class="refer" routerLink="/login" type="button" (click)="this.OnLoginButtonClick()">Выйти</button> -->
 </div>
 
 <!-- Modal -->

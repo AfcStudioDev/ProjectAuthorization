@@ -1,5 +1,5 @@
 export class LicenseModel {
-    constructor(id = "", startLicense = "", deviceNumber = "", licenseKey = "", duration : 0, userId: "") {
+    constructor(id = "", startLicense = new Date, deviceNumber = "", licenseKey = "", duration : 0, userId: "") {
         this.id = id;
         this.startLicense = startLicense;
         this.deviceNumber = deviceNumber;
@@ -8,7 +8,7 @@ export class LicenseModel {
         this.userId = userId;
     }
     id: string
-    startLicense: string
+    startLicense: Date
     deviceNumber: string
     licenseKey: string
     duration: number
