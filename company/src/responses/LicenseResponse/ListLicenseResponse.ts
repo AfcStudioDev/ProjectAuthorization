@@ -1,6 +1,6 @@
-import { DeviceModel } from "../../models/DeviceModel";
+import { LicenseModel } from "../../models/LicenseModel";
 import { BaseResponse } from "../BaseResponse";
 
 export type ListLicenseResponse = BaseResponse & {
-    licenses: DeviceModel[];
+    licenses: LicenseModel[];
 }

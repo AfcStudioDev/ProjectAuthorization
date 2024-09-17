@@ -4,10 +4,10 @@ import { FormsModule, Validators } from '@angular/forms';
 import { LicenseTypeModel } from '../../models/LicenseTypeModel';
 import { LicenseTypeService } from '../http/licenseType.service';
 import { LicenseService } from '../http/license.service';
-import { DeviceModel } from '../../models/DeviceModel';
 import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymentRequest';
 import { PaymentService } from '../http/payment.service';
 import { MakePaymentRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
+import { LicenseModel } from '../../models/LicenseModel';
 declare let YooMoneyCheckoutWidget: any;
 
 @Component({
@@ -24,7 +24,7 @@ export class HomeComponent {
   }
   login: string = "tg";
   typeLicense: LicenseTypeModel[] = [];
-  licenseList: DeviceModel[] = [];
+  licenseList: LicenseModel[] = [];
   typeLicenseModal: LicenseTypeModel = new LicenseTypeModel;
   createPaymentRequest: CreatePaymentRequest = new CreatePaymentRequest;
 
