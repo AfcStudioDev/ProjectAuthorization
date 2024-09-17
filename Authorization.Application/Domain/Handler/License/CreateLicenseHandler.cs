@@ -1,5 +1,4 @@
 ﻿using Authorization.Application.Abstractions;
-using Authorization.Application.Domain.Entities;
 using Authorization.Application.Domain.Requests.License;
 using Authorization.Application.Domain.Responses.License;
 using MediatR;
@@ -8,49 +7,45 @@ namespace Authorization.Application.Domain.Handler.License
 {
     public class CreateLicenseHandler : IRequestHandler<CreateLicenseRequest, CreateLicenseResponse>
     {
-        private readonly IRepository<Device> _deviceRepository;
         private readonly IRepository<Entities.License> _licenseRepository;
+        private readonly IRepository<Entities.LicenseType> _licenseTypeRepository;
+        private readonly IRepository<Entities.User> _userRepository;
 
-        public CreateLicenseHandler(IRepository<Device> deviceRepository, IRepository<Entities.License> entitiesRepository)
+        public CreateLicenseHandler(IRepository<Entities.License> entitiesRepository, IRepository<Entities.LicenseType> licenseTypeRepository, IRepository<Entities.User> userRepository)
         {
-            _deviceRepository = deviceRepository;
             _licenseRepository = entitiesRepository;
+            _licenseTypeRepository = licenseTypeRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<CreateLicenseResponse> Handle(CreateLicenseRequest request, CancellationToken cancellationToken)
         {
-            var newLicense = new Entities.License() { LicenseTypeId = request.LicenseType, StartLicense = DateTime.Now };
-            var device = _deviceRepository.GetWithInclude(a => a.UserId == request.UserId, a => a.Licenses).FirstOrDefault();
+            var newLicense = new Entities.License() { StartLicense = DateTime.Now };
+            var license = _licenseRepository.GetWithInclude(a => a.UserId == request.UserId && a.DeviceNumber == request.DeviceNumber).FirstOrDefault();
 
-            if (device is not null)
+            var licenseType = await _licenseTypeRepository.FindByIdAsync(request.LicenseType);
+
+            if (license is not null)
             {
-                var sortingLicense = device.Licenses.OrderByDescending(a => a.StartLicense.Ticks).ToList();
-                var lastLicense = sortingLicense.FirstOrDefault();
-                if (lastLicense != null)
-                {
-                    lastLicense = _licenseRepository.GetWithInclude(a => a.Id == lastLicense.Id, a => a.LicenseType).First();
-
-                    var endLastlicense = lastLicense.StartLicense.AddDays(lastLicense.LicenseType.Duration);
-
-                    var startLicense = endLastlicense >= DateTime.Now ? endLastlicense : DateTime.Now;
-
-                    newLicense.StartLicense = startLicense;
-
-                    device.Licenses.Add(newLicense);
-                }
+                if(license.StartLicense.AddDays(license.Duration) >= DateTime.Now)
+                    license.Duration += licenseType.Duration;
                 else
                 {
-                    device.Licenses.Add(newLicense);
+                    license.StartLicense = DateTime.Now;
+                    license.Duration = licenseType.Duration;
                 }
 
-                await _deviceRepository.UpdateAsync(device);
+                await _licenseRepository.UpdateAsync(license);
             }
             else
             {
-                device = new Device() { DeviceNumber = request.DeviceNumber, UserId = request.UserId, LicenseKey = Guid.NewGuid().ToString() };
-                device.Licenses.Add(newLicense);
+                var user = await _userRepository.FindByIdAsync(request.UserId);
 
-                await _deviceRepository.CreateAsync(device);
+                license = new Entities.License() { DeviceNumber = request.DeviceNumber, UserId = request.UserId, LicenseKey = Guid.NewGuid().ToString(), Duration = licenseType.Duration, StartLicense = DateTime.Now };
+
+                user.Licenses.Add(license);
+
+                await _userRepository.UpdateAsync(user);
             }
 
             return new CreateLicenseResponse() { Success = true };

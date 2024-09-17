@@ -4,7 +4,10 @@ import { FormsModule, Validators } from '@angular/forms';
 import { LicenseTypeModel } from '../../models/LicenseTypeModel';
 import { LicenseTypeService } from '../http/licenseType.service';
 import { LicenseService } from '../http/license.service';
-import { DeviceModel } from '../../models/DeviceModel';
+import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymentRequest';
+import { PaymentService } from '../http/payment.service';
+import { MakePaymentRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
+import { LicenseModel } from '../../models/LicenseModel';
 declare let YooMoneyCheckoutWidget: any;
 
 @Component({
@@ -13,25 +16,37 @@ declare let YooMoneyCheckoutWidget: any;
   imports: [FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [LicenseTypeService, LicenseService]
+  providers: [LicenseTypeService, LicenseService, PaymentService]
 })
 export class HomeComponent {
-  constructor(private router: Router, private licenseTypeService: LicenseTypeService, private licenseService: LicenseService) {
+  constructor(private router: Router, private licenseTypeService: LicenseTypeService, private licenseService: LicenseService, private paymentService: PaymentService) {
 
   }
   login: string = "tg";
   typeLicense: LicenseTypeModel[] = [];
-  licenseList: DeviceModel[] = [];
+  licenseList: LicenseModel[] = [];
+  typeLicenseModal: LicenseTypeModel = new LicenseTypeModel;
+  createPaymentRequest: CreatePaymentRequest = new CreatePaymentRequest;
 
   getLogin() {
     return this.login;
   }
   OnLoginButtonClick() {
+    let token:string = localStorage.getItem("token") || "";    
+    if( token != "" )
+    {
+      localStorage.removeItem("token");
+    }
     this.router.navigate(["/login"]);
   }
 
   ngOnInit() {
     this.getTypeLicense();
+    this.getLicense();
+  }
+
+  getCountDaysEnd(startLicense: Date, duration: number) {
+    return Math.round((new Date(startLicense).setHours(duration * 24) - Date.now()) / (60 * 60 * 24 * 1000));
   }
 
   getTypeLicense() {
@@ -60,55 +75,69 @@ export class HomeComponent {
     });
   }
 
-  GoPay(type: number) {
-    var host = window.location.host;
-    console.log(host);
+  OpenModalBay(id: string)
+  {
+    let selectLicenseType = this.typeLicense.find(a=>a.id === id);
 
-    var checkout = new YooMoneyCheckoutWidget({
-      confirmation_token: "response.confirmation.confirmation_token",
-      customization: {
-        modal: true
+    if(selectLicenseType != undefined)
+    {
+      this.createPaymentRequest.licenseType = selectLicenseType.id;
+      this.typeLicenseModal = selectLicenseType;
+    }
+  }
+
+  GoPay(type: number) {
+    var pay_info = this.paymentService.CreatePayment(this.createPaymentRequest).subscribe({
+      next: (response) => {
+        console.log(response);
+        var host = window.location.host;
+        console.log(host);
+
+        var checkout = new YooMoneyCheckoutWidget({
+          confirmation_token: response.confirmation.confirmation_token,
+         customization: {
+            modal: true
+          },
+          error_callback: (error: any) => {
+            console.log(error);
+          }
+        });
+        
+        checkout.on('success', () => {
+          alert("Оплата успешно произведена!");
+          checkout.destroy();
+
+          let makePayment = new MakePaymentRequest;
+          makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
+          makePayment.licenseType = this.createPaymentRequest.licenseType;
+          makePayment.paymentId = response.id;
+
+          this.paymentService.MakePayment(makePayment).subscribe({ 
+            next: (response) => {
+              if(!response)
+              {
+                alert("Произошла ошибка при выдаче лицензии!");
+              }
+            }
+           });
+          this.getLicense();
+        });
+
+        checkout.on('fail', () => {
+          alert("Оплата прошла неудачно, попробуйте снова");
+
+          checkout.destroy();
+        });
+
+        checkout.render()
+          .then(() => {
+
+          });
       },
-      error_callback: (error: any) => {
-        console.log(error);
+      error: (error)=>{
+        alert("Произошла ошибка при создании оплаты");
       }
     });
-
-    checkout.render()
-      .then(() => {
-
-      });
-
-    //     checkout.on('success', () => {
-    //       alert("Оплата успешно произведена!");
-    //       checkout.destroy();
-    //       this.licenseService.ConfirmLicenseCreate(response.id, type.toString()).subscribe({ 
-    //         next: (response) => {
-    //           if(!response)
-    //           {
-    //             alert("Произошла ошибка при выдаче лицензии!");
-    //           }
-    //         }
-    //        });
-    //       this.router.navigate(['/projects']);
-    //     });
-
-    //     checkout.on('fail', () => {
-    //       alert("Оплата прошла неудачно, попробуйте снова");
-
-    //       checkout.destroy();
-    //     });
-
-    //     checkout.render()
-    //       .then(() => {
-
-    //       });
-    //   },
-    //   error: (error)=>{
-    //     alert("У вас уже имеется лицензия!");
-    //     this.router.navigate(['/profile']);
-    //   }
-    // });
   }
 
 }

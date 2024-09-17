@@ -21,7 +21,7 @@ namespace Authorization.Infrastructure.Api.Controllers
         [Route("get")]
         [SwaggerResponse(StatusCodes.Status200OK, "Post 200 getDistr", typeof(GetFilesUploadResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Post getDistr", typeof(GetFilesUploadResponse))]
-        public async Task<IActionResult> GetDistr(GetFilesUploadRequest request)
+        public async Task<IActionResult> getDistrAndroid([FromQuery] GetFilesUploadRequest request)
         {
             var response = await _mediator.Send(request);
 
@@ -34,5 +34,5 @@ namespace Authorization.Infrastructure.Api.Controllers
                 return BadRequest(response);
             }
         }
-    }
+	}
 }

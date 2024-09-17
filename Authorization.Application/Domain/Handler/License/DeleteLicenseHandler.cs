@@ -1,5 +1,4 @@
 ﻿using Authorization.Application.Abstractions;
-using Authorization.Application.Domain.Entities;
 using Authorization.Application.Domain.Requests.License;
 using Authorization.Application.Domain.Responses.License;
 using MediatR;
@@ -8,9 +7,9 @@ namespace Authorization.Application.Domain.Handler.License
 {
     public class DeleteLicenseHandler : IRequestHandler<DeleteLicenseRequest, DeleteLicenseResponse>
     {
-        private readonly IRepository<Device> _repository;
+        private readonly IRepository<Entities.License> _repository;
 
-        public DeleteLicenseHandler(IRepository<Device> repository)
+        public DeleteLicenseHandler(IRepository<Entities.License> repository)
         {
             _repository = repository;
         }
@@ -18,10 +17,10 @@ namespace Authorization.Application.Domain.Handler.License
         {
             var response = new DeleteLicenseResponse();
 
-            var device = _repository.Get(a => a.DeviceNumber == request.DeviceNumber).FirstOrDefault();
-            if (device is not null)
+            var license = _repository.Get(a => a.DeviceNumber == request.DeviceNumber).FirstOrDefault();
+            if (license is not null)
             {
-                await _repository.RemoveAsync(device);
+                await _repository.RemoveAsync(license);
 
                 response.Success = true;
             }

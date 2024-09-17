@@ -5,6 +5,7 @@
       <thead>
         <tr>
           <th scope="col">Название устройства</th>
+          <th scope="col">ключ</th>
           <th>Лицензия</th>
         </tr>
       </thead>
@@ -12,22 +13,30 @@
         @for (c of licenseList; track c.id) {
         <tr>
           <td>{{c.deviceNumber}}</td>
+          <td>{{c.licenseKey}}</td>
           <td>
-            <tr>
-              @for (lic of c.licenses; track lic.id) {
-                <td>{{lic.licenseType.name}}</td>
-                <td>Начало: {{lic.startLicense}}</td>
-                <td>Длительность: {{lic.licenseType.duration}}</td>
-              }
-            </tr>
-          </td>
+        <tr>
+          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5 && this.getCountDaysEnd(c.startLicense, c.duration) >0){
+            <td class="text-danger">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+          }
+          @else if(this.getCountDaysEnd(c.startLicense, c.duration) <= 0)
+          {
+            <td class="text-danger">лицензия просрочена</td>
+          }
+          @else
+          {
+            <td class="text-success">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+          }
         </tr>
-      }
-      @empty {
+
+        </td>
+        </tr>
+        }
+        @empty {
         <tr>
           <td>Нет лицензий</td>
         </tr>
-      }
+        }
       </tbody>
     </table>
   </div>
@@ -46,13 +55,12 @@
             <li>На одно устройство</li>
           </ul>
           <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal"
-            class="btn btn-lg btn-block btn-primary">Приобрести</button>
+            class="btn btn-lg btn-block btn-primary" (click)="this.OpenModalBay(c.id)">Приобрести</button>
         </div>
       </div>
       }
     </div>
   </div>
-  <!-- <button class="refer" routerLink="/login" type="button" (click)="this.OnLoginButtonClick()">Выйти</button> -->
 </div>
 
 <!-- Modal -->
@@ -64,10 +72,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Вы хотите преобрести товар: Подписка на 30 дней за 0₽</p>
+        <p>Вы хотите преобрести товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
+          {{typeLicenseModal.price}}₽</p>
         <p>Введите номер устройства:</p>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="000000000">
+          <input type="email" class="form-control" [(ngModel)]="createPaymentRequest.deviceNumber" id="floatingInput"
+            placeholder="000000000">
           <label for="floatingInput">Номер устройства</label>
         </div>
       </div>

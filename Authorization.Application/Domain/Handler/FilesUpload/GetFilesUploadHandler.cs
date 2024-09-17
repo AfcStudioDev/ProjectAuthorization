@@ -18,10 +18,7 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
             {
                 case Enums.PlatformType.Android:
                     path = Path.Combine(path, _androidApp);
-                    break;
-                case Enums.PlatformType.IOS:
-                    path = Path.Combine(path, _iosApp);
-                    break;
+                    break;                
                 case Enums.PlatformType.Windows:
                     path = Path.Combine(path, _windowsApp);
                     break;

@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="row justify-content-center align-items-center min-vh-100">
-    <div class="col-md-6">
+<div class="container text-center vh-100">
+  <div class="row  d-flex align-items-center justify-content-center h-75">
+    <div class="col-md-6">  
       <div class="card shadow-lg text-center">
         <div class="card-header triangle p-4">
           <h5 class="company-label">компани наме</h5>
@@ -27,6 +27,14 @@
           </form>
         </div>
       </div>
+    </div>    
+  </div>
+  <div class="row justify-content-center text-center h-25">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoad1Click()">Скачать Android .apk</button>
     </div>
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoad2Click()">Скачать installer для Windows</button>
+    </div>    
   </div>
 </div>

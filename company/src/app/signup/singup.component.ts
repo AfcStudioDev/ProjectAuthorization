@@ -13,11 +13,11 @@ import { AuthorizationService } from '../http/authorization.service';
   providers: [AuthorizationService]
 })
 export class SignUpComponent {
-  constructor(private router: Router, private authorizationService: AuthorizationService) { }
+  constructor(private router: Router, private authorizationService: AuthorizationService) { 
+    this.CheckAuthToken();
+  }
   emailRegex: RegExp = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-  //passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
-  login: string = "john@gmail.com";
-  password: string = "";
+  passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");  
   passwordRepeated: string = "";
   prompt: string = "";
 
@@ -32,11 +32,10 @@ export class SignUpComponent {
     }
     else if (!this.CheckPasswordsMatch()) {
       this.prompt = "Пароли не совпадают";
-    } else {
-
+    } else {      
       this.authorizationService.Registration(this.registration).subscribe({
         next: (response) => {
-          this.router.navigate(["/home"]);
+          this.router.navigate(["/login"]);
         },
         error: (err) => {
           alert("Не удалось создать аккаунт");
@@ -59,4 +58,12 @@ export class SignUpComponent {
   OnLoginButtonClick() {
     this.router.navigate(["/login"]);
   }
+  CheckAuthToken(){
+    let token:string = localStorage.getItem("token") || "";
+    if( token != "" )
+    {
+      this.router.navigate(['/home']);
+    }
+  }
+  
 }
