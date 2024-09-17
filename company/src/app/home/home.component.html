@@ -16,8 +16,12 @@
           <td>{{c.licenseKey}}</td>
           <td>
         <tr>
-          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5){
+          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5 && this.getCountDaysEnd(c.startLicense, c.duration) >0){
             <td class="text-danger">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+          }
+          @else if(this.getCountDaysEnd(c.startLicense, c.duration) <= 0)
+          {
+            <td class="text-danger">лицензия просрочена</td>
           }
           @else
           {
