@@ -14,7 +14,9 @@ import { AuthorizationService } from '../http/authorization.service';
   providers: [AuthorizationService]
 })
 export class LoginComponent {  
-  constructor(private router: Router, private authorizationService : AuthorizationService){}
+  constructor(private router: Router, private authorizationService : AuthorizationService){
+    this.CheckAuthToken();
+  }
   
   login: LoginRequest  = new LoginRequest;
 
@@ -34,5 +36,20 @@ export class LoginComponent {
   }
   OnSignUpButtonClick(){
     this.router.navigate(["/signup"]);
+  }
+
+  OnDownLoad1Click(){
+
+  }
+
+  OnDownLoad2Click(){
+    
+  }
+  CheckAuthToken(){
+    let token:string = localStorage.getItem("token") || "";
+    if( token != "" )
+    {
+      this.router.navigate(['/home']);
+    }
   }
 }

@@ -32,6 +32,11 @@ export class HomeComponent {
     return this.login;
   }
   OnLoginButtonClick() {
+    let token:string = localStorage.getItem("token") || "";    
+    if( token != "" )
+    {
+      localStorage.removeItem("token");
+    }
     this.router.navigate(["/login"]);
   }
 
