@@ -55,5 +55,23 @@ namespace Authorization.Infrastructure.Api.Controllers
 				return BadRequest( response );
 			}
 		}
+
+		[HttpGet]
+		[Route("LoginList")]
+		[SwaggerResponse(StatusCodes.Status200OK, "Post 200 GetListLogin", typeof(GetListLoginResponse))]
+		[SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 GetListLogin", typeof(GetListLoginResponse))]
+		public async Task<IActionResult> getLoginList(GetListLoginRequest request)
+		{
+			var response = await _mediator.Send(request);
+
+			if (response.Success)
+			{
+				return Ok(response);
+			}
+			else
+			{
+				return BadRequest(response);
+			}
+		}
 	}
 }
