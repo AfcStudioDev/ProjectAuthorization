@@ -17,9 +17,7 @@ export class SignUpComponent {
     this.CheckAuthToken();
   }
   emailRegex: RegExp = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-  //passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
-  login: string = "john@gmail.com";
-  password: string = "";
+  passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");  
   passwordRepeated: string = "";
   prompt: string = "";
 
@@ -34,8 +32,7 @@ export class SignUpComponent {
     }
     else if (!this.CheckPasswordsMatch()) {
       this.prompt = "Пароли не совпадают";
-    } else {
-
+    } else {      
       this.authorizationService.Registration(this.registration).subscribe({
         next: (response) => {
           this.router.navigate(["/home"]);

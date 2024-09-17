@@ -3,7 +3,6 @@
     public enum PlatformType
     {
         Android,
-        Windows,
-        IOS
+        Windows
     }
 }

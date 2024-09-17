@@ -1,6 +1,7 @@
 ﻿using Authorization.Application.Domain.Requests.LicenseType;
 using Authorization.Application.Domain.Responses.License;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -16,7 +17,7 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             _mediator = mediator;
         }
-
+        [Authorize]
         [HttpGet]
         [Route("")]
         [SwaggerResponse(StatusCodes.Status200OK, "Post 200 GetListTypeLicense", typeof(GetListLicenseResponse))]
