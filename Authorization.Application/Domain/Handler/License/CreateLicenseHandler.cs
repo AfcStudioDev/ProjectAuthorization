@@ -27,7 +27,13 @@ namespace Authorization.Application.Domain.Handler.License
 
             if (license is not null)
             {
-                license.Duration += licenseType.Duration;
+                if(license.StartLicense.AddDays(license.Duration) >= DateTime.Now)
+                    license.Duration += licenseType.Duration;
+                else
+                {
+                    license.StartLicense = DateTime.Now;
+                    license.Duration = licenseType.Duration;
+                }
 
                 await _licenseRepository.UpdateAsync(license);
             }
