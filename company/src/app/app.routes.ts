@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './signup/singup.component';
 import { LoginComponent } from './login/login.component';
 import { LicenseComponent } from './license/license.component';
+import { UserManagedComponent } from './admin/user/userManaged.component';
 
 export const routes: Routes = [
   {
@@ -19,5 +20,8 @@ export const routes: Routes = [
   },
   {
     path:'license', component: LicenseComponent
+  },
+  {
+    path:'admin/userManaged', component: UserManagedComponent
   }
 ];
