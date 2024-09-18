@@ -14,22 +14,22 @@ namespace HashPasswordTests
         {
             HashPassword hashPassword = new( staticSalt );
 
-            var actual = hashPassword.EncryptingPass( userPassword, salt );
+            string actual = hashPassword.EncryptingPass( userPassword, salt );
 
             Assert.Equal( expected, actual );
         }
 
-            /// <summary>
-            /// Проверяет логику генерации динамической соли
-            /// </summary>
-            /// Не забудь обновить соль, если обновил статик соль
-            [Theory]
-        [InlineData( "test1@test.test", "Server=1", new byte[] { 55, 48, 50, 49, 52, 100, 101, 101, 83, 101, 114, 118, 101, 114, 61, 49 })]
+        /// <summary>
+        /// Проверяет логику генерации динамической соли
+        /// </summary>
+        /// Не забудь обновить соль, если обновил статик соль
+        [Theory]
+        [InlineData( "test1@test.test", "Server=1", new byte[] { 55, 48, 50, 49, 52, 100, 101, 101, 83, 101, 114, 118, 101, 114, 61, 49 } )]
         public void GenerateDynamicSalt_GenerateDefaultSalt_ReturnSame( string email, string staticSalt, byte[] expected )
         {
             HashPassword hashPassword = new( staticSalt );
 
-            var actual = hashPassword.CreateDinamicSaltFromEmail( email );
+            byte[] actual = hashPassword.CreateDinamicSaltFromEmail( email );
 
             Assert.Equal( expected, actual );
         }

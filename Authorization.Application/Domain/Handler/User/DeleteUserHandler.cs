@@ -1,6 +1,7 @@
 ﻿using Authorization.Application.Abstractions;
 using Authorization.Application.Domain.Requests.User;
 using Authorization.Application.Domain.Responses.User;
+
 using MediatR;
 
 namespace Authorization.Application.Domain.Handler.User
@@ -9,19 +10,19 @@ namespace Authorization.Application.Domain.Handler.User
     {
         private readonly IRepository<Entities.User> _userRepository;
 
-        public DeleteUserHandler(IRepository<Entities.User> repository)
+        public DeleteUserHandler( IRepository<Entities.User> repository )
         {
             _userRepository = repository;
         }
 
-        public async Task<DeleteUserResponse> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteUserResponse> Handle( DeleteUserRequest request, CancellationToken cancellationToken )
         {
-            var response = new DeleteUserResponse();
+            DeleteUserResponse response = new DeleteUserResponse();
 
-            var user = await _userRepository.FindByIdAsync(request.Id);
+            Entities.User user = await _userRepository.FindByIdAsync( request.Id );
             if (user != null)
             {
-                await _userRepository.RemoveAsync(user);
+                _ = await _userRepository.RemoveAsync( user );
                 response.Success = true;
             }
             else

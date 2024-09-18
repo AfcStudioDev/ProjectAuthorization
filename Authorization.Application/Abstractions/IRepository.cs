@@ -9,28 +9,28 @@ namespace Authorization.Application.Abstractions
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        int Create(T item);
+        int Create( T item );
 
         /// <summary>
         /// Создать объект в базе данных
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<int> CreateAsync(T item);
+        Task<int> CreateAsync( T item );
 
         /// <summary>
         /// Поиск по id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T FindById(Guid id);
+        T FindById( Guid id );
 
         /// <summary>
         /// Поиск по id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<T> FindByIdAsync(Guid id);
+        Task<T> FindByIdAsync( Guid id );
 
         /// <summary>
         /// Получение объекта из базы данных
@@ -43,35 +43,35 @@ namespace Authorization.Application.Abstractions
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        IEnumerable<T> Get(Func<T, bool> predicate);
+        IEnumerable<T> Get( Func<T, bool> predicate );
 
         /// <summary>
         /// Удаление объекта из бд
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        int Remove(T item);
+        int Remove( T item );
 
         /// <summary>
         /// Удаление объекта из бд
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<int> RemoveAsync(T item);
+        Task<int> RemoveAsync( T item );
 
         /// <summary>
         /// Обновление объекта из базы данных
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        int Update(T item);
+        int Update( T item );
 
         /// <summary>
         /// Обновление объекта из базы данных
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        Task<int> UpdateAsync(T item);
+        Task<int> UpdateAsync( T item );
 
         /// <summary>
         /// Получение объекта с вложенными полями с условием из базы данных
@@ -79,7 +79,7 @@ namespace Authorization.Application.Abstractions
         /// <param name="predicate"></param>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        IEnumerable<T> GetWithInclude(Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties);
+        IEnumerable<T> GetWithInclude( Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties );
 
         /// <summary>
         /// Получение объекта с вложенными полями с условием из базы данных
@@ -87,7 +87,7 @@ namespace Authorization.Application.Abstractions
         /// <param name="includeProperty"></param>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        IEnumerable<T> GetWithInclude(object includeProperty,
-            params Expression<Func<T, object>>[] includeProperties);
+        IEnumerable<T> GetWithInclude( object includeProperty,
+            params Expression<Func<T, object>>[] includeProperties );
     }
 }

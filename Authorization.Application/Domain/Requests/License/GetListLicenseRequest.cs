@@ -1,4 +1,5 @@
 ﻿using Authorization.Application.Domain.Responses.License;
+
 using MediatR;
 
 namespace Authorization.Application.Domain.Requests.License

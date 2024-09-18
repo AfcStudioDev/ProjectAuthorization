@@ -1,4 +1,5 @@
 ﻿using Authorization.Application.Domain.Responses.Payment;
+
 using MediatR;
 
 namespace Authorization.Application.Domain.Requests.Payment
