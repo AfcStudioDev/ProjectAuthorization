@@ -10,24 +10,24 @@ namespace Authorization.Application.AuthorizeOptions
 {
 	public class HashPassword
 	{
-		private readonly byte[] _staticSalt = new byte[8]; //{ 130, 105, 75, 103, 70, 158, 128, 199 };	 
+		private readonly byte[] _staticSalt = new byte[8];
 
 		public HashPassword( string staticSaltString )
 		{
 			_staticSalt = Encoding.ASCII.GetBytes( staticSaltString.ToCharArray(), 0, 8 );
 		}
+        // TODO: очистить или найти применение
+		//public string CreateSalt()
+		//{
+		//	var saltbyte = new byte[8];
+		//	using ( var rng = RandomNumberGenerator.Create() )
+		//	{
+		//		rng.GetBytes( saltbyte );
+		//	}
+		//	string salt = Encoding.ASCII.GetString( saltbyte );
 
-		public string CreateSalt()
-		{
-			var saltbyte = new byte[8];
-			using ( var rng = RandomNumberGenerator.Create() )
-			{
-				rng.GetBytes( saltbyte );
-			}
-			string salt = Encoding.ASCII.GetString( saltbyte );
-
-			return salt;
-		}
+		//	return salt;
+		//}
 
 		public byte[] CreateDinamicSaltFromEmail(string email)
 		{
