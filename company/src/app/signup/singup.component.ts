@@ -17,13 +17,13 @@ export class SignUpComponent {
     this.CheckAuthToken();
   }
   emailRegex: RegExp = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-  passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");  
+  passwordRegex: RegExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");  
   passwordRepeated: string = "";
   prompt: string = "";
-
   registration: RegistrationRequest = new RegistrationRequest;
 
   OnSignUpButtonClick() {
+    this.prompt = "";
     if (!this.CheckLogin()) {
       this.prompt = "Некорректная почта";
     }
@@ -46,10 +46,34 @@ export class SignUpComponent {
   }
 
   CheckLogin(): boolean {
-    return this.emailRegex.test(this.registration.email);
+    if(this.registration.email.length > 30) {
+      alert("Почта не должна быть больше 30 символов")
+      return false;
+    }
+    if(!this.emailRegex.test(this.registration.email))
+      {
+        alert("Имя (до @) ящика может состоять только из букв английского алфавита,\n"
+             +"цифр и следующих знаков: [._%+-] \n"
+             +"Имя домена (после @) до точки должно содержать только цифры и буквы английского алфавита\n"
+             +"Имя домена после точки должно содержать только буквы и не меньше 2");
+        return false;
+      };
+    return true;
   }
   CheckPassword(): boolean {
-    return this.registration.password.length >= 8;
+    if(this.registration.password.length < 8)
+    {
+      alert("Пароль должен быть не короче 8 символов")
+      return false;
+    }
+    if(!this.passwordRegex.test(this.registration.password))
+    {
+      alert("Пароль должен содержать не менее 8 символов и включать как минимум:\n"
+           +"1 цифру, 1 прописную и 1 строчную букву,\n"
+           +"1 спец символ из списка: [@$!%*#?&]")
+      return false;
+    }
+    return true;
   }
   CheckPasswordsMatch(): boolean {
     return this.registration.password == this.passwordRepeated;

@@ -72,6 +72,11 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
         private bool ValidData(PostRegistrationRequest request)
         {
+            if (request.Email.Length < 30)
+            {
+                return false;
+            }
+
             var emailRegex = new Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
             var passwordRegex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
             if (emailRegex.IsMatch(request.Email) && passwordRegex.IsMatch(request.Password))
