@@ -10,3 +10,11 @@ services:
       - "80:80"
     volumes:
       - ./nginx/test/:/etc/nginx/conf.d/:ro
+
+  authorizationservice:
+    image: ${DOCKER_REGISTRY-}authorizationservice
+    ports:
+      - "7293:8080"
+    build:
+      context: .
+      dockerfile: ProjectAuthorization/Dockerfile
