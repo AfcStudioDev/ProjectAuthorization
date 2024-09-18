@@ -1,6 +1,6 @@
 // endpoints
 export const configs = {
-      AuthorisationServiceHost: "http://localhost:5075",
+  AuthorisationServiceHost: "/api/authservice",
       authorizeUrl: "Authorization",
       loginUrl:"Login",
       loginAllUrl: "LoginAll",

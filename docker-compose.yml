@@ -7,14 +7,14 @@ services:
       context: company
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "7293:80"
     volumes:
       - ./nginx/test/:/etc/nginx/conf.d/:ro
 
   authorizationservice:
     image: ${DOCKER_REGISTRY-}authorizationservice
     ports:
-      - "7293:8080"
+      - "7294:8080"
     build:
       context: .
       dockerfile: ProjectAuthorization/Dockerfile
