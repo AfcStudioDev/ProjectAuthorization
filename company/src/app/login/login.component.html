@@ -16,9 +16,8 @@
                 name="password" [(ngModel)]="login.password" />
             </div>
 
-            <button class="btn btn-primary btn-block w-100" routerLink="/home" type="button"
+            <button [attr.disabled]="login.identificator.length == 0 || login.password.length == 0 ? true : null" class="btn btn-primary btn-block w-100" routerLink="/home" type="button"
               (click)="this.OnLoginButtonClick()">Войти</button>
-
             <div class="d-flex justify-content-center">
               <p class="simpleText px-2">Нет аккаунта?</p>
               <a class="refer" routerLink="/home" type="button"
