@@ -72,7 +72,7 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
         private bool ValidData(PostRegistrationRequest request)
         {
-            if (request.Email.Length < 30)
+            if (request.Email.Length > 30)
             {
                 return false;
             }

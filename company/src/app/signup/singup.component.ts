@@ -3,6 +3,8 @@ import { RouterOutlet, Router } from '@angular/router';
 import { FormsModule, Validators } from '@angular/forms';
 import { RegistrationRequest } from '../../requests/AuthorizationRequest/RegistrationRequest';
 import { AuthorizationService } from '../http/authorization.service';
+import { GetFilesUploadRequest } from '../../requests/Download/GetFilesUploadRequest';
+import { DownloadDistrService } from '../http/downloadDistr.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,10 +12,10 @@ import { AuthorizationService } from '../http/authorization.service';
   imports: [FormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
-  providers: [AuthorizationService]
+  providers: [AuthorizationService, DownloadDistrService]
 })
 export class SignUpComponent {
-  constructor(private router: Router, private authorizationService: AuthorizationService) { 
+  constructor(private router: Router, private authorizationService: AuthorizationService, private downloadDistrService : DownloadDistrService) { 
     this.CheckAuthToken();
   }
   emailRegex: RegExp = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
@@ -38,7 +40,7 @@ export class SignUpComponent {
           this.router.navigate(["/login"]);
         },
         error: (err) => {
-          alert("Не удалось создать аккаунт");
+          alert("Не удалось создать аккаунт: " + err.error);
           console.log(err);
         }
       });
@@ -89,5 +91,14 @@ export class SignUpComponent {
       this.router.navigate(['/home']);
     }
   }
-  
+
+  OnDownLoad1Click(){
+    let request = new GetFilesUploadRequest(0);
+    this.downloadDistrService.GetDistr(request);    
+  }
+
+  OnDownLoad2Click(){
+    let request = new GetFilesUploadRequest(1);
+    this.downloadDistrService.GetDistr(request);    
+  }
 }

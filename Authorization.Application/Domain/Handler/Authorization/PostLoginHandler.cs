@@ -21,12 +21,18 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
         public async Task<PostLoginResponse> Handle(PostLoginRequest request, CancellationToken cancellationToken)
         {
-            if (CheckOnIdentity(request.Identificator, request.Password, out Entities.User user))
+            bool userIsFine = CheckOnIdentity(request.Identificator, request.Password, out Entities.User user);
+
+            if (userIsFine)
             {
                 TokenCreater tokenCreater = new TokenCreater(_authOptions);
                 string token = tokenCreater.CreateToken(user);
 
                 return new PostLoginResponse() { Success = true, Token = token };
+            }
+            else if(user == null)
+            {
+                return new PostLoginResponse() { Success = false, Message = "User not found" };
             }
             else
             {

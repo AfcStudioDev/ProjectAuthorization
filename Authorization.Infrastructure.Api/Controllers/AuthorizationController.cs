@@ -35,7 +35,7 @@ namespace Authorization.Infrastructure.Api.Controllers
 			}
 			else
 			{
-				return BadRequest( response );
+				return BadRequest( response.Message );
 			}
 		}
 
@@ -53,7 +53,7 @@ namespace Authorization.Infrastructure.Api.Controllers
 			}
 			else
 			{
-				return BadRequest( response );
+				return BadRequest( response.Message );
 			}
 		}
 
@@ -71,7 +71,7 @@ namespace Authorization.Infrastructure.Api.Controllers
 			}
 			else
 			{
-				return BadRequest(response);
+				return BadRequest(response.Message);
 			}
 		}
 	}

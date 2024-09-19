@@ -24,7 +24,16 @@ export class HomeComponent {
   }
   login: string = "tg";
   typeLicense: LicenseTypeModel[] = [];
-  licenseList: LicenseModel[] = [];
+  licenseList: LicenseModel[] = [
+  {
+    "id":"aaa",
+    "startLicense":new Date(),
+    "deviceNumber":"DEVICE NUM",
+    "licenseKey":"LICENSE KEY",
+    "duration":50000,
+    "userId":"USER ID",
+  },
+  ];
   typeLicenseModal: LicenseTypeModel = new LicenseTypeModel;
   createPaymentRequest: CreatePaymentRequest = new CreatePaymentRequest;
 
@@ -84,6 +93,10 @@ export class HomeComponent {
       this.createPaymentRequest.licenseType = selectLicenseType.id;
       this.typeLicenseModal = selectLicenseType;
     }
+  }
+
+  OnCopyDeviceNumberClick(deviceNum:string) {
+    navigator.clipboard.writeText(deviceNum);
   }
 
   GoPay(type: number) {
