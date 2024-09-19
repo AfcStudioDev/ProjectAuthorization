@@ -1,5 +1,6 @@
 ﻿using Authorization.Application.Domain.Enums;
 using Authorization.Application.Domain.Responses.FilesUpload;
+
 using MediatR;
 
 namespace Authorization.Application.Domain.Requests.FilesUpload

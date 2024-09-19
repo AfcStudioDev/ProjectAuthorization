@@ -1,6 +1,8 @@
 ﻿using Authorization.Application.Domain.Requests.FilesUpload;
 using Authorization.Application.Domain.Responses.FilesUpload;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authorization.Application.Domain.Handler.FilesUpload
@@ -11,26 +13,26 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
         private const string _androidApp = "base.apk";
         private const string _iosApp = "base.ipa";
         private const string _windowsApp = "base.exe";
-        public async Task<GetFilesUploadResponse> Handle(GetFilesUploadRequest request, CancellationToken cancellationToken)
+        public async Task<GetFilesUploadResponse> Handle( GetFilesUploadRequest request, CancellationToken cancellationToken )
         {
             string path = _folderDistr;
             switch (request.Platform)
             {
                 case Enums.PlatformType.Android:
-                    path = Path.Combine(path, _androidApp);
-                    break;                
+                    path = Path.Combine( path, _androidApp );
+                    break;
                 case Enums.PlatformType.Windows:
-                    path = Path.Combine(path, _windowsApp);
+                    path = Path.Combine( path, _windowsApp );
                     break;
 
             }
 
-            var response = new GetFilesUploadResponse();
+            GetFilesUploadResponse response = new GetFilesUploadResponse();
             Stream? stream = null;
 
-            if (File.Exists(path))
+            if (File.Exists( path ))
             {
-                stream = File.OpenRead(path);
+                stream = File.OpenRead( path );
                 response.Success = true;
             }
             else
@@ -39,8 +41,9 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
                 response.Message = "Файл не найден";
             }
 
-            response.File = new FileStreamResult(stream, "application/octet-stream") { 
-                FileDownloadName = Path.GetFileName(path)
+            response.File = new FileStreamResult( stream, "application/octet-stream" )
+            {
+                FileDownloadName = Path.GetFileName( path )
             };
 
             return response;

@@ -4,10 +4,10 @@ namespace Authorization.YooKassa.Domain.Entities
 {
     public class Confirmation
     {
-        [JsonPropertyName("type")]
+        [JsonPropertyName( "type" )]
         public string Type { get; set; } = null!;
 
-        [JsonPropertyName("confirmation_token")]
+        [JsonPropertyName( "confirmation_token" )]
         public string ConfirmationToken { get; set; } = null!;
     }
 }

@@ -1,6 +1,4 @@
-﻿using Authorization.Application.Domain.Entities;
-
-namespace Authorization.Application.Domain.Responses.Authorization
+﻿namespace Authorization.Application.Domain.Responses.Authorization
 {
     public class GetListLoginResponse : BaseResponse
     {
