@@ -1,4 +1,4 @@
-export class MakePaymentRequest {
+export class MakePaymentAndConfirmRequest {
     constructor(paymentId = "", deviceNumber = "", licenseType = "") {
         this.paymentId = paymentId;
         this.deviceNumber = deviceNumber;
