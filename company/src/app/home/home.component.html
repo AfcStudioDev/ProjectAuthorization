@@ -80,9 +80,14 @@
             placeholder="000000000">
           <label for="floatingInput">Номер устройства</label>
         </div>
+        <div [class.d-none]="!succesPay" class="alert alert-success d-none">
+          <h4 class="alert-heading">Успешно!</h4>
+          <p>Вы преобрели товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
+            {{typeLicenseModal.price}}₽</p>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button type="button" class="btn btn-secondary" (click)="this.getLicense()" data-bs-dismiss="modal">Выйти</button>
         <button type="button" [attr.disabled]="createPaymentRequest.deviceNumber.length == 0 ? true : null"
           class="btn btn-primary" (click)="this.GoPay(1)">Приобрести</button>
       </div>
