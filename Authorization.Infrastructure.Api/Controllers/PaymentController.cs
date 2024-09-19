@@ -41,7 +41,7 @@ namespace Authorization.Infrastructure.Api.Controllers
         [Route("MakePaymentAndConfirmLicenseCreate")]
         [SwaggerResponse(StatusCodes.Status200OK, "Post 200 Payment", typeof(MakePaymentAndConfirmResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 Payment", typeof(MakePaymentAndConfirmResponse))]
-        public async Task<IActionResult> MakePaymentAndConfirmLicenseCreate([FromQuery] MakePaymentAndConfirmRequest request)
+        public async Task<IActionResult> MakePaymentAndConfirmLicenseCreate([FromBody] MakePaymentAndConfirmRequest request)
         {
             request.UserId = GetUserIdFromToken();
 

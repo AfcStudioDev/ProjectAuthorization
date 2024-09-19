@@ -26,7 +26,7 @@ namespace Authorization.Application.Domain.Handler.Payment
         {
             var response = new MakePaymentAndConfirmResponse();
 
-            if (await ConfirmYoucassaPayment(request.PaymentId))
+            //if (await ConfirmYoucassaPayment(request.PaymentId))
             {
                 var createLicenseRequest = new CreateLicenseRequest() { UserId = (Guid)request.UserId!, DeviceNumber = request.DeviceNumber, LicenseType = request.LicenseType };
                 var responseCreateLicense = await _mediator.Send(createLicenseRequest);
@@ -41,11 +41,11 @@ namespace Authorization.Application.Domain.Handler.Payment
                     response.Message = "Не удалось создать лицензию";
                 }
             }
-            else
-            {
-                response.Success = false;
-                response.Message = "Не удалось подтвердить платеж";
-            }
+            //else
+            //{
+            //    response.Success = false;
+            //    response.Message = "Не удалось подтвердить платеж";
+            //}
 
             return response;
         }
