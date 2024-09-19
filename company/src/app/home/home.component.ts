@@ -90,55 +90,70 @@ export class HomeComponent {
   }
 
   GoPay(type: number) {
-    var pay_info = this.paymentService.CreatePayment(this.createPaymentRequest).subscribe({
+
+    let makePayment = new MakePaymentAndConfirmRequest;
+    makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
+    makePayment.licenseType = this.createPaymentRequest.licenseType;
+    makePayment.paymentId = "111";
+
+    this.paymentService.MakePayment(makePayment).subscribe({ 
       next: (response) => {
-        console.log(response);
-        var host = window.location.host;
-        console.log(host);
-
-        var checkout = new YooMoneyCheckoutWidget({
-          confirmation_token: response.confirmation.confirmation_token,
-         customization: {
-            modal: true
-          },
-          error_callback: (error: any) => {
-            console.log(error);
-          }
-        });
-        
-        checkout.on('success', () => {
-          alert("Оплата успешно произведена!");
-          checkout.destroy();
-
-          let makePayment = new MakePaymentAndConfirmRequest;
-          makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
-          makePayment.licenseType = this.createPaymentRequest.licenseType;
-          makePayment.paymentId = response.id;
-
-          this.paymentService.MakePayment(makePayment).subscribe({ 
-            next: (response) => {
-              this.succesPay = true;
-            },
-            error: (err) => {
-              alert("Произошла ошибка при выдаче лицензии!");
-            }
-           });
-        });
-
-        checkout.on('fail', () => {
-          alert("Оплата прошла неудачно, попробуйте снова");
-
-          checkout.destroy();
-        });
-
-        checkout.render()
-          .then(() => {
-
-          });
+        this.succesPay = true;
       },
-      error: (error)=>{
-        alert("Произошла ошибка при создании оплаты");
+      error: (err) => {
+        alert("Произошла ошибка при выдаче лицензии!");
       }
-    });
+     });
+
+    // var pay_info = this.paymentService.CreatePayment(this.createPaymentRequest).subscribe({
+    //   next: (response) => {
+    //     console.log(response);
+    //     var host = window.location.host;
+    //     console.log(host);
+
+    //     var checkout = new YooMoneyCheckoutWidget({
+    //       confirmation_token: response.confirmation.confirmation_token,
+    //      customization: {
+    //         modal: true
+    //       },
+    //       error_callback: (error: any) => {
+    //         console.log(error);
+    //       }
+    //     });
+        
+    //     checkout.on('success', () => {
+    //       alert("Оплата успешно произведена!");
+    //       checkout.destroy();
+
+    //       let makePayment = new MakePaymentAndConfirmRequest;
+    //       makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
+    //       makePayment.licenseType = this.createPaymentRequest.licenseType;
+    //       makePayment.paymentId = response.id;
+
+    //       this.paymentService.MakePayment(makePayment).subscribe({ 
+    //         next: (response) => {
+    //           this.succesPay = true;
+    //         },
+    //         error: (err) => {
+    //           alert("Произошла ошибка при выдаче лицензии!");
+    //         }
+    //        });
+    //     });
+
+    //     checkout.on('fail', () => {
+    //       alert("Оплата прошла неудачно, попробуйте снова");
+
+    //       checkout.destroy();
+    //     });
+
+    //     checkout.render()
+    //       .then(() => {
+
+    //       });
+    //   },
+    //   error: (error)=>{
+    //     alert("Произошла ошибка при создании оплаты");
+    //   }
+    // });
   }
 }
