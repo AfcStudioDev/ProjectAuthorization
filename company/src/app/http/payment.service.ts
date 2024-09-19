@@ -4,7 +4,7 @@ import { configs } from '../config';
 import { Observable } from 'rxjs';
 import { BaseResponse } from '../../responses/BaseResponse';
 import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymentRequest';
-import { MakePaymentRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
+import { MakePaymentAndConfirmRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
 
 @Injectable()
 export class PaymentService {
@@ -20,7 +20,7 @@ export class PaymentService {
         return this.httpClient.post<any>(url, request, options);
     }
 
-    public MakePayment(request: MakePaymentRequest): Observable<BaseResponse> {
+    public MakePayment(request: MakePaymentAndConfirmRequest): Observable<BaseResponse> {
         const url = configs.AuthorisationServiceHost + "/" + configs.paymentUrl + "/" + configs.makePaymentUrl;
         const header = new HttpHeaders({'Authorization': `Bearer ${this.token}`, 'X-Require-Auth': 'true'});
         const options = {headers : header}
