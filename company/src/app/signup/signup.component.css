@@ -70,4 +70,14 @@ button.btn-primary:hover {
 
 .right-panel {
     background-color: #d3d3d3;
+}  
+
+button.btn-outline-primary {
+    border-color: #5aa3b0;
+    color: #5aa3b0;
+    --bs-btn-color: #5aa3b0;
+}
+
+button.btn-outline-primary:hover {
+    background-color: #499495;
 }

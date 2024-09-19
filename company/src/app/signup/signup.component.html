@@ -8,7 +8,8 @@
           <p class="simpleText"> Это - сайт компании ... </p>
           <p class="simpleText"> Здесь вы можете ...</p>
           <br><br><br>
-          <p class="simpleText"> Для начала вам нужно зарегистрироваться</p>
+          <p class="simpleText"> Сначала вам нужно зарегистрироваться: для этого укажите почту и пароль. </p>
+          <p> Ваш пароль должен содержать не менее 8 символов и включать как минимум 1 цифру, 1 прописную и 1 строчную букву, 1 спец символ из списка: [&#64;$!%*#?&]</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
@@ -42,6 +43,14 @@
         </div>
       </div>
       </div>
+    </div>    
+  <div class="row justify-content-center text-center h-25">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoad1Click()">Скачать Android .apk</button>
     </div>
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoad2Click()">Скачать installer для Windows</button>
+    </div>    
+  </div>
   </div>
 </div>

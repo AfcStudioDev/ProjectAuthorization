@@ -31,7 +31,7 @@ export class LoginComponent {
         this.router.navigate(["/home"]);
       },
       error: (err) => {
-        alert("не удалось авторизоваться!");
+        alert("Не удалось авторизоваться: " + err.error);
         console.log(err)
       }
     });

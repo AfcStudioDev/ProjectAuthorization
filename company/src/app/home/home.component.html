@@ -12,7 +12,10 @@
       <tbody>
         @for (c of licenseList; track c.id) {
         <tr>
-          <td>{{c.deviceNumber}}</td>
+          <td>
+            {{c.deviceNumber}}
+            <button type="button" data-bs-target="#bayModal" class="btn btn-primary" (click)="this.OnCopyDeviceNumberClick(c.deviceNumber)">Копировать</button>
+          </td>
           <td>{{c.licenseKey}}</td>
           <td>
         <tr>
