@@ -4,10 +4,10 @@ namespace Authorization.YooKassa.Domain.Entities
 {
     public class Amount
     {
-        [JsonPropertyName("value")]
+        [JsonPropertyName( "value" )]
         public string Value { get; set; } = null!;
 
-        [JsonPropertyName("currency")]
+        [JsonPropertyName( "currency" )]
         public string Currency { get; set; } = null!;
     }
 }

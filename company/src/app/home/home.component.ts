@@ -6,7 +6,7 @@ import { LicenseTypeService } from '../http/licenseType.service';
 import { LicenseService } from '../http/license.service';
 import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymentRequest';
 import { PaymentService } from '../http/payment.service';
-import { MakePaymentRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
+import { MakePaymentAndConfirmRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
 import { LicenseModel } from '../../models/LicenseModel';
 declare let YooMoneyCheckoutWidget: any;
 
@@ -24,9 +24,19 @@ export class HomeComponent {
   }
   login: string = "tg";
   typeLicense: LicenseTypeModel[] = [];
-  licenseList: LicenseModel[] = [];
+  licenseList: LicenseModel[] = [
+  {
+    "id":"aaa",
+    "startLicense":new Date(),
+    "deviceNumber":"DEVICE NUM",
+    "licenseKey":"LICENSE KEY",
+    "duration":50000,
+    "userId":"USER ID",
+  },
+  ];
   typeLicenseModal: LicenseTypeModel = new LicenseTypeModel;
   createPaymentRequest: CreatePaymentRequest = new CreatePaymentRequest;
+  succesPay: boolean = false;
 
   getLogin() {
     return this.login;
@@ -77,6 +87,8 @@ export class HomeComponent {
 
   OpenModalBay(id: string)
   {
+    this.succesPay = false;
+
     let selectLicenseType = this.typeLicense.find(a=>a.id === id);
 
     if(selectLicenseType != undefined)
@@ -84,6 +96,10 @@ export class HomeComponent {
       this.createPaymentRequest.licenseType = selectLicenseType.id;
       this.typeLicenseModal = selectLicenseType;
     }
+  }
+
+  OnCopyDeviceNumberClick(deviceNum:string) {
+    navigator.clipboard.writeText(deviceNum);
   }
 
   GoPay(type: number) {
@@ -107,20 +123,19 @@ export class HomeComponent {
           alert("Оплата успешно произведена!");
           checkout.destroy();
 
-          let makePayment = new MakePaymentRequest;
+          let makePayment = new MakePaymentAndConfirmRequest;
           makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
           makePayment.licenseType = this.createPaymentRequest.licenseType;
           makePayment.paymentId = response.id;
 
           this.paymentService.MakePayment(makePayment).subscribe({ 
             next: (response) => {
-              if(!response)
-              {
-                alert("Произошла ошибка при выдаче лицензии!");
-              }
+              this.succesPay = true;
+            },
+            error: (err) => {
+              alert("Произошла ошибка при выдаче лицензии!");
             }
            });
-          this.getLicense();
         });
 
         checkout.on('fail', () => {
@@ -139,5 +154,4 @@ export class HomeComponent {
       }
     });
   }
-
 }

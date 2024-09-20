@@ -1,32 +1,35 @@
 <div class="container">
-  <button type="button" class="btn btn-primary" (click)="this.OnLoginButtonClick()">Выйти</button>
-  <div class="table-container form-control p-0 my-2 rounded">
+  <button type="button" class="btn btn-primary my-3" (click)="this.OnLoginButtonClick()">Выйти</button>
+  <div class="table-container form-control p-0 table-responsive-md rounded">
     <table class="table table-borderless m-2 rounded">
       <thead>
         <tr>
-          <th scope="col">Название устройства</th>
-          <th scope="col">ключ</th>
+          <th scope="col">Код устройства</th>
+          <th scope="col">Ключ</th>
           <th>Лицензия</th>
         </tr>
       </thead>
       <tbody>
         @for (c of licenseList; track c.id) {
         <tr>
-          <td>{{c.deviceNumber}}</td>
+          <td>
+            {{c.deviceNumber}}
+            <button type="button" data-bs-target="#bayModal" class="btn btn-primary" (click)="this.OnCopyDeviceNumberClick(c.deviceNumber)">Копировать</button>
+          </td>
           <td>{{c.licenseKey}}</td>
           <td>
         <tr>
-          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5 && this.getCountDaysEnd(c.startLicense, c.duration) >0){
+          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5 && this.getCountDaysEnd(c.startLicense, c.duration)>
+            0){
             <td class="text-danger">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
-          }
-          @else if(this.getCountDaysEnd(c.startLicense, c.duration) <= 0)
-          {
-            <td class="text-danger">лицензия просрочена</td>
-          }
-          @else
-          {
-            <td class="text-success">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
-          }
+            }
+            @else if(this.getCountDaysEnd(c.startLicense, c.duration) <= 0) { <td class="text-danger">лицензия
+              просрочена</td>
+              }
+              @else
+              {
+              <td class="text-success">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+              }
         </tr>
 
         </td>
@@ -40,8 +43,8 @@
       </tbody>
     </table>
   </div>
-
-  <div class="container  justify-content-center ">
+  <h1 class="ustify-content-center license-text text-center">Варианты лицензий</h1>
+  <div class="container justify-content-center">
     <div class="card-deck justify-content-center text-center row">
       @for (c of typeLicense; track c.id) {
       <div class="card m-1 col-12 col-md-2 box-shadow">
@@ -80,10 +83,113 @@
             placeholder="000000000">
           <label for="floatingInput">Номер устройства</label>
         </div>
+        <div [class.d-none]="!succesPay" class="alert alert-success d-none">
+          <h4 class="alert-heading">Успешно!</h4>
+          <p>Вы преобрели товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
+            {{typeLicenseModal.price}}₽</p>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
-        <button type="button" class="btn btn-primary" (click)="this.GoPay(1)">Приобрести</button>
+        <button type="button" class="btn btn-secondary" (click)="this.getLicense()" data-bs-dismiss="modal">Выйти</button>
+        <button type="button" [attr.disabled]="createPaymentRequest.deviceNumber.length == 0 ? true : null"
+          class="btn btn-primary" (click)="this.GoPay(1)">Приобрести</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="bottom">
+  <div class="d-flex justify-content-center">
+  <a type="button" class="link-opacity-75 mx-2" data-bs-toggle="modal"
+  data-bs-target="#contactModal">контакты</a>
+<a type="button" class="link-opacity-75" data-bs-toggle="modal"
+  data-bs-target="#userAgreementModal">пользовательское соглашение</a>
+  </div>
+</footer>
+
+<div class="modal fade" id="userAgreementModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="userAgreementModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="userAgreementModalLabel">Пользовательское соглашение</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Настоящее Пользовательское Соглашение (Далее Соглашение) регулирует отношения между владельцем beep.beeb
+          (далее beep.beeb или Администрация) с одной стороны и пользователем сайта с другой.
+          Сайт beep.beeb не является средством массовой информации.</p>
+
+        <p>Используя сайт, Вы соглашаетесь с условиями данного соглашения.
+          Если Вы не согласны с условиями данного соглашения, не используйте сайт beep.beeb!</p>
+
+        <h5>Права и обязанности сторон</h5>
+        <strong>Пользователь имеет право:</strong>
+        <ul>
+          <li>осуществлять поиск информации на сайте</li>
+          <li>получать информацию на сайте</li>
+          <li>использовать информацию сайта в личных некоммерческих целях</li>
+        </ul>
+        <strong>Администрация имеет право:</strong>
+        <ul>
+          <li>по своему усмотрению и необходимости создавать, изменять, отменять правила</li>
+          <li>ограничивать доступ к любой информации на сайте</li>
+        </ul>
+        <strong>Пользователь обязуется:</strong>
+        <ul>
+          <li>не нарушать работоспособность сайта</li>
+          <li>не использовать скрипты (программы) для автоматизированного сбора информации и/или взаимодействия с
+            Сайтом и его Сервисами</li>
+        </ul>
+        <strong>Администрация обязуется:</strong>
+        <ul>
+          <li>поддерживать работоспособность сайта за исключением случаев, когда это невозможно по независящим от
+            Администрации причинам.</li>
+        </ul>
+        <strong>Ответственность сторон</strong>
+        <ul>
+          <li>администрация не несет никакой ответственности за услуги, предоставляемые третьими лицами</li>
+          <li>в случае возникновения форс-мажорной ситуации (боевые действия, чрезвычайное положение, стихийное
+            бедствие и
+            т. д.) Администрация не гарантирует сохранность информации, размещённой Пользователем, а также бесперебойную
+            работу информационного ресурса</li>
+        </ul>
+        <h5>Условия действия Соглашения</h5>
+        <p>Данное Соглашение вступает в силу при любом использовании данного сайта.
+          Соглашение перестает действовать при появлении его новой версии.</p>
+        <p>Администрация оставляет за собой право в одностороннем порядке изменять данное соглашение по своему
+          усмотрению.</p>
+        <p>Администрация не оповещает пользователей об изменении в Соглашении.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="contactModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="contactModalLabel">Контакты</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>Основные контакты для связи</h5>
+        <a class="dropdown-item btn-outline-primary" target="_blank" href="https://t.me/втавава">Основной контакт
+          поддержки</a>
+        <a class="dropdown-item btn-outline-primary" target="_blank" href="https://t.me/выаыв">Основной канал
+          новостей</a>
+        <a class="dropdown-item btn-outline-primary" href="mailto:beep.e@eee.ru">По вопросам
+          сотрудничества:<br>beep.eeee.ru</a>
+        <p>ФИО: John Doe</p>
+        <p>ИНН: 00000000000000000000000000000</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
       </div>
     </div>
   </div>

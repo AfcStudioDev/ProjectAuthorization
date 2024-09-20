@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorization.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorization.Application", "..\Authorization.Application\Authorization.Application.csproj", "{5E557161-FEBA-4CE3-9B94-A6AB8A934ACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorization.YooKassa", "..\Authorization.YooKassa\Authorization.YooKassa.csproj", "{EBAF302B-6BE3-4F6A-A5AE-7CF9CC5288A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorization.YooKassa", "..\Authorization.YooKassa\Authorization.YooKassa.csproj", "{EBAF302B-6BE3-4F6A-A5AE-7CF9CC5288A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorization.Application.Tests", "..\Tests\Authorization.Application.Tests.csproj", "{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,26 @@ Global
 		{EBAF302B-6BE3-4F6A-A5AE-7CF9CC5288A5}.Release|x64.Build.0 = Release|Any CPU
 		{EBAF302B-6BE3-4F6A-A5AE-7CF9CC5288A5}.Release|x86.ActiveCfg = Release|Any CPU
 		{EBAF302B-6BE3-4F6A-A5AE-7CF9CC5288A5}.Release|x86.Build.0 = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|x64.Build.0 = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Debug|x86.Build.0 = Debug|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|ARM.Build.0 = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|ARM64.Build.0 = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|x64.ActiveCfg = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|x64.Build.0 = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|x86.ActiveCfg = Release|Any CPU
+		{8466D79C-7AAB-46C2-8F4F-80CF2C0AACD1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

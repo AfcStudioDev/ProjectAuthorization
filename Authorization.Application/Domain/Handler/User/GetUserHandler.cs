@@ -1,6 +1,7 @@
 ﻿using Authorization.Application.Abstractions;
 using Authorization.Application.Domain.Requests.User;
 using Authorization.Application.Domain.Responses.User;
+
 using MediatR;
 
 namespace Authorization.Application.Domain.Handler.User
@@ -9,15 +10,15 @@ namespace Authorization.Application.Domain.Handler.User
     {
         private readonly IRepository<Entities.User> _repository;
 
-        public GetUserHandler(IRepository<Entities.User> repository)
+        public GetUserHandler( IRepository<Entities.User> repository )
         {
             _repository = repository;
         }
-        public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
+        public async Task<GetUserResponse> Handle( GetUserRequest request, CancellationToken cancellationToken )
         {
-            var response = new GetUserResponse();
+            GetUserResponse response = new GetUserResponse();
 
-            response.User = await _repository.FindByIdAsync((Guid)request.Id!);
+            response.User = await _repository.FindByIdAsync( (Guid)request.Id! );
 
             if (response.User != null)
             {

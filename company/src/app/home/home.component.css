@@ -112,7 +112,20 @@ li {
   color: #4a8e9f;
 }
 
+h1 {
+  color: #4a8e9f;
+}
+
 button.btn {
   border: none;
   border-radius: 20px;
+}
+a {
+  color: #4a8e9f;
+  text-decoration-line: underline; 
+}
+
+.btn-wrapper-end {
+  display: flex;
+  justify-content: flex-end;
 }

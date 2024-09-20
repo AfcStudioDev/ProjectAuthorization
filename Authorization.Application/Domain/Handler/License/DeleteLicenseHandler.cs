@@ -1,6 +1,7 @@
 ﻿using Authorization.Application.Abstractions;
 using Authorization.Application.Domain.Requests.License;
 using Authorization.Application.Domain.Responses.License;
+
 using MediatR;
 
 namespace Authorization.Application.Domain.Handler.License
@@ -9,23 +10,25 @@ namespace Authorization.Application.Domain.Handler.License
     {
         private readonly IRepository<Entities.License> _repository;
 
-        public DeleteLicenseHandler(IRepository<Entities.License> repository)
+        public DeleteLicenseHandler( IRepository<Entities.License> repository )
         {
             _repository = repository;
         }
-        public async Task<DeleteLicenseResponse> Handle(DeleteLicenseRequest request, CancellationToken cancellationToken)
+        public async Task<DeleteLicenseResponse> Handle( DeleteLicenseRequest request, CancellationToken cancellationToken )
         {
-            var response = new DeleteLicenseResponse();
+            DeleteLicenseResponse response = new DeleteLicenseResponse();
 
-            var license = _repository.Get(a => a.DeviceNumber == request.DeviceNumber).FirstOrDefault();
+            Entities.License? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber ).FirstOrDefault();
             if (license is not null)
             {
-                await _repository.RemoveAsync(license);
+                _ = await _repository.RemoveAsync( license );
 
                 response.Success = true;
             }
             else
+            {
                 response.Message = "Лицензия не найдена";
+            }
 
             return response;
         }

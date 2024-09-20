@@ -2,7 +2,9 @@
 using Authorization.Application.Domain.Requests.Payment;
 using Authorization.Application.Domain.Responses.Payment;
 using Authorization.YooKassa;
+
 using MediatR;
+
 using Microsoft.Extensions.Configuration;
 
 namespace Authorization.Application.Domain.Handler.Payment
@@ -14,7 +16,7 @@ namespace Authorization.Application.Domain.Handler.Payment
         private readonly string _shopId;
         private readonly string _secretKey;
 
-        public MakePaymentAndConfirmHandler(IMediator mediator, IConfiguration configuration)
+        public MakePaymentAndConfirmHandler( IMediator mediator, IConfiguration configuration )
         {
             _mediator = mediator;
             _urlPayments = configuration["YooCassaService:UrlPayments"]!;
@@ -22,14 +24,14 @@ namespace Authorization.Application.Domain.Handler.Payment
             _secretKey = configuration["YooCassaService:SecretKey"]!;
         }
 
-        public async Task<MakePaymentAndConfirmResponse> Handle(MakePaymentAndConfirmRequest request, CancellationToken cancellationToken)
+        public async Task<MakePaymentAndConfirmResponse> Handle( MakePaymentAndConfirmRequest request, CancellationToken cancellationToken )
         {
-            var response = new MakePaymentAndConfirmResponse();
+            MakePaymentAndConfirmResponse response = new MakePaymentAndConfirmResponse();
 
-            if (await ConfirmYoucassaPayment(request.PaymentId))
+            if (await ConfirmYoucassaPayment( request.PaymentId ))
             {
-                var createLicenseRequest = new CreateLicenseRequest() { UserId = (Guid)request.UserId!, DeviceNumber = request.DeviceNumber, LicenseType = request.LicenseType };
-                var responseCreateLicense = await _mediator.Send(createLicenseRequest);
+                CreateLicenseRequest createLicenseRequest = new CreateLicenseRequest() { UserId = (Guid)request.UserId!, DeviceNumber = request.DeviceNumber, LicenseType = request.LicenseType };
+                Responses.License.CreateLicenseResponse responseCreateLicense = await _mediator.Send( createLicenseRequest );
 
                 if (responseCreateLicense.Success)
                 {
@@ -55,10 +57,10 @@ namespace Authorization.Application.Domain.Handler.Payment
         /// </summary>
         /// <param name="paymentId"></param>
         /// <returns></returns>
-        private async Task<bool> ConfirmYoucassaPayment(string paymentId)
+        private async Task<bool> ConfirmYoucassaPayment( string paymentId )
         {
-            YooCassaClient client = new YooCassaClient(_urlPayments, _shopId, _secretKey);
-            var response = await client.IsSuccessPay(paymentId);
+            YooCassaClient client = new YooCassaClient( _urlPayments, _shopId, _secretKey );
+            bool response = await client.IsSuccessPay( paymentId );
 
             return response;
         }

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Authorization.Application.Domain.Responses.FilesUpload
 {

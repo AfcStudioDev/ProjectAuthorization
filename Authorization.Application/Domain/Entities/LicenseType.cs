@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Authorization.Application.Domain.Entities
+﻿namespace Authorization.Application.Domain.Entities
 {
     public class LicenseType
     {
