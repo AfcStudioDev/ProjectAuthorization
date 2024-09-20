@@ -19,7 +19,7 @@ namespace Authorization.Application.Domain.Handler.License
         {
             CheckLicenseResponse response = new CheckLicenseResponse();
 
-            Entities.License? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber && a.LicenseKey == request.LicenseKey ).FirstOrDefault();
+            Entities.License? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber ).FirstOrDefault();
 
             if (license is not null)
             {
