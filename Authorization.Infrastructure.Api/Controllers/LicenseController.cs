@@ -32,14 +32,16 @@ namespace Authorization.Infrastructure.Api.Controllers
 
             GetListLicenseResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [HttpGet]
@@ -50,14 +52,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             CheckLicenseResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -71,14 +74,15 @@ namespace Authorization.Infrastructure.Api.Controllers
 
             CreateLicenseResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -90,14 +94,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             DeleteLicenseResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         private Guid GetUserIdFromToken()

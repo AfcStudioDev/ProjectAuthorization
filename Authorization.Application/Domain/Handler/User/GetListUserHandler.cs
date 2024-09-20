@@ -25,6 +25,7 @@ namespace Authorization.Application.Domain.Handler.User
             {
                 users = users.Where( a => a.Email == request.Email );
             }
+
             return new GetListUserResponse() { Success = true, Users = users.ToList() };
         }
     }

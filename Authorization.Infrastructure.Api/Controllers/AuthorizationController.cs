@@ -32,15 +32,17 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             PostRegistrationResponse response = await _mediator.Send( request );
 
-			if ( response.Success )
-			{
-				return Ok( response );
-			}
-			else
-			{
-				return BadRequest( response.Message );
-			}
-		}
+            //if ( response.Success )
+            //{
+            //	return Ok( response );
+            //}
+            //else
+            //{
+            //	return BadRequest( response.Message );
+            //}
+
+            return response.Success ? Ok( response ) : BadRequest( response.Message );
+        }
 
         [HttpPost]
         [Route( "Login" )]
@@ -50,15 +52,17 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             PostLoginResponse response = await _mediator.Send( request );
 
-			if ( response.Success )
-			{
-				return Ok( response );
-			}
-			else
-			{
-				return BadRequest( response.Message );
-			}
-		}
+            //if ( response.Success )
+            //{
+            //	return Ok( response );
+            //}
+            //else
+            //{
+            //	return BadRequest( response.Message );
+            //}
+
+            return response.Success ? Ok( response ) : BadRequest( response.Message );
+        }
 
         [HttpGet]
         [Route( "LoginList" )]
@@ -68,14 +72,16 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             GetListLoginResponse response = await _mediator.Send( request );
 
-			if (response.Success)
-			{
-				return Ok(response);
-			}
-			else
-			{
-				return BadRequest(response.Message);
-			}
-		}
-	}
+            //if (response.Success)
+            //{
+            //	return Ok(response);
+            //}
+            //else
+            //{
+            //	return BadRequest(response.Message);
+            //}
+
+            return response.Success ? Ok( response ) : BadRequest( response.Message );
+        }
+    }
 }

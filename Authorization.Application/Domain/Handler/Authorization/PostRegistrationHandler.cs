@@ -22,73 +22,85 @@ namespace Authorization.Application.Domain.Handler.Authorization
 
         public async Task<PostRegistrationResponse> Handle( PostRegistrationRequest request, CancellationToken cancellationToken )
         {
+            PostRegistrationResponse response = new() { Success = false};
+
             if (!ValidData( request ))
             {
-                return new PostRegistrationResponse() { Success = false, Message = "InValid Password or Login" };
-            }
-            if (CheckOnExist( request ))
-            {
-                return new PostRegistrationResponse() { Success = false, Message = "User Exist" };
+                response.Message = "InValid Password or Login";
             }
             else
             {
-                byte[] salt = _hasher.CreateDinamicSaltFromEmail( request.Email );
-                Entities.User user = new Entities.User()
+                if (IsExist( request ))
                 {
-                    Id = Guid.NewGuid(),//todo лучше id пусть база создает
-                    Email = request.Email,
-                    PasswordHash = _hasher.EncryptingPass( request.Password, salt )
-                };
-
-                try
-                {
-                    int countSaveEntities = _repository.Create( user );
-                    if (countSaveEntities == 1)
-                    {
-                        return new PostRegistrationResponse() { Success = true };
-                    }
-                    else
-                    {
-                        return new PostRegistrationResponse() { Success = false, Message = "Error on add Entity" };
-                    }
+                    response.Message = "User Exist";
                 }
-                catch (Exception e)
+                else
                 {
-                    return new PostRegistrationResponse() { Success = false, Message = e.Message };
+                    Entities.User user = CreateUserForDB( request );
+
+                    try
+                    {
+                        int countSaveEntities = _repository.Create( user );
+                        if (countSaveEntities == 1)
+                        {
+                            response.Success = true;
+                        }
+                        else
+                        {
+                            response.Message = "Error on add Entity";
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        response.Message = e.Message;
+                    }
                 }
             }
+
+            return response;
         }
 
-        private bool CheckOnExist( PostRegistrationRequest request )
+        private Entities.User CreateUserForDB( PostRegistrationRequest request )
+        {
+            byte[] salt = _hasher.CreateDinamicSaltFromEmail( request.Email );
+            Entities.User user = new Entities.User()
+            {
+                Id = Guid.NewGuid(),//todo лучше id пусть база создает
+                Email = request.Email,
+                PasswordHash = _hasher.EncryptingPass( request.Password, salt )
+            };
+            return user;
+        }
+
+        private bool IsExist( PostRegistrationRequest request )
         {
             Entities.User user = _repository.Get().FirstOrDefault( u => u.Email == request.Email );
-            if (user != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //if (user != null)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            return user != null ? true : false;
         }
 
         private bool ValidData( PostRegistrationRequest request )
         {
-            if (request.Email.Length > 30)
+            var isDataValid = false;
+            if (request.Email.Length < 31)
             {
-                return false;
+                var emailRegex = new Regex( "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" );
+                var passwordRegex = new Regex( "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" );
+
+                if (emailRegex.IsMatch( request.Email ) && passwordRegex.IsMatch( request.Password ))
+                {
+                    isDataValid = true;
+                }
             }
 
-            var emailRegex = new Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-            var passwordRegex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
-            if (emailRegex.IsMatch(request.Email) && passwordRegex.IsMatch(request.Password))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return isDataValid;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Authorization.Application.Domain.Handler.License
 
         public async Task<CheckLicenseResponse> Handle( CheckLicenseRequest request, CancellationToken cancellationToken )
         {
-            CheckLicenseResponse response = new CheckLicenseResponse();
+            CheckLicenseResponse response = new() { Success = false };
 
             Entities.License? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber && a.LicenseKey == request.LicenseKey ).FirstOrDefault();
 
@@ -25,10 +25,6 @@ namespace Authorization.Application.Domain.Handler.License
             {
                 response.Success = true;
                 response.Message = $"Лицензия до {license.StartLicense.AddDays( license.Duration ).Date}";
-            }
-            else
-            {
-                response.Success = false;
             }
 
             return response;

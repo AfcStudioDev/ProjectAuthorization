@@ -30,14 +30,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             CreateUserResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -49,14 +50,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             UpdateUserResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -68,14 +70,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             DeleteUserResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -87,14 +90,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             GetUserResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -106,14 +110,15 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             GetListUserResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok( response );
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return Ok( response );
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
     }
 }

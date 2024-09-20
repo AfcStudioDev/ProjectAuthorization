@@ -30,7 +30,6 @@ namespace Authorization.Application.Domain.Handler.User
                 }
                 else
                 {
-                    response.Success = false;
                     response.Message = registrationResponse.Message;
                 }
             }

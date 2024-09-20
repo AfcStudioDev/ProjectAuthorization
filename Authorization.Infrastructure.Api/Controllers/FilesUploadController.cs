@@ -28,14 +28,16 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             GetFilesUploadResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return response.File!;
-            }
-            else
-            {
-                return BadRequest( response );
-            }
+            //if (response.Success)
+            //{
+            //    return response.File!;
+            //}
+            //else
+            //{
+            //    return BadRequest( response );
+            //}
+
+            return response.Success ? response.File! : BadRequest( response );
         }
     }
 }
