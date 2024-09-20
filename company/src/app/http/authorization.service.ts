@@ -24,4 +24,10 @@ export class AuthorizationService {
 
         return this.httpClient.post<BaseResponse>(url, request);
     }
+
+    public Verification(): Observable<BaseResponse> {
+        const url = configs.AuthorisationServiceHost + "/" + configs.authorizeUrl + "/" + configs.verificationUrl;
+
+        return this.httpClient.get<BaseResponse>(url);
+    }
 }

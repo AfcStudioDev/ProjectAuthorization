@@ -12,5 +12,6 @@ export const configs = {
       licenseTypeUrl:"LicenseType",
       paymentUrl:"payment",
       createPaymentUrl:"CreatePayment",
-      makePaymentUrl:"MakePaymentAndConfirmLicenseCreate"
+      makePaymentUrl:"MakePaymentAndConfirmLicenseCreate",
+      verificationUrl:"Verification"
     };

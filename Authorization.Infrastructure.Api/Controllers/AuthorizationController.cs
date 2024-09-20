@@ -7,6 +7,8 @@ using Authorization.Application.Domain.Responses.Authorization;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Entities;
 using Authorization.Application.AuthorizeOptions;
+using Authorization.Application.Domain.Responses;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Authorization.Infrastructure.Api.Controllers
 {
@@ -17,7 +19,7 @@ namespace Authorization.Infrastructure.Api.Controllers
 		private readonly IMediator _mediator;
 		public AuthorizationController( IMediator mediator, IRepository<User> userRepository, AuthOptions authOptions )
 		{
-			_mediator = mediator ?? throw new ArgumentNullException( nameof( mediator ) );			
+			_mediator = mediator ?? throw new ArgumentNullException( nameof( mediator ) );
 		}
 
 		[HttpPost]
@@ -54,6 +56,20 @@ namespace Authorization.Infrastructure.Api.Controllers
 			{
 				return BadRequest( response );
 			}
+		}
+
+		[HttpGet]
+		[Route( "Verification" )]
+		[Authorize]
+		[SwaggerResponse( StatusCodes.Status200OK, "GET 200 Login", typeof( BaseResponse ) )]
+		[SwaggerResponse( StatusCodes.Status400BadRequest, "GET 400 Login", typeof( BaseResponse ) )]
+		public async Task<IActionResult> Verification(  )
+		{
+			var Response = new BaseResponse() 
+			{
+				Success = true,
+			};
+			return Ok( Response );			
 		}
 	}
 }

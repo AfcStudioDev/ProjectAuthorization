@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,7 +11,9 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
 })
 
 export class AppComponent {
-  constructor(private router: Router){}
+  constructor(
+    private readonly router: Router
+  ){}
   title = "MAIN";
 
   OnMainButtonClick(){
