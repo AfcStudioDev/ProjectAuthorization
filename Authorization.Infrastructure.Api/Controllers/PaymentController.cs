@@ -25,18 +25,12 @@ namespace Authorization.Infrastructure.Api.Controllers
         [Route( "CreatePayment" )]
         [SwaggerResponse( StatusCodes.Status200OK, "Post 200 Payment", typeof( CreatePaymentResponse ) )]
         [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 Payment", typeof( CreatePaymentResponse ) )]
-        public async Task<IActionResult> CreatePayment( [FromQuery] CreatePaymentRequest request )
+        public async Task<IActionResult> CreatePayment( [FromBody] CreatePaymentRequest request )
         {
+            request.UserId = GetUserIdFromToken();
+
             CreatePaymentResponse response = await _mediator.Send( request );
 
-            //if (response.Success)
-            //{
-            //    return Ok( response );
-            //}
-            //else
-            //{
-            //    return BadRequest( response );
-            //}
             return response.Success ? Ok( response ) : BadRequest( response );
         }
 
@@ -45,20 +39,12 @@ namespace Authorization.Infrastructure.Api.Controllers
         [Route( "MakePaymentAndConfirmLicenseCreate" )]
         [SwaggerResponse( StatusCodes.Status200OK, "Post 200 Payment", typeof( MakePaymentAndConfirmResponse ) )]
         [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 Payment", typeof( MakePaymentAndConfirmResponse ) )]
-        public async Task<IActionResult> MakePaymentAndConfirmLicenseCreate( [FromQuery] MakePaymentAndConfirmRequest request )
+        public async Task<IActionResult> MakePaymentAndConfirmLicenseCreate( [FromBody] MakePaymentAndConfirmRequest request )
         {
             request.UserId = GetUserIdFromToken();
 
             MakePaymentAndConfirmResponse response = await _mediator.Send( request );
 
-            //if (response.Success)
-            //{
-            //    return Ok( response );
-            //}
-            //else
-            //{
-            //    return BadRequest( response );
-            //}
             return response.Success ? Ok( response ) : BadRequest( response );
         }
 

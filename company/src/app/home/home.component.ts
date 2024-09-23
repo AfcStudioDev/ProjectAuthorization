@@ -62,9 +62,7 @@ export class HomeComponent {
   getTypeLicense() {
     this.licenseTypeService.GetTypeLicense().subscribe({
       next: (response) => {
-        console.log(response);
         this.typeLicense = response.licenseTypes;
-        console.log(this.typeLicense);
       },
       error: (err) => {
         console.log(err);
@@ -75,9 +73,7 @@ export class HomeComponent {
   getLicense() {
     this.licenseService.GetAllLicense().subscribe({
       next: (response) => {
-        console.log(response);
         this.licenseList = response.licenses;
-        console.log(this.licenseList);
       },
       error: (err) => {
         console.log(err);
@@ -105,12 +101,8 @@ export class HomeComponent {
   GoPay(type: number) {
     var pay_info = this.paymentService.CreatePayment(this.createPaymentRequest).subscribe({
       next: (response) => {
-        console.log(response);
-        var host = window.location.host;
-        console.log(host);
-
         var checkout = new YooMoneyCheckoutWidget({
-          confirmation_token: response.confirmation.confirmation_token,
+          confirmation_token: response.pay.confirmation.confirmation_token,
          customization: {
             modal: true
           },
@@ -120,13 +112,11 @@ export class HomeComponent {
         });
         
         checkout.on('success', () => {
-          alert("Оплата успешно произведена!");
           checkout.destroy();
-
           let makePayment = new MakePaymentAndConfirmRequest;
           makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
           makePayment.licenseType = this.createPaymentRequest.licenseType;
-          makePayment.paymentId = response.id;
+          makePayment.paymentId = response.pay.id;
 
           this.paymentService.MakePayment(makePayment).subscribe({ 
             next: (response) => {

@@ -36,6 +36,8 @@ namespace Authorization.Application.Domain.Handler.Payment
             {
                 PayResponse? youCassaResponse = await CreatePaynetAndGetResponse( request, licenseType );
                 MakeResponse( youCassaResponse, ref response );
+
+                response.Pay = youCassaResponse;
             }
             else
             {
@@ -54,7 +56,7 @@ namespace Authorization.Application.Domain.Handler.Payment
             {
                 Amount = new Amount() { Currency = "RUB", Value = $"{licenseType.Price.ToString( CultureInfo.InvariantCulture )}" },
                 Capture = true,
-                Description = $"Оплата за подписку для пользователя. Тип подписки {licenseType.Name}",
+                Description = $"Оплата за подписку для пользователя. Тип подписки {licenseType.Name}. Пользователь ID - { paymentRequest.UserId }",
                 Confirmation = new Confirmation() { Type = "embedded" }
             } );
 
