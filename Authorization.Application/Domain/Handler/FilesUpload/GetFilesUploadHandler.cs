@@ -11,7 +11,7 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
     {
         private const string _folderDistr = "distrib";
         private const string _androidApp = "base.apk";
-        private const string _iosApp = "base.ipa";
+        private const string _androidTabletApp = "base.ipa";
         private const string _windowsApp = "base.exe";
         public async Task<GetFilesUploadResponse> Handle( GetFilesUploadRequest request, CancellationToken cancellationToken )
         {
@@ -24,8 +24,10 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
                 case Enums.PlatformType.Windows:
                     path = Path.Combine( path, _windowsApp );
                     break;
-
-            }
+				case Enums.PlatformType.AndroidTablet:
+					path = Path.Combine( path, _androidTabletApp );
+					break;
+			}
 
             GetFilesUploadResponse response = new GetFilesUploadResponse();
             Stream? stream = null;

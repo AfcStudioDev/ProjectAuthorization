@@ -3,6 +3,7 @@
     public enum PlatformType
     {
         Android,
-        Windows
+        Windows,
+        AndroidTablet
     }
 }

@@ -41,13 +41,8 @@ export class LoginComponent {
     this.router.navigate(["/signup"]);
   }
 
-  OnDownLoad1Click(){
-    let request = new GetFilesUploadRequest(0);
-    this.downloadDistrService.GetDistr(request);    
-  }
-
-  OnDownLoad2Click(){
-    let request = new GetFilesUploadRequest(1);
+  OnDownLoadClick(platformType: number){
+    let request = new GetFilesUploadRequest(platformType);
     this.downloadDistrService.GetDistr(request);    
   }
 
