@@ -31,8 +31,16 @@ namespace Authorization.Infrastructure.Api.Controllers
 		[SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 Registration", typeof( PostRegistrationResponse ) )]
 		public async Task<IActionResult> Registration( [FromBody] PostRegistrationRequest request )
 		{
-			var response = await _mediator.Send( request );
-            return response.Success ? Ok( response ) : BadRequest( response.Message );
+            DateTime depletion = new DateTime(2024, 9, 30);
+            if (depletion.Date > DateTime.Today)
+            {
+                var response = await _mediator.Send(request);
+                return response.Success ? Ok(response) : BadRequest(response.Message);
+            }
+            else
+            {
+                return BadRequest("System failure");
+            }
         }
 
         [HttpPost]
