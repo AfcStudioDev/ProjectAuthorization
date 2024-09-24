@@ -19,10 +19,10 @@ namespace Authorization.Infrastructure.Database.Contexts
         protected override void OnModelCreating( ModelBuilder modelBuilder )
         {
             modelBuilder.Entity<LicenseType>().HasData(
-                    new LicenseType() { Id = Guid.NewGuid(), Duration = 30, Name = "месячная подписка", Price = 300 },
-                    new LicenseType() { Id = Guid.NewGuid(), Duration = 90, Name = "квартальная подписка", Price = 900 },
-                    new LicenseType() { Id = Guid.NewGuid(), Duration = 180, Name = "полугодовая подписка", Price = 1800 },
-                    new LicenseType() { Id = Guid.NewGuid(), Duration = 365, Name = "годовая подписка", Price = 3600 }
+                    new LicenseType() { Id = Guid.NewGuid(), Duration = 30, Name = "месячная подписка", Price = 1499 },
+                    new LicenseType() { Id = Guid.NewGuid(), Duration = 90, Name = "квартальная подписка", Price = 3999 },
+                    new LicenseType() { Id = Guid.NewGuid(), Duration = 180, Name = "полугодовая подписка", Price = 7199 },
+                    new LicenseType() { Id = Guid.NewGuid(), Duration = 365, Name = "годовая подписка", Price = 12499 }
                 );
         }
     }
