@@ -32,7 +32,8 @@ services:
       YooCassaService__UrlPayments: "https://api.yookassa.ru"
       YooCassaService__ShopId: "462934"
       YooCassaService__SecretKey: "test_JFEl1yhHNEi5yVzWcL5PIXW-NxWyDXOMY-PUFmtAa9Y"
-
+    volumes:
+      - ./ProjectAuthorization/distrib/:/app/distrib/:r
     build:
       context: .
       dockerfile: ProjectAuthorization/Dockerfile

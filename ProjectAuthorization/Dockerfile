@@ -23,7 +23,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-COPY ["ProjectAuthorization/distrib/base.apk", "distrib/"]
-COPY ["ProjectAuthorization/distrib/base.exe", "distrib/"]
+#COPY ["ProjectAuthorization/distrib/base.apk", "distrib/"]
+#COPY ["ProjectAuthorization/distrib/base.exe", "distrib/"]
 
 ENTRYPOINT ["dotnet", "ProjectAuthorization.dll"]
