@@ -4,15 +4,22 @@ volumes:
   my-db:
 
 services:
-  front:
+  nginx:
     image: ${DOCKER_REGISTRY-}sbpfronts
     build:
       context: company
       dockerfile: Dockerfile
     ports:
-      - "7293:80"
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    depends_on:
+      - authorizationservice
     volumes:
-      - ./nginx/test/:/etc/nginx/conf.d/:ro
+      - ./nginx/prod/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   authorizationservice:
     image: ${DOCKER_REGISTRY-}authorizationservice
@@ -30,13 +37,13 @@ services:
       context: .
       dockerfile: ProjectAuthorization/Dockerfile
 
-  # certbot:
-  #   image: certbot/certbot:latest
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./certbot/www/:/var/www/certbot/:rw
-  #     - ./certbot/conf/:/etc/letsencrypt/:rw
-  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  certbot:
+    image: certbot/certbot:latest
+    restart: unless-stopped
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   db:
     image: mysql:9.0.1
