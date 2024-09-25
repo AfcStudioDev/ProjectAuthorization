@@ -11,7 +11,7 @@ namespace Authorization.Application.Domain.Handler.FilesUpload
     {
         private const string _folderDistr = "distrib";
         private const string _androidApp = "base.apk";
-        private const string _androidTabletApp = "base.ipa";
+        private const string _androidTabletApp = "tabletBase.apk";
         private const string _windowsApp = "base.exe";
         public async Task<GetFilesUploadResponse> Handle( GetFilesUploadRequest request, CancellationToken cancellationToken )
         {
