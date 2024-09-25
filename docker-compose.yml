@@ -5,7 +5,7 @@ volumes:
 
 services:
   nginx:
-    image: ${DOCKER_REGISTRY-}sbpfronts
+    image: ${DOCKER_REGISTRY-}jingler_front
     build:
       context: company
       dockerfile: Dockerfile
@@ -15,6 +15,7 @@ services:
     restart: unless-stopped
     depends_on:
       - authorizationservice
+      - db      
     volumes:
       - ./nginx/prod/:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
@@ -25,6 +26,7 @@ services:
     image: ${DOCKER_REGISTRY-}authorizationservice
     ports:
       - "7294:8080"
+    restart: unless-stopped
     depends_on:
       - db
     environment:
