@@ -1,39 +1,37 @@
 ﻿using Authorization.Application.Domain.Requests.Payment;
 using Authorization.Application.Domain.Responses.Payment;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Authorization.Infrastructure.Api.Controllers
 {
-    [Route("payment")]
+    [Route( "payment" )]
     public class PaymentController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public PaymentController(IMediator mediator)
+        public PaymentController( IMediator mediator )
         {
             _mediator = mediator;
         }
 
         [Authorize]
         [HttpPost]
-        [Route("CreatePayment")]
-        [SwaggerResponse(StatusCodes.Status200OK, "Post 200 Payment", typeof(CreatePaymentResponse))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Post 400 Payment", typeof(CreatePaymentResponse))]
-        public async Task<IActionResult> CreatePayment([FromQuery] CreatePaymentRequest request)
+        [Route( "CreatePayment" )]
+        [SwaggerResponse( StatusCodes.Status200OK, "Post 200 Payment", typeof( CreatePaymentResponse ) )]
+        [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 Payment", typeof( CreatePaymentResponse ) )]
+        public async Task<IActionResult> CreatePayment( [FromBody] CreatePaymentRequest request )
         {
-            var response = await _mediator.Send(request);
+            request.UserId = GetUserIdFromToken();
 
-            if (response.Success)
-            {
-                return Ok(response);
-            }
-            else
-            {
-                return BadRequest(response);
-            }
+            CreatePaymentResponse response = await _mediator.Send( request );
+
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         [Authorize]
@@ -45,21 +43,14 @@ namespace Authorization.Infrastructure.Api.Controllers
         {
             request.UserId = GetUserIdFromToken();
 
-            var response = await _mediator.Send(request);
+            MakePaymentAndConfirmResponse response = await _mediator.Send( request );
 
-            if (response.Success)
-            {
-                return Ok(response);
-            }
-            else
-            {
-                return BadRequest(response);
-            }
+            return response.Success ? Ok( response ) : BadRequest( response );
         }
 
         private Guid GetUserIdFromToken()
         {
-            return Guid.Parse(HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "UserId")!.Value);
+            return Guid.Parse( HttpContext.User.Claims.FirstOrDefault( claim => claim.Type == "UserId" )!.Value );
         }
     }
 }

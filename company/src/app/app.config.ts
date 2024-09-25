@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './signup/singup.component';
 import { Observable } from 'rxjs/internal/Observable';
+import { AuthorizationService } from './http/authorization.service';
 
 const appRoutes: Routes =[
   { path: "", component: AppComponent},
@@ -15,7 +16,7 @@ const appRoutes: Routes =[
 ];
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),    provideHttpClient(withInterceptors([AuthInterceptor]))]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(), provideHttpClient(withInterceptors([AuthInterceptor])),AuthorizationService]
 };
 
 export function  AuthInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {

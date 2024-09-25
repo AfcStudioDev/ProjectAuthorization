@@ -84,6 +84,7 @@ export class SignUpComponent {
   OnLoginButtonClick() {
     this.router.navigate(["/login"]);
   }
+  
   CheckAuthToken(){
     let token:string = localStorage.getItem("token") || "";
     if( token != "" )
@@ -92,13 +93,8 @@ export class SignUpComponent {
     }
   }
 
-  OnDownLoad1Click(){
-    let request = new GetFilesUploadRequest(0);
-    this.downloadDistrService.GetDistr(request);    
-  }
-
-  OnDownLoad2Click(){
-    let request = new GetFilesUploadRequest(1);
+  OnDownLoadClick(platformType: number){
+    let request = new GetFilesUploadRequest(platformType);
     this.downloadDistrService.GetDistr(request);    
   }
 }

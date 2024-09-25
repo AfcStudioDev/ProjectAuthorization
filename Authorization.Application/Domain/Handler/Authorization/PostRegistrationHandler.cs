@@ -1,92 +1,106 @@
-﻿using Authorization.Application.Abstractions;
+﻿using System.Text.RegularExpressions;
+
+using Authorization.Application.Abstractions;
 using Authorization.Application.AuthorizeOptions;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Responses.Authorization;
+
 using MediatR;
-using System.Text.RegularExpressions;
 
 namespace Authorization.Application.Domain.Handler.Authorization
 {
     public class PostRegistrationHandler : IRequestHandler<PostRegistrationRequest, PostRegistrationResponse>
     {
         private readonly IRepository<Entities.User> _repository;
-        private HashPassword _hasher;
+        private readonly HashPassword _hasher;
 
-        public PostRegistrationHandler(IRepository<Entities.User> repository, HashPassword hasher)
+        public PostRegistrationHandler( IRepository<Entities.User> repository, HashPassword hasher )
         {
             this._repository = repository;
             _hasher = hasher;
         }
 
-        public async Task<PostRegistrationResponse> Handle(PostRegistrationRequest request, CancellationToken cancellationToken)
+        public async Task<PostRegistrationResponse> Handle( PostRegistrationRequest request, CancellationToken cancellationToken )
         {
-            if (!ValidData(request))
+            PostRegistrationResponse response = new() { Success = false};
+
+            if (!ValidData( request ))
             {
-                return new PostRegistrationResponse() { Success = false, Message = "InValid Password or Login" };
-            }
-            if (CheckOnExist(request))
-            {
-                return new PostRegistrationResponse() { Success = false, Message = "User Exist" };
+                response.Message = "InValid Password or Login";
             }
             else
             {
-                byte[] salt = _hasher.CreateDinamicSaltFromEmail(request.Email);
-                Entities.User user = new Entities.User()
+                if (IsExist( request ))
                 {
-                    Id = Guid.NewGuid(),//todo лучше id пусть база создает
-                    Email = request.Email,
-                    PasswordHash = _hasher.EncryptingPass(request.Password, salt)
-                };
+                    response.Message = "User Exist";
+                }
+                else
+                {
+                    Entities.User user = CreateUserForDB( request );
 
-                try
-                {
-                    var countSaveEntities = _repository.Create(user);
-                    if (countSaveEntities == 1)
+                    try
                     {
-                        return new PostRegistrationResponse() { Success = true };
+                        int countSaveEntities = _repository.Create( user );
+                        if (countSaveEntities == 1)
+                        {
+                            response.Success = true;
+                        }
+                        else
+                        {
+                            response.Message = "Error on add Entity";
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        return new PostRegistrationResponse() { Success = false, Message = "Error on add Entity" };
+                        response.Message = e.Message;
                     }
                 }
-                catch (Exception e)
+            }
+
+            return response;
+        }
+
+        private Entities.User CreateUserForDB( PostRegistrationRequest request )
+        {
+            byte[] salt = _hasher.CreateDinamicSaltFromEmail( request.Email );
+            Entities.User user = new Entities.User()
+            {
+                Id = Guid.NewGuid(),//todo лучше id пусть база создает
+                Email = request.Email,
+                PasswordHash = _hasher.EncryptingPass( request.Password, salt )
+            };
+            return user;
+        }
+
+        private bool IsExist( PostRegistrationRequest request )
+        {
+            Entities.User user = _repository.Get().FirstOrDefault( u => u.Email == request.Email );
+            //if (user != null)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            return user != null ? true : false;
+        }
+
+        private bool ValidData( PostRegistrationRequest request )
+        {
+            var isDataValid = false;
+            if (request.Email.Length < 31)
+            {
+                var emailRegex = new Regex( "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" );
+                var passwordRegex = new Regex( "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" );
+
+                if (emailRegex.IsMatch( request.Email ) && passwordRegex.IsMatch( request.Password ))
                 {
-                    return new PostRegistrationResponse() { Success = false, Message = e.Message };
+                    isDataValid = true;
                 }
             }
-        }
 
-        private bool CheckOnExist(PostRegistrationRequest request)
-        {
-            Entities.User user = _repository.Get().FirstOrDefault(u => u.Email == request.Email);
-            if (user != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private bool ValidData(PostRegistrationRequest request)
-        {
-            if (request.Email.Length > 30)
-            {
-                return false;
-            }
-
-            var emailRegex = new Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-            var passwordRegex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
-            if (emailRegex.IsMatch(request.Email) && passwordRegex.IsMatch(request.Password))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return isDataValid;
         }
     }
 }

@@ -4,37 +4,37 @@ namespace Authorization.YooKassa.Domain.Entities
 {
     public class PayResponse
     {
-        [JsonPropertyName("id")]
+        [JsonPropertyName( "id" )]
         public string Id { get; set; } = null!;
 
-        [JsonPropertyName("status")]
+        [JsonPropertyName( "status" )]
         public string Status { get; set; } = null!;
 
-        [JsonPropertyName("paid")]
+        [JsonPropertyName( "paid" )]
         public bool Paid { get; set; }
 
-        [JsonPropertyName("amount")]
+        [JsonPropertyName( "amount" )]
         public Amount Amount { get; set; } = null!;
 
-        [JsonPropertyName("confirmation")]
+        [JsonPropertyName( "confirmation" )]
         public Confirmation Confirmation { get; set; } = null!;
 
-        [JsonPropertyName("created_at")]
+        [JsonPropertyName( "created_at" )]
         public DateTime CreatedAt { get; set; }
 
-        [JsonPropertyName("description")]
+        [JsonPropertyName( "description" )]
         public string Description { get; set; } = null!;
 
-        [JsonPropertyName("metadata")]
+        [JsonPropertyName( "metadata" )]
         public Metadata Metadata { get; set; } = null!;
 
-        [JsonPropertyName("recipient")]
+        [JsonPropertyName( "recipient" )]
         public Recipient Recipient { get; set; } = null!;
 
-        [JsonPropertyName("refundable")]
+        [JsonPropertyName( "refundable" )]
         public bool Refundable { get; set; }
 
-        [JsonPropertyName("test")]
+        [JsonPropertyName( "test" )]
         public bool Test { get; set; }
     }
 }

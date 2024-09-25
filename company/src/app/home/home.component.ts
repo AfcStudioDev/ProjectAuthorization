@@ -62,9 +62,7 @@ export class HomeComponent {
   getTypeLicense() {
     this.licenseTypeService.GetTypeLicense().subscribe({
       next: (response) => {
-        console.log(response);
         this.typeLicense = response.licenseTypes;
-        console.log(this.typeLicense);
       },
       error: (err) => {
         console.log(err);
@@ -75,9 +73,7 @@ export class HomeComponent {
   getLicense() {
     this.licenseService.GetAllLicense().subscribe({
       next: (response) => {
-        console.log(response);
         this.licenseList = response.licenses;
-        console.log(this.licenseList);
       },
       error: (err) => {
         console.log(err);
@@ -103,70 +99,49 @@ export class HomeComponent {
   }
 
   GoPay(type: number) {
-
-    let makePayment = new MakePaymentAndConfirmRequest;
-    makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
-    makePayment.licenseType = this.createPaymentRequest.licenseType;
-    makePayment.paymentId = "111";
-
-    this.paymentService.MakePayment(makePayment).subscribe({ 
+    var pay_info = this.paymentService.CreatePayment(this.createPaymentRequest).subscribe({
       next: (response) => {
-        this.succesPay = true;
-      },
-      error: (err) => {
-        alert("Произошла ошибка при выдаче лицензии!");
-      }
-     });
-
-    // var pay_info = this.paymentService.CreatePayment(this.createPaymentRequest).subscribe({
-    //   next: (response) => {
-    //     console.log(response);
-    //     var host = window.location.host;
-    //     console.log(host);
-
-    //     var checkout = new YooMoneyCheckoutWidget({
-    //       confirmation_token: response.confirmation.confirmation_token,
-    //      customization: {
-    //         modal: true
-    //       },
-    //       error_callback: (error: any) => {
-    //         console.log(error);
-    //       }
-    //     });
+        var checkout = new YooMoneyCheckoutWidget({
+          confirmation_token: response.pay.confirmation.confirmation_token,
+         customization: {
+            modal: true
+          },
+          error_callback: (error: any) => {
+            console.log(error);
+          }
+        });
         
-    //     checkout.on('success', () => {
-    //       alert("Оплата успешно произведена!");
-    //       checkout.destroy();
+        checkout.on('success', () => {
+          checkout.destroy();
+          let makePayment = new MakePaymentAndConfirmRequest;
+          makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
+          makePayment.licenseType = this.createPaymentRequest.licenseType;
+          makePayment.paymentId = response.pay.id;
 
-    //       let makePayment = new MakePaymentAndConfirmRequest;
-    //       makePayment.deviceNumber = this.createPaymentRequest.deviceNumber;
-    //       makePayment.licenseType = this.createPaymentRequest.licenseType;
-    //       makePayment.paymentId = response.id;
+          this.paymentService.MakePayment(makePayment).subscribe({ 
+            next: (response) => {
+              this.succesPay = true;
+            },
+            error: (err) => {
+              alert("Произошла ошибка при выдаче лицензии!");
+            }
+           });
+        });
 
-    //       this.paymentService.MakePayment(makePayment).subscribe({ 
-    //         next: (response) => {
-    //           this.succesPay = true;
-    //         },
-    //         error: (err) => {
-    //           alert("Произошла ошибка при выдаче лицензии!");
-    //         }
-    //        });
-    //     });
+        checkout.on('fail', () => {
+          alert("Оплата прошла неудачно, попробуйте снова");
 
-    //     checkout.on('fail', () => {
-    //       alert("Оплата прошла неудачно, попробуйте снова");
+          checkout.destroy();
+        });
 
-    //       checkout.destroy();
-    //     });
+        checkout.render()
+          .then(() => {
 
-    //     checkout.render()
-    //       .then(() => {
-
-    //       });
-    //   },
-    //   error: (error)=>{
-    //     alert("Произошла ошибка при создании оплаты");
-    //   }
-    // });
+          });
+      },
+      error: (error)=>{
+        alert("Произошла ошибка при создании оплаты");
+      }
+    });
   }
 }
