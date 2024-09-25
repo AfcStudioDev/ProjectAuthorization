@@ -1,7 +1,10 @@
 version: '3.4'
 
+volumes:
+  my-db:
+
 services:
-  sbpfront:
+  front:
     image: ${DOCKER_REGISTRY-}sbpfronts
     build:
       context: company
@@ -15,6 +18,35 @@ services:
     image: ${DOCKER_REGISTRY-}authorizationservice
     ports:
       - "7294:8080"
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=db;Port=3306;User Id=userForProd1234;Password=vR2DviDKQXp6FC4DwYFp;Database=ProjectAuthorizationTest"
+      YooCassaService__UrlPayments: "https://api.yookassa.ru"
+      YooCassaService__ShopId: "462934"
+      YooCassaService__SecretKey: "test_JFEl1yhHNEi5yVzWcL5PIXW-NxWyDXOMY-PUFmtAa9Y"
+
     build:
       context: .
       dockerfile: ProjectAuthorization/Dockerfile
+
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./certbot/www/:/var/www/certbot/:rw
+  #     - ./certbot/conf/:/etc/letsencrypt/:rw
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  db:
+    image: mysql:9.0.1
+    environment:
+      MYSQL_DATABASE: "ProjectAuthorizationTest"
+      MYSQL_USER: "userForProd1234"
+      MYSQL_PASSWORD: 'vR2DviDKQXp6FC4DwYFp'
+      MYSQL_ROOT_PASSWORD: 'vR2DviDKQXp6FC4DwYFp'
+    volumes:
+      - my-db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
