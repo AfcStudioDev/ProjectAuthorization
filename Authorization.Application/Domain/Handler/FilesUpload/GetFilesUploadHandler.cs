@@ -1,9 +1,13 @@
 ﻿using Authorization.Application.Domain.Requests.FilesUpload;
 using Authorization.Application.Domain.Responses.FilesUpload;
 
+using System.IO;
+using System.Threading.Tasks;
+
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace Authorization.Application.Domain.Handler.FilesUpload
 {

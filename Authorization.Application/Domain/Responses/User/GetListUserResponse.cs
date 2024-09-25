@@ -1,4 +1,6 @@
-﻿namespace Authorization.Application.Domain.Responses.User
+﻿using System.Collections.Generic;
+
+namespace Authorization.Application.Domain.Responses.User
 {
     public class GetListUserResponse : BaseResponse
     {

@@ -1,4 +1,6 @@
-﻿namespace Authorization.Application.Domain.Responses.License
+﻿using System.Collections.Generic;
+
+namespace Authorization.Application.Domain.Responses.License
 {
     public class GetListLicenseResponse : BaseResponse
     {

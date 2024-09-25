@@ -4,6 +4,8 @@ using Authorization.Application.Domain.Requests.User;
 using Authorization.Application.Domain.Responses.User;
 
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Authorization.Application.Domain.Handler.User
 {

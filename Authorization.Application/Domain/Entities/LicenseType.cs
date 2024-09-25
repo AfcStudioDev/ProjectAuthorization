@@ -1,4 +1,6 @@
-﻿namespace Authorization.Application.Domain.Entities
+﻿using System;
+
+namespace Authorization.Application.Domain.Entities
 {
     public class LicenseType
     {

@@ -4,8 +4,12 @@ using Authorization.Application.Abstractions;
 using Authorization.Application.AuthorizeOptions;
 using Authorization.Application.Domain.Requests.Authorization;
 using Authorization.Application.Domain.Responses.Authorization;
-
+using System.Threading.Tasks;
+using System.Threading;
 using MediatR;
+
+using System;
+using System.Linq;
 
 namespace Authorization.Application.Domain.Handler.Authorization
 {

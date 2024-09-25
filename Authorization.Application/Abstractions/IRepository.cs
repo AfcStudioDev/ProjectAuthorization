@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
+using System.Threading.Tasks;
 
+using System;
+using System.Collections.Generic;
 namespace Authorization.Application.Abstractions
 {
     public interface IRepository<T> where T : class

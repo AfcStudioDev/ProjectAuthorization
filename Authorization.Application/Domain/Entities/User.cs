@@ -1,4 +1,7 @@
-﻿namespace Authorization.Application.Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace Authorization.Application.Domain.Entities
 {
     public class User
     {

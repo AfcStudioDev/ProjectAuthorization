@@ -3,6 +3,10 @@ using Authorization.Application.Domain.Requests.License;
 using Authorization.Application.Domain.Responses.License;
 
 using MediatR;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Authorization.Application.Domain.Handler.License
 {

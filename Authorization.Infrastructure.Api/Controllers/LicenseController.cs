@@ -3,11 +3,14 @@ using Authorization.Application.Domain.Responses.License;
 
 using MediatR;
 
+using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 using Swashbuckle.AspNetCore.Annotations;
+using System.Linq;
 
 namespace Authorization.Infrastructure.Api.Controllers
 {

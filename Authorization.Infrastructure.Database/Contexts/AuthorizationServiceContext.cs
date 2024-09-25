@@ -1,6 +1,7 @@
 ﻿using Authorization.Application.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Authorization.Infrastructure.Database.Contexts
 {
