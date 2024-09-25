@@ -7,7 +7,7 @@ using Authorization.Application.Domain.Responses;
 using Authorization.Application.Domain.Responses.Authorization;
 
 using MediatR;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +63,7 @@ namespace Authorization.Infrastructure.Api.Controllers
             return response.Success ? Ok( response ) : BadRequest( response.Message );
         }
 
+        [Authorize]
 		[HttpGet]
 		[Route( "Verification" )]
 		[SwaggerResponse( StatusCodes.Status200OK, "GET 200 Login", typeof( BaseResponse ) )]
