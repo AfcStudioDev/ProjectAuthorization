@@ -33,9 +33,9 @@
                 (click)="this.OnSignUpButtonClick()">Создать
                 аккаунт</button>
               <div>
-                <p class="simpleText"></p>Уже есть аккаунт?<p class="refer" routerLink="/login" type="button"
+                <p class="simpleText"></p>Уже есть аккаунт?<a class="refer m-0" routerLink="/login" type="button"
                   (click)="this.OnLoginButtonClick()">Заходите
-                </p>
+                  </a>
               </div>
               <p class="text-danger" (ngModel)="this.prompt">{{this.prompt}}</p>
             </div>
