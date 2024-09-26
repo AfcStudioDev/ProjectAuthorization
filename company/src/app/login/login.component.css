@@ -1,79 +1,81 @@
 .refer {
-    border: 0px;
-    background-color: transparent;
-    text-decoration: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    float: right;
-    color: #4a8e9f;
-  }
-
-  .refer:hover {
-    text-decoration: underline;
-  }
-
-  .inputField {
-    background: #d4d4d4;
-    text-align: center;
-    color: #4a8e9f;
-  }
-  
-  .simpleText {
-
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-
-  body {
-    background-color: #f5f5f5;
-  }
-
-  .card {
-    background-color: #d3d3d3;
-    border: none;
-    border-radius: 10px;
-  }
-
-  .card-header {
-    background-color: transparent;
-  }
-
-  .company-label {
-    background-color: transparent;
-    color: #5aa3b0;
-  }
-
-  input.form-control {
-    background-color: #e0e0e0;
-    border: none;
-    border-radius: 20px;
-  }
-
-  .triangle {
-    border-radius: 4%;
-    background: #e1e1e1;
-    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+  border: 0px;
+  background-color: transparent;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  float: right;
+  color: #4a8e9f;
 }
 
-  input.form-control:focus {
-    box-shadow: none;
-    outline: none;
-  }
+.refer:hover {
+  text-decoration: underline;
+}
 
-  button.btn-primary {
-    background-color: #5aa3b0;
-    border: none;
-    border-radius: 20px;
-  }
+.inputField {
+  background: #d4d4d4;
+  text-align: center;
+  color: #4a8e9f;
+}
 
-  button.btn-primary:hover {
-    background-color: #499495;
-  }
-  button.btn-outline-primary{
-    border-color:#5aa3b0;
-    color: #5aa3b0;
-    --bs-btn-color:#5aa3b0;
-  }
-  button.btn-outline-primary:hover {
-    background-color: #499495;
-  }
+.simpleText {
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.card {
+  background-color: #d3d3d3;
+  border: none;
+  border-radius: 10px;
+}
+
+.card-header {
+  background-color: transparent;
+}
+
+.company-label {
+  background-color: transparent;
+  color: #5aa3b0;
+}
+
+input.form-control {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 20px;
+}
+
+.triangle {
+  border-radius: 4%;
+  background: #e1e1e1;
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+}
+
+input.form-control:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+button.btn-primary {
+  background-color: #5aa3b0;
+  border: none;
+  border-radius: 20px;
+}
+
+button.btn-primary:hover {
+  background-color: #499495;
+}
+
+button.btn-outline-primary {
+  border-color: #5aa3b0;
+  color: #5aa3b0;
+  --bs-btn-color: #5aa3b0;
+}
+
+button.btn-outline-primary:hover {
+  background-color: #499495;
+}

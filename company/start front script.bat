@@ -1,0 +1,2 @@
+cd %CD%\
+npm start

@@ -1,6 +1,6 @@
-import { Input, Component } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
-import { FormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { LicenseTypeModel } from '../../models/LicenseTypeModel';
 import { LicenseTypeService } from '../http/licenseType.service';
 import { LicenseService } from '../http/license.service';
@@ -8,6 +8,8 @@ import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymen
 import { PaymentService } from '../http/payment.service';
 import { MakePaymentAndConfirmRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
 import { LicenseModel } from '../../models/LicenseModel';
+import { DownloadModule } from '../shared/download.module';
+import { DownloadDistrService } from '../http/downloadDistr.service';
 declare let YooMoneyCheckoutWidget: any;
 
 @Component({
@@ -16,23 +18,27 @@ declare let YooMoneyCheckoutWidget: any;
   imports: [FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [LicenseTypeService, LicenseService, PaymentService]
+  providers: [LicenseTypeService, LicenseService, PaymentService, DownloadDistrService, DownloadModule]
 })
 export class HomeComponent {
-  constructor(private router: Router, private licenseTypeService: LicenseTypeService, private licenseService: LicenseService, private paymentService: PaymentService) {
+  constructor(
+    private router: Router,
+    private licenseTypeService: LicenseTypeService,
+    private licenseService: LicenseService,
+    private paymentService: PaymentService,
+    protected download: DownloadModule) { }
 
-  }
   login: string = "tg";
   typeLicense: LicenseTypeModel[] = [];
   licenseList: LicenseModel[] = [
-  {
-    "id":"aaa",
-    "startLicense":new Date(),
-    "deviceNumber":"DEVICE NUM",
-    "licenseKey":"LICENSE KEY",
-    "duration":50000,
-    "userId":"USER ID",
-  },
+    {
+      "id": "aaa",
+      "startLicense": new Date(),
+      "deviceNumber": "DEVICE NUM",
+      "licenseKey": "LICENSE KEY",
+      "duration": 50000,
+      "userId": "USER ID",
+    },
   ];
   typeLicenseModal: LicenseTypeModel = new LicenseTypeModel;
   createPaymentRequest: CreatePaymentRequest = new CreatePaymentRequest;
@@ -42,9 +48,8 @@ export class HomeComponent {
     return this.login;
   }
   OnLoginButtonClick() {
-    let token:string = localStorage.getItem("token") || "";    
-    if( token != "" )
-    {
+    let token: string = localStorage.getItem("token") || "";
+    if (token != "") {
       localStorage.removeItem("token");
     }
     this.router.navigate(["/login"]);
@@ -62,7 +67,7 @@ export class HomeComponent {
   getTypeLicense() {
     this.licenseTypeService.GetTypeLicense().subscribe({
       next: (response) => {
-        this.typeLicense = response.licenseTypes;
+        this.typeLicense = response.licenseTypes.sort((a,b)=>a.duration - b.duration);
       },
       error: (err) => {
         console.log(err);
@@ -81,20 +86,18 @@ export class HomeComponent {
     });
   }
 
-  OpenModalBay(id: string)
-  {
+  OpenModalBay(id: string) {
     this.succesPay = false;
 
-    let selectLicenseType = this.typeLicense.find(a=>a.id === id);
+    let selectLicenseType = this.typeLicense.find(a => a.id === id);
 
-    if(selectLicenseType != undefined)
-    {
+    if (selectLicenseType != undefined) {
       this.createPaymentRequest.licenseType = selectLicenseType.id;
       this.typeLicenseModal = selectLicenseType;
     }
   }
 
-  OnCopyDeviceNumberClick(deviceNum:string) {
+  OnCopyDeviceNumberClick(deviceNum: string) {
     navigator.clipboard.writeText(deviceNum);
   }
 
@@ -103,14 +106,14 @@ export class HomeComponent {
       next: (response) => {
         var checkout = new YooMoneyCheckoutWidget({
           confirmation_token: response.pay.confirmation.confirmation_token,
-         customization: {
+          customization: {
             modal: true
           },
           error_callback: (error: any) => {
             console.log(error);
           }
         });
-        
+
         checkout.on('success', () => {
           checkout.destroy();
           let makePayment = new MakePaymentAndConfirmRequest;
@@ -118,14 +121,14 @@ export class HomeComponent {
           makePayment.licenseType = this.createPaymentRequest.licenseType;
           makePayment.paymentId = response.pay.id;
 
-          this.paymentService.MakePayment(makePayment).subscribe({ 
+          this.paymentService.MakePayment(makePayment).subscribe({
             next: (response) => {
               this.succesPay = true;
             },
             error: (err) => {
               alert("Произошла ошибка при выдаче лицензии!");
             }
-           });
+          });
         });
 
         checkout.on('fail', () => {
@@ -139,7 +142,7 @@ export class HomeComponent {
 
           });
       },
-      error: (error)=>{
+      error: (error) => {
         alert("Произошла ошибка при создании оплаты");
       }
     });

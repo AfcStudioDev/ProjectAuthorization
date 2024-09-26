@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from "../home/home.component";
 import { LoginRequest } from '../../requests/AuthorizationRequest/LoginRequest';
 import { AuthorizationService } from '../http/authorization.service';
 import { DownloadDistrService } from '../http/downloadDistr.service';
-import { request } from 'http';
-import { GetFilesUploadRequest } from '../../requests/Download/GetFilesUploadRequest';
+import { DownloadModule } from '../shared/download.module';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +13,16 @@ import { GetFilesUploadRequest } from '../../requests/Download/GetFilesUploadReq
   imports: [FormsModule, HomeComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [AuthorizationService,DownloadDistrService]
+  providers: [AuthorizationService, DownloadDistrService, DownloadModule]
 })
-export class LoginComponent {  
-  constructor(private router: Router, private authorizationService : AuthorizationService, private downloadDistrService : DownloadDistrService){
+export class LoginComponent {
+  constructor(private router: Router, private authorizationService: AuthorizationService, protected download: DownloadModule) {
     this.CheckAuthToken();
   }
-  
-  login: LoginRequest  = new LoginRequest;
 
-  OnLoginButtonClick(){
+  login: LoginRequest = new LoginRequest;
+
+  OnLoginButtonClick() {
     this.authorizationService.Login(this.login).subscribe({
       next: (response) => {
         console.log(response);
@@ -37,19 +36,13 @@ export class LoginComponent {
     });
 
   }
-  OnSignUpButtonClick(){
+  OnSignUpButtonClick() {
     this.router.navigate(["/signup"]);
   }
 
-  OnDownLoadClick(platformType: number){
-    let request = new GetFilesUploadRequest(platformType);
-    this.downloadDistrService.GetDistr(request);    
-  }
-
-  CheckAuthToken(){
-    let token:string = localStorage.getItem("token") || "";
-    if( token != "" )
-    {
+  CheckAuthToken() {
+    let token: string = localStorage.getItem("token") || "";
+    if (token != "") {
       this.router.navigate(['/home']);
     }
   }

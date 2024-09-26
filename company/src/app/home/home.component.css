@@ -1,5 +1,5 @@
 body {
-  background-color: #e1e1e1  !important;
+  background-color: #e1e1e1 !important;
 }
 
 .refer {
@@ -58,13 +58,28 @@ input.form-control:focus {
   outline: none;
 }
 
+.btn {
+  border: 1px;
+}
+
 button.btn-primary {
   background-color: #5aa3b0;
-  border: none;
+  border: 1px;
   border-radius: 20px;
+
 }
 
 button.btn-primary:hover {
+  background-color: #499495;
+}
+
+button.btn-outline-primary {
+  border-color: #5aa3b0;
+  color: #5aa3b0;
+  --bs-btn-color: #5aa3b0;
+}
+
+button.btn-outline-primary:hover {
   background-color: #499495;
 }
 
@@ -112,7 +127,7 @@ li {
   color: #4a8e9f;
 }
 
-h1 {
+h1, h2{
   color: #4a8e9f;
 }
 
@@ -120,9 +135,10 @@ button.btn {
   border: none;
   border-radius: 20px;
 }
+
 a {
   color: #4a8e9f;
-  text-decoration-line: underline; 
+  text-decoration-line: underline;
 }
 
 .btn-wrapper-end {

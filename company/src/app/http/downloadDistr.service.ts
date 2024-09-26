@@ -1,14 +1,10 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { configs } from "../config";
 import { GetFilesUploadRequest } from "../../requests/Download/GetFilesUploadRequest";
-import { GetFilesUploadResponse } from "../../responses/Download/GetFilesUploadResponse";
-import { Observable } from "rxjs/internal/Observable";
-import { HttpParameterCodec } from "@angular/common/http";
 
 @Injectable()
 export class  DownloadDistrService{
-    constructor(private httpClient: HttpClient) { }
+    constructor() { }
 
     public GetDistr(request: GetFilesUploadRequest) {        
         let queryString = Object.entries(request)

@@ -1,6 +1,6 @@
 <div class="container text-center vh-100">
   <div class="row  d-flex align-items-center justify-content-center h-75">
-    <div class="col-md-6">  
+    <div class="col-md-6">
       <div class="card shadow-lg text-center">
         <div class="card-header triangle p-4">
           <h5 class="company-label">Jingler Pro</h5>
@@ -16,7 +16,8 @@
                 name="password" [(ngModel)]="login.password" />
             </div>
 
-            <button [attr.disabled]="login.identificator.length == 0 || login.password.length == 0 ? true : null" class="btn btn-primary btn-block w-100" routerLink="/home" type="button"
+            <button [attr.disabled]="login.identificator.length == 0 || login.password.length == 0 ? true : null"
+              class="btn btn-primary btn-block w-100" routerLink="/home" type="button"
               (click)="this.OnLoginButtonClick()">Войти</button>
             <div class="d-flex justify-content-center">
               <p class="simpleText px-2">Нет аккаунта?</p>
@@ -26,17 +27,20 @@
           </form>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
   <div class="row justify-content-center text-center h-25">
-    <div class="col">
-      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoadClick(1)">Скачать сервер (Windows)</button>
+    <div class="col-md-auto">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.download.OnDownLoadClick(1)">Скачать
+        сервер (Windows)</button>
     </div>
-    <div class="col">
-      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoadClick(0)">Скачать клиент для телефона (Android)</button>
+    <div class="col-md-auto">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.download.OnDownLoadClick(0)">Скачать
+        клиент для телефона (Android)</button>
     </div>
-    <div class="col">
-      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.OnDownLoadClick(2)">Скачать клиент для планшета (Android)</button>
+    <div class="col-md-auto">
+      <button type="button" class="btn btn-outline-primary btn-lg" (click)="this.download.OnDownLoadClick(2)">Скачать
+        клиент для планшета (Android)</button>
     </div>
   </div>
 </div>

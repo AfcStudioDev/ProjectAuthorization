@@ -13,7 +13,8 @@
         <tr>
           <td>
             {{c.deviceNumber}}
-            <button type="button" data-bs-target="#bayModal" class="btn btn-primary" (click)="this.OnCopyDeviceNumberClick(c.deviceNumber)">Копировать</button>
+            <button type="button" data-bs-target="#bayModal" class="btn btn-primary"
+              (click)="this.OnCopyDeviceNumberClick(c.deviceNumber)">Копировать</button>
           </td>
           <td>
         <tr>
@@ -42,6 +43,7 @@
     </table>
   </div>
   <h1 class="ustify-content-center license-text text-center">Варианты лицензий</h1>
+  <h2 class="ustify-content-center license-text text-center">на одно устройство</h2>
   <div class="container justify-content-center">
     <div class="card-deck justify-content-center text-center row">
       @for (c of typeLicense; track c.id) {
@@ -53,7 +55,7 @@
           <h1 class="card-title pricing-card-title">{{c.price}}₽</h1>
           <ul class="list-unstyled mt-3 mb-4">
             <li class="fs-5">{{c.name}}</li>
-            <li>На одно устройство</li>
+            <!-- <li>На одно устройство</li> -->
           </ul>
           <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal"
             class="btn btn-lg btn-block btn-primary" (click)="this.OpenModalBay(c.id)">Приобрести</button>
@@ -65,7 +67,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="bayModal" tabindex="-1" aria-labelledby="bayModalLabel" aria-hidden="true">
+<div class="modal fade" id="bayModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="bayModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -73,7 +75,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Вы хотите преобрести товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
+        <p>Вы хотите приобрести товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
           {{typeLicenseModal.price}}₽</p>
         <p>Введите номер устройства:</p>
         <div class="form-floating mb-3">
@@ -83,25 +85,39 @@
         </div>
         <div [class.d-none]="!succesPay" class="alert alert-success d-none">
           <h4 class="alert-heading">Успешно!</h4>
-          <p>Вы преобрели товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
+          <p>Вы приобрели товар: "{{typeLicenseModal.name}}" на {{typeLicenseModal.duration}} дней за
             {{typeLicenseModal.price}}₽</p>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="this.getLicense()" data-bs-dismiss="modal">Выйти</button>
+        <button type="button" class="btn btn-secondary" (click)="this.getLicense()"
+          data-bs-dismiss="modal">Выйти</button>
         <button type="button" [attr.disabled]="createPaymentRequest.deviceNumber.length == 0 ? true : null"
           class="btn btn-primary" (click)="this.GoPay(1)">Приобрести</button>
       </div>
     </div>
   </div>
 </div>
+<div class="row justify-content-center text-center h-25">
+  <div class="col-md-auto">
+    <button type="button" class="btn btn-primary btn-lg m-2" (click)="this.download.OnDownLoadClick(1)">Скачать сервер
+      (Windows)</button>
+  </div>
+  <div class="col-md-auto">
+    <button type="button" class="btn btn-primary btn-lg m-2" (click)="this.download.OnDownLoadClick(0)">Скачать клиент
+      для телефона (Android)</button>
+  </div>
+  <div class="col-md-auto">
+    <button type="button" class="btn btn-primary btn-lg m-2" (click)="this.download.OnDownLoadClick(2)">Скачать клиент
+      для планшета (Android)</button>
+  </div>
+</div>
 
 <footer class="bottom">
   <div class="d-flex justify-content-center">
-  <a type="button" class="link-opacity-75 mx-2" data-bs-toggle="modal"
-  data-bs-target="#contactModal">контакты</a>
-<a type="button" class="link-opacity-75" data-bs-toggle="modal"
-  data-bs-target="#userAgreementModal">пользовательское соглашение</a>
+    <a type="button" class="link-opacity-75 mx-2" data-bs-toggle="modal" data-bs-target="#contactModal">контакты</a>
+    <a type="button" class="link-opacity-75" data-bs-toggle="modal"
+      data-bs-target="#userAgreementModal">пользовательское соглашение</a>
   </div>
 </footer>
 
