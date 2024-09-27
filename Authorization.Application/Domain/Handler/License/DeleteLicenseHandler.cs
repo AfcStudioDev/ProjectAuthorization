@@ -8,9 +8,9 @@ namespace Authorization.Application.Domain.Handler.License
 {
     public class DeleteLicenseHandler : IRequestHandler<DeleteLicenseRequest, DeleteLicenseResponse>
     {
-        private readonly IRepository<Entities.License> _repository;
+        private readonly IRepository<Entities.Device> _repository;
 
-        public DeleteLicenseHandler( IRepository<Entities.License> repository )
+        public DeleteLicenseHandler( IRepository<Entities.Device> repository )
         {
             _repository = repository;
         }
@@ -18,7 +18,7 @@ namespace Authorization.Application.Domain.Handler.License
         {
             DeleteLicenseResponse response = new DeleteLicenseResponse();
 
-            Entities.License? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber ).FirstOrDefault();
+            Entities.Device? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber ).FirstOrDefault();
             if (license is not null)
             {
                 _ = await _repository.RemoveAsync( license );

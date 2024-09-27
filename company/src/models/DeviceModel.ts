@@ -1,19 +1,12 @@
-import { LicenseModel } from "./LicenseModel";
-import { UserModel } from "./UserModel";
-
 export class DeviceModel {
-    constructor(id = "", deviceNumber = "", licenseKey = "", userId = "", user : any, licenses = []) {
+    constructor(id: number, expirationLicense = new Date, deviceNumber = "", userId: number) {
         this.id = id;
+        this.expirationLicense = expirationLicense;
         this.deviceNumber = deviceNumber;
-        this.licenseKey = licenseKey;
         this.userId = userId;
-        this.user = user;
-        this.licenses = licenses;
     }
-    id: string
+    id: number
+    expirationLicense: Date
     deviceNumber: string
-    licenseKey: string
-    userId: string
-    user: UserModel
-    licenses: LicenseModel[]
+    userId: number
 }

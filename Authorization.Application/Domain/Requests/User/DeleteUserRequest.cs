@@ -6,6 +6,6 @@ namespace Authorization.Application.Domain.Requests.User
 {
     public class DeleteUserRequest : IRequest<DeleteUserResponse>
     {
-        public Guid Id { get; set; }
+        public uint Id { get; set; }
     }
 }

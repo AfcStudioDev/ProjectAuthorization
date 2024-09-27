@@ -31,7 +31,7 @@ namespace Authorization.Application.Domain.Handler.Payment
         {
             CreatePaymentResponse response = new CreatePaymentResponse();
 
-            Entities.LicenseType licenseType = await _repository.FindByIdAsync( request.LicenseType );
+            Entities.LicenseType licenseType = await _repository.FindByIdAsync( (uint)request.LicenseType );
             if (licenseType != null)
             {
                 PayResponse? youCassaResponse = await CreatePaynetAndGetResponse( request, licenseType );

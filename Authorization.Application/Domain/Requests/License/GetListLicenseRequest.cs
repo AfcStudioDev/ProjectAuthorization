@@ -4,8 +4,8 @@ using MediatR;
 
 namespace Authorization.Application.Domain.Requests.License
 {
-    public class GetListLicenseRequest : IRequest<GetListLicenseResponse>
+    public class GetListLicenseRequest : IRequest<GetListDeviceResponse>
     {
-        public Guid? UserId { get; set; }
+        public uint? UserId { get; set; }
     }
 }

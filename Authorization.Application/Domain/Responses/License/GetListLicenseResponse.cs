@@ -1,7 +1,7 @@
 ﻿namespace Authorization.Application.Domain.Responses.License
 {
-    public class GetListLicenseResponse : BaseResponse
+    public class GetListDeviceResponse : BaseResponse
     {
-        public List<Entities.License> Licenses { get; set; } = new();
+        public List<Entities.Device> Devices { get; set; } = new();
     }
 }

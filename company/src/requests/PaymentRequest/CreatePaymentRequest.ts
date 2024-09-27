@@ -1,8 +1,8 @@
 export class CreatePaymentRequest {
-    constructor(deviceNumber = "", licenseType = "") {
+    constructor(deviceNumber = "", licenseType: number = 0) {
         this.deviceNumber = deviceNumber;
         this.licenseType = licenseType;
     }
     deviceNumber: string;
-    licenseType: string;
+    licenseType: number;
 }

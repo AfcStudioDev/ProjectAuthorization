@@ -24,13 +24,13 @@ namespace Authorization.Infrastructure.Api.Controllers
         [Authorize]
         [HttpGet]
         [Route( "all" )]
-        [SwaggerResponse( StatusCodes.Status200OK, "Post 200 GetAllLicense", typeof( GetListLicenseResponse ) )]
-        [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 GetAllLicense", typeof( GetListLicenseResponse ) )]
+        [SwaggerResponse( StatusCodes.Status200OK, "Post 200 GetAllLicense", typeof( GetListDeviceResponse ) )]
+        [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 GetAllLicense", typeof( GetListDeviceResponse ) )]
         public async Task<IActionResult> GetAllLicense( GetListLicenseRequest request )
         {
             request.UserId = GetUserIdFromToken();
 
-            GetListLicenseResponse response = await _mediator.Send( request );
+            GetListDeviceResponse response = await _mediator.Send( request );
 
             //if (response.Success)
             //{
@@ -105,9 +105,9 @@ namespace Authorization.Infrastructure.Api.Controllers
             return response.Success ? Ok( response ) : BadRequest( response );
         }
 
-        private Guid GetUserIdFromToken()
+        private uint GetUserIdFromToken()
         {
-            return Guid.Parse( HttpContext.User.Claims.FirstOrDefault( claim => claim.Type == "UserId" )!.Value );
+            return uint.Parse( HttpContext.User.Claims.FirstOrDefault( claim => claim.Type == "UserId" )!.Value );
         }
     }
 }

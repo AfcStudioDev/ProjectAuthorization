@@ -65,7 +65,7 @@ namespace Authorization.Application.Domain.Handler.Authorization
             byte[] salt = _hasher.CreateDinamicSaltFromEmail( request.Email );
             Entities.User user = new Entities.User()
             {
-                Id = Guid.NewGuid(),//todo лучше id пусть база создает
+                //Id = Guid.NewGuid(),//todo лучше id пусть база создает
                 Email = request.Email,
                 PasswordHash = _hasher.EncryptingPass( request.Password, salt )
             };

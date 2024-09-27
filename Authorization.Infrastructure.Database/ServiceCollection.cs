@@ -20,7 +20,7 @@ namespace Authorization.Infrastructure.Database
             );
 
             _ = services.AddTransient<IRepository<User>, UserRepository>();
-            _ = services.AddTransient<IRepository<License>, LicenseRepository>();
+            _ = services.AddTransient<IRepository<Device>, DeviceRepository>();
             _ = services.AddTransient<IRepository<LicenseType>, LicenseTypeRepository>();
         }
     }

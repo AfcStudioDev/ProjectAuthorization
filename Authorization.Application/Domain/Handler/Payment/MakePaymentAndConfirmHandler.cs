@@ -30,7 +30,7 @@ namespace Authorization.Application.Domain.Handler.Payment
 
             if (await ConfirmYoucassaPayment(request.PaymentId))
             {
-                CreateLicenseRequest createLicenseRequest = new CreateLicenseRequest() { UserId = (Guid)request.UserId!, DeviceNumber = request.DeviceNumber, LicenseType = request.LicenseType };
+                CreateLicenseRequest createLicenseRequest = new CreateLicenseRequest() { UserId = (uint)request.UserId!, DeviceNumber = request.DeviceNumber, LicenseType = request.LicenseType };
                 Responses.License.CreateLicenseResponse responseCreateLicense = await _mediator.Send( createLicenseRequest );
 
                 if (responseCreateLicense.Success)

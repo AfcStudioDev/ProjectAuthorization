@@ -6,8 +6,8 @@ namespace Authorization.Application.Domain.Requests.License
 {
     public class CreateLicenseRequest : IRequest<CreateLicenseResponse>
     {
-        public Guid UserId { get; set; }
+        public uint UserId { get; set; }
         public string DeviceNumber { get; set; } = null!;
-        public Guid LicenseType { get; set; }
+        public uint LicenseType { get; set; }
     }
 }

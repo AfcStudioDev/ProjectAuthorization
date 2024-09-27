@@ -33,12 +33,12 @@ namespace Authorization.Infrastructure.Database.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public User FindById( Guid id )
+        public User FindById( uint id )
         {
             return _dbSet.Find( id )!;
         }
 
-        public async Task<User> FindByIdAsync( Guid id )
+        public async Task<User> FindByIdAsync( uint id )
         {
             return (await _dbSet.FindAsync( id ))!;
         }

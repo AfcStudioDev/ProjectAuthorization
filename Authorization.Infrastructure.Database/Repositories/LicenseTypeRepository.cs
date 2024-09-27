@@ -33,12 +33,12 @@ namespace Authorization.Infrastructure.Database.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public LicenseType FindById( Guid id )
+        public LicenseType FindById( uint id )
         {
             return _dbSet.Find( id )!;
         }
 
-        public async Task<LicenseType> FindByIdAsync( Guid id )
+        public async Task<LicenseType> FindByIdAsync( uint id )
         {
             return (await _dbSet.FindAsync( id ))!;
         }

@@ -48,9 +48,9 @@ namespace Authorization.Infrastructure.Api.Controllers
             return response.Success ? Ok( response ) : BadRequest( response );
         }
 
-        private Guid GetUserIdFromToken()
+        private uint GetUserIdFromToken()
         {
-            return Guid.Parse( HttpContext.User.Claims.FirstOrDefault( claim => claim.Type == "UserId" )!.Value );
+            return uint.Parse( HttpContext.User.Claims.FirstOrDefault( claim => claim.Type == "UserId" )!.Value );
         }
     }
 }

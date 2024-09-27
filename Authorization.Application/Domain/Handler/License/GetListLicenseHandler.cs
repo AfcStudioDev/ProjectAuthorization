@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Authorization.Application.Domain.Handler.License
 {
-    public class GetListLicenseHandler : IRequestHandler<GetListLicenseRequest, GetListLicenseResponse>
+    public class GetListLicenseHandler : IRequestHandler<GetListLicenseRequest, GetListDeviceResponse>
     {
         private readonly IRepository<Entities.User> _repository;
 
@@ -15,11 +15,11 @@ namespace Authorization.Application.Domain.Handler.License
             _repository = repository;
         }
 
-        public async Task<GetListLicenseResponse> Handle( GetListLicenseRequest request, CancellationToken cancellationToken )
+        public async Task<GetListDeviceResponse> Handle( GetListLicenseRequest request, CancellationToken cancellationToken )
         {
-            List<Entities.License> response = _repository.GetWithInclude( a => a.Id == request.UserId, a => a.Licenses ).First().Licenses;
+            List<Entities.Device> response = _repository.GetWithInclude( a => a.Id == request.UserId, a => a.Devices ).First().Devices;
 
-            return new GetListLicenseResponse() { Licenses = response, Success = true };
+            return new GetListDeviceResponse() { Devices = response, Success = true };
         }
     }
 }

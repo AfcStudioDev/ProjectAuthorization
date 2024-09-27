@@ -7,7 +7,7 @@ import { LicenseService } from '../http/license.service';
 import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymentRequest';
 import { PaymentService } from '../http/payment.service';
 import { MakePaymentAndConfirmRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
-import { LicenseModel } from '../../models/LicenseModel';
+import { DeviceModel } from '../../models/DeviceModel';
 import { DownloadModule } from '../shared/download.module';
 import { DownloadDistrService } from '../http/downloadDistr.service';
 declare let YooMoneyCheckoutWidget: any;
@@ -29,17 +29,8 @@ export class HomeComponent {
     protected download: DownloadModule) { }
 
   login: string = "tg";
-  typeLicense: LicenseTypeModel[] = [];
-  licenseList: LicenseModel[] = [
-    {
-      "id": "aaa",
-      "startLicense": new Date(),
-      "deviceNumber": "DEVICE NUM",
-      "licenseKey": "LICENSE KEY",
-      "duration": 50000,
-      "userId": "USER ID",
-    },
-  ];
+  typeLicenses: LicenseTypeModel[] = [];
+  licenseList: DeviceModel[] = [];
   typeLicenseModal: LicenseTypeModel = new LicenseTypeModel;
   createPaymentRequest: CreatePaymentRequest = new CreatePaymentRequest;
   succesPay: boolean = false;
@@ -60,14 +51,15 @@ export class HomeComponent {
     this.getLicense();
   }
 
-  getCountDaysEnd(startLicense: Date, duration: number) {
-    return Math.round((new Date(startLicense).setHours(duration * 24) - Date.now()) / (60 * 60 * 24 * 1000));
+  getCountDaysEnd(expirationLicense: Date) {
+
+    return Math.round((new Date(expirationLicense).setHours(0) - Date.now()) / (60 * 60 * 24 * 1000));
   }
 
   getTypeLicense() {
     this.licenseTypeService.GetTypeLicense().subscribe({
       next: (response) => {
-        this.typeLicense = response.licenseTypes.sort((a,b)=>a.duration - b.duration);
+        this.typeLicenses = response.licenseTypes.sort((a, b) => a.duration - b.duration);
       },
       error: (err) => {
         console.log(err);
@@ -78,7 +70,7 @@ export class HomeComponent {
   getLicense() {
     this.licenseService.GetAllLicense().subscribe({
       next: (response) => {
-        this.licenseList = response.licenses;
+        this.licenseList = response.devices;
       },
       error: (err) => {
         console.log(err);
@@ -86,10 +78,10 @@ export class HomeComponent {
     });
   }
 
-  OpenModalBay(id: string) {
+  OpenModalBay(id: number) {
     this.succesPay = false;
 
-    let selectLicenseType = this.typeLicense.find(a => a.id === id);
+    let selectLicenseType = this.typeLicenses.find(a => a.id === id);
 
     if (selectLicenseType != undefined) {
       this.createPaymentRequest.licenseType = selectLicenseType.id;

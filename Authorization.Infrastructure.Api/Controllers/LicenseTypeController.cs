@@ -23,8 +23,8 @@ namespace Authorization.Infrastructure.Api.Controllers
         [Authorize]
         [HttpGet]
         [Route( "" )]
-        [SwaggerResponse( StatusCodes.Status200OK, "Post 200 GetListTypeLicense", typeof( GetListLicenseResponse ) )]
-        [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 GetListTypeLicense", typeof( GetListLicenseResponse ) )]
+        [SwaggerResponse( StatusCodes.Status200OK, "Post 200 GetListTypeLicense", typeof( GetListDeviceResponse ) )]
+        [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 GetListTypeLicense", typeof( GetListDeviceResponse ) )]
         public async Task<IActionResult> getAll( GetListLicenseTypeRequest request )
         {
             Application.Domain.Responses.LicenseType.GetListLicenseTypeResponse response = await _mediator.Send( request );

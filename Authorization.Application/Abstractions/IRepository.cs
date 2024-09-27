@@ -23,14 +23,14 @@ namespace Authorization.Application.Abstractions
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T FindById( Guid id );
+        T FindById( uint id );
 
         /// <summary>
         /// Поиск по id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<T> FindByIdAsync( Guid id );
+        Task<T> FindByIdAsync( uint id );
 
         /// <summary>
         /// Получение объекта из базы данных

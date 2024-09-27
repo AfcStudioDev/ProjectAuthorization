@@ -8,9 +8,9 @@ namespace Authorization.Application.Domain.Handler.License
 {
     public class CheckLicenseHandler : IRequestHandler<CheckLicenseRequest, CheckLicenseResponse>
     {
-        private readonly IRepository<Entities.License> _repository;
+        private readonly IRepository<Entities.Device> _repository;
 
-        public CheckLicenseHandler( IRepository<Entities.License> repository )
+        public CheckLicenseHandler( IRepository<Entities.Device> repository )
         {
             _repository = repository;
         }
@@ -19,12 +19,12 @@ namespace Authorization.Application.Domain.Handler.License
         {
             CheckLicenseResponse response = new() { Success = false };
 
-            Entities.License? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber ).FirstOrDefault();
+            Entities.Device? license = _repository.Get( a => a.DeviceNumber == request.DeviceNumber ).FirstOrDefault();
 
             if (license is not null)
             {
                 response.Success = true;
-                response.Message = $"Лицензия до {license.StartLicense.AddDays( license.Duration ).Date}";
+                response.Message = $"Лицензия до {license.ExpirationLicense}";
             }
 
             return response;

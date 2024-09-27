@@ -9,25 +9,25 @@
         </tr>
       </thead>
       <tbody>
-        @for (c of licenseList; track c.id) {
+        @for (license of licenseList; track license.id) {
         <tr>
           <td>
-            {{c.deviceNumber}}
+            {{license.deviceNumber}}
             <button type="button" data-bs-target="#bayModal" class="btn btn-primary"
-              (click)="this.OnCopyDeviceNumberClick(c.deviceNumber)">Копировать</button>
+              (click)="this.OnCopyDeviceNumberClick(license.deviceNumber)">Копировать</button>
           </td>
           <td>
         <tr>
-          @if(this.getCountDaysEnd(c.startLicense, c.duration) <= 5 && this.getCountDaysEnd(c.startLicense, c.duration)>
+          @if(this.getCountDaysEnd(license.expirationLicense) <= 5 && this.getCountDaysEnd(license.expirationLicense)>
             0){
-            <td class="text-danger">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+            <td class="text-danger">{{this.getCountDaysEnd(license.expirationLicense)}} дней до конца</td>
             }
-            @else if(this.getCountDaysEnd(c.startLicense, c.duration) <= 0) { <td class="text-danger">лицензия
+            @else if(this.getCountDaysEnd(license.expirationLicense) <= 0) { <td class="text-danger">лицензия
               просрочена</td>
               }
               @else
               {
-              <td class="text-success">{{this.getCountDaysEnd(c.startLicense, c.duration)}} дней до конца</td>
+              <td class="text-success">{{this.getCountDaysEnd(license.expirationLicense)}} дней до конца</td>
               }
         </tr>
 
@@ -46,19 +46,19 @@
   <h2 class="ustify-content-center license-text text-center">на одно устройство</h2>
   <div class="container justify-content-center">
     <div class="card-deck justify-content-center text-center row">
-      @for (c of typeLicense; track c.id) {
+      @for (typeLicense of typeLicenses; track typeLicense.id) {
       <div class="card m-1 col-12 col-md-2 box-shadow">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">На {{c.duration}} дней</h4>
+          <h4 class="my-0 font-weight-normal">На {{typeLicense.duration}} дней</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">{{c.price}}₽</h1>
+          <h1 class="card-title pricing-card-title">{{typeLicense.price}}₽</h1>
           <ul class="list-unstyled mt-3 mb-4">
-            <li class="fs-5">{{c.name}}</li>
+            <li class="fs-5">{{typeLicense.name}}</li>
             <!-- <li>На одно устройство</li> -->
           </ul>
           <button type="button" data-bs-toggle="modal" data-bs-target="#bayModal"
-            class="btn btn-lg btn-block btn-primary" (click)="this.OpenModalBay(c.id)">Приобрести</button>
+            class="btn btn-lg btn-block btn-primary" (click)="this.OpenModalBay(typeLicense.id)">Приобрести</button>
         </div>
       </div>
       }

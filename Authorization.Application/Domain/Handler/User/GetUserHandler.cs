@@ -18,7 +18,7 @@ namespace Authorization.Application.Domain.Handler.User
         {
             GetUserResponse response = new GetUserResponse();
 
-            response.User = await _repository.FindByIdAsync( (Guid)request.Id! );
+            response.User = await _repository.FindByIdAsync( (uint)request.Id! );
 
             if (response.User != null)
             {
