@@ -37,7 +37,14 @@
                   (click)="this.OnLoginButtonClick()">Заходите
                   </a>
               </div>
-              <p class="text-danger" (ngModel)="this.prompt">{{this.prompt}}</p>
+              <div>
+                <p class="text-danger" (ngModel)="this.prompt">{{this.prompt}}</p>
+              </div>
+              <div>
+                <a class="refer m-4" routerLink="/aaa" type="button"
+                  (click)="this.OnOuterButtonClick()">Внешняя страница
+                  </a>
+              </div>
             </div>
           </div>
         </div>

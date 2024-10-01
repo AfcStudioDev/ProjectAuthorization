@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './signup/singup.component';
 import { LoginComponent } from './login/login.component';
 import { LicenseComponent } from './license/license.module';
+import { DummyComponent } from './dummy/dummy';
 // import { UserManagedComponent } from './admin/user/userManaged.component';
 import { homeEnter1Guard } from './guards/home-enter1.guard';
 import { homeEnter2Guard } from './guards/home-enter2.guard';
@@ -22,9 +23,8 @@ export const routes: Routes = [
   },
   {
     path:'license', component: LicenseComponent,canActivate: [homeEnter1Guard],
+  },
+  {
+    path:'outer', component: DummyComponent
   }
-  // },
-  // {
-  //   path:'admin/userManaged', component: UserManagedComponent
-  // }
 ];

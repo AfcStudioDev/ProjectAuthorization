@@ -88,4 +88,8 @@ export class SignUpComponent {
       this.router.navigate(['/home']);
     }
   }
+  
+  OnOuterButtonClick() {
+    this.router.navigate(["/outer"]);
+  }
 }
