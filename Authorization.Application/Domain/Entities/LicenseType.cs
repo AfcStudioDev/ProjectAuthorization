@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Authorization.Application.Domain.Entities
 {
     /// <summary>
@@ -8,10 +10,11 @@ namespace Authorization.Application.Domain.Entities
     public class LicenseType
     {
         [Key]
-        public uint Id { get; set; }
+        public UInt16 Id { get; set; }
         [Required]
         public string Name { get; set; } = null!;
         [Required]
+        [Precision(8,2)]
         public decimal Price { get; set; }
         [Required]
         public UInt16 Duration { get; set; }
