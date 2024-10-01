@@ -44,11 +44,11 @@ namespace Authorization.Infrastructure.Api.Controllers
             return response.Success ? Ok( response ) : BadRequest( response );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route( "check" )]
         [SwaggerResponse( StatusCodes.Status200OK, "Post 200 CheckLicense", typeof( CheckLicenseResponse ) )]
         [SwaggerResponse( StatusCodes.Status400BadRequest, "Post 400 CheckLicense", typeof( CheckLicenseResponse ) )]
-        public async Task<IActionResult> Check( CheckLicenseRequest request )
+        public async Task<IActionResult> Check( [FromBody]CheckLicenseRequest request )
         {
             CheckLicenseResponse response = await _mediator.Send( request );
 
