@@ -15,5 +15,8 @@ namespace Authorization.YooKassa.Domain.Entities
 
         [JsonPropertyName( "description" )]
         public string Description { get; set; } = null!;
+
+        [JsonPropertyName("receipt")]
+        public Receipt Receipt { get; set; } = null!;
     }
 }
