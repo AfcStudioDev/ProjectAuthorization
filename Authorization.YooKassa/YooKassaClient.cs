@@ -39,7 +39,7 @@ namespace Authorization.YooKassa
             }
             else
             {
-                _ = await response.Content.ReadAsStringAsync();
+                var a  = await response.Content.ReadAsStringAsync();
                 return null;
             }
         }

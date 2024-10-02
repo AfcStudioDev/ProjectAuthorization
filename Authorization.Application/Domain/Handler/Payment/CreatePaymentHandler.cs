@@ -15,16 +15,18 @@ namespace Authorization.Application.Domain.Handler.Payment
     public class CreatePaymentHandler : IRequestHandler<CreatePaymentRequest, CreatePaymentResponse>
     {
         private readonly IRepository<Entities.LicenseType> _repository;
+        private readonly IRepository<Entities.User> _userRepository;
         private readonly string _urlPayments;
         private readonly string _shopId;
         private readonly string _secretKey;
 
-        public CreatePaymentHandler( IConfiguration configuration, IRepository<Entities.LicenseType> repository )
+        public CreatePaymentHandler( IConfiguration configuration, IRepository<Entities.LicenseType> repository, IRepository<Entities.User> userRepository )
         {
             _urlPayments = configuration["YooCassaService:UrlPayments"]!;
             _shopId = configuration["YooCassaService:ShopId"]!;
             _secretKey = configuration["YooCassaService:SecretKey"]!;
             _repository = repository;
+            _userRepository = userRepository;
         }
 
         public async Task<CreatePaymentResponse> Handle( CreatePaymentRequest request, CancellationToken cancellationToken )
@@ -50,14 +52,17 @@ namespace Authorization.Application.Domain.Handler.Payment
 
         private async Task<PayResponse?> CreatePaynetAndGetResponse( CreatePaymentRequest paymentRequest, Entities.LicenseType licenseType )
         {
-            YooCassaClient youcassaClient = new YooCassaClient( _urlPayments, _shopId, _secretKey );
+            var user = _userRepository.FindById((uint)paymentRequest.UserId!);
 
+            YooCassaClient youcassaClient = new YooCassaClient( _urlPayments, _shopId, _secretKey );
+            var amount = new Amount() { Currency = "RUB", Value = $"{licenseType.Price.ToString(CultureInfo.InvariantCulture)}" };
             PayResponse? response = await youcassaClient.CreateNewPay( new PayRequest()
             {
-                Amount = new Amount() { Currency = "RUB", Value = $"{licenseType.Price.ToString( CultureInfo.InvariantCulture )}" },
+                Amount = amount,
                 Capture = true,
                 Description = $"Оплата за подписку для пользователя. Тип подписки {licenseType.Name}. Пользователь ID - { paymentRequest.UserId }",
-                Confirmation = new Confirmation() { Type = "embedded" }
+                Confirmation = new Confirmation() { Type = "embedded" },
+                Receipt = new Receipt() { Customer = new Customer() { Email = user.Email }, Items = new() { new ItemStore() { Amount = amount, Description = licenseType.Name, Quantity = 1 } } }
             } );
 
             return response;
