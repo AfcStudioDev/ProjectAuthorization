@@ -5,18 +5,19 @@ import { HomeComponent } from "../home/home.component";
 import { LoginRequest } from '../../requests/AuthorizationRequest/LoginRequest';
 import { AuthorizationService } from '../http/authorization.service';
 import { DownloadDistrService } from '../http/downloadDistr.service';
-import { DownloadModule } from '../shared/download.module';
+import { DownloadModuleComponent } from '../shared/download.module.component';
+import { ContactsLicenseComponent } from '../contactsLicense/contactsLicense.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HomeComponent],
+  imports: [FormsModule, HomeComponent, DownloadModuleComponent, ContactsLicenseComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers: [AuthorizationService, DownloadDistrService, DownloadModule]
+  providers: [AuthorizationService, DownloadDistrService]
 })
 export class LoginComponent {
-  constructor(private router: Router, private authorizationService: AuthorizationService, protected download: DownloadModule) {
+  constructor(private router: Router, private authorizationService: AuthorizationService) {
     this.CheckAuthToken();
   }
 

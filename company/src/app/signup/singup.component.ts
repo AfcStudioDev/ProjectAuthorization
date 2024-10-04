@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { RegistrationRequest } from '../../requests/AuthorizationRequest/RegistrationRequest';
 import { AuthorizationService } from '../http/authorization.service';
 import { DownloadDistrService } from '../http/downloadDistr.service';
-import { DownloadModule } from '../shared/download.module';
+import { DownloadModuleComponent } from '../shared/download.module.component';
+import { ContactsLicenseComponent } from '../contactsLicense/contactsLicense.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, DownloadModuleComponent, ContactsLicenseComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
-  providers: [AuthorizationService, DownloadDistrService, DownloadModule]
+  providers: [AuthorizationService, DownloadDistrService]
 })
 export class SignUpComponent {
-  constructor(private router: Router, private authorizationService: AuthorizationService, protected download: DownloadModule) {
+  constructor(private router: Router, private authorizationService: AuthorizationService) {
     this.CheckAuthToken();
   }
   emailRegex: RegExp = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
