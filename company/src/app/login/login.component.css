@@ -12,6 +12,12 @@
   text-decoration: underline;
 }
 
+.contact {
+  color: #4a8e9f;
+  text-decoration: underline;
+  text-decoration: none;
+}
+
 .inputField {
   background: #d4d4d4;
   text-align: center;

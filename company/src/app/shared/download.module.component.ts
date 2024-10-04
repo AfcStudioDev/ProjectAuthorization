@@ -1,14 +1,14 @@
 import { DownloadDistrService } from '../http/downloadDistr.service';
 import { GetFilesUploadRequest } from '../../requests/Download/GetFilesUploadRequest';
-import { NgModule } from '@angular/core';
+import { Component} from '@angular/core';
 
-@NgModule({
-  declarations: [],
-  imports: [],
-  providers: [DownloadDistrService],
-  bootstrap: [],
+@Component({
+  selector: 'app-download-module',
+  standalone: true,
+  templateUrl: './download.module.component.html',
+  styleUrl: './download.module.component.css'
 })
-export class DownloadModule {
+export class DownloadModuleComponent {
   constructor(private downloadDistrService: DownloadDistrService) {
   }
 

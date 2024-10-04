@@ -8,25 +8,25 @@ import { CreatePaymentRequest } from '../../requests/PaymentRequest/CreatePaymen
 import { PaymentService } from '../http/payment.service';
 import { MakePaymentAndConfirmRequest } from '../../requests/PaymentRequest/MakePaymentRequest';
 import { DeviceModel } from '../../models/DeviceModel';
-import { DownloadModule } from '../shared/download.module';
 import { DownloadDistrService } from '../http/downloadDistr.service';
+import { ContactsLicenseComponent } from '../contactsLicense/contactsLicense.component';
+import { DownloadModuleComponent } from '../shared/download.module.component';
 declare let YooMoneyCheckoutWidget: any;
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ContactsLicenseComponent, DownloadModuleComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [LicenseTypeService, LicenseService, PaymentService, DownloadDistrService, DownloadModule]
+  providers: [LicenseTypeService, LicenseService, PaymentService, DownloadDistrService]
 })
 export class HomeComponent {
   constructor(
     private router: Router,
     private licenseTypeService: LicenseTypeService,
     private licenseService: LicenseService,
-    private paymentService: PaymentService,
-    protected download: DownloadModule) { }
+    private paymentService: PaymentService) { }
 
   login: string = "tg";
   typeLicenses: LicenseTypeModel[] = [];
