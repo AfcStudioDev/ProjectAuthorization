@@ -62,11 +62,12 @@ if (app.Environment.IsDevelopment())
     } );
 }
 
+app.AddMigrations();
+
 app.UseCors( x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader() );
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
